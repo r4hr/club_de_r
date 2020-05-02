@@ -1,0 +1,300 @@
+---
+title: "Club de R - Sesión 1"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Sesión 1 del Club de R
+
+Estos son ejercicios tomados del libro **Ciencia de datos para gente sociable** que escribió [Antonio Vazquez Brust](https://www.linkedin.com/in/avazquez/?originalSubdomain=ar) y que se puede leer gratis en la [web del libro](https://bitsandbricks.github.io/ciencia_de_datos_gente_sociable/)
+y encontrar en su [blog personal](https://bitsandbricks.github.io/).
+
+Elegimos este libro primero porque está en español, y segundo porque para introducir el lenguaje R comienza con un ejemplo muy entrenido y cercano, mucho más comprensible que los clásicos datasets *iris* o *mtcars*.
+
+# Empezando
+
+Para instalar paquetes en R:
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+Luego, para usar el paquete hay se carga el paquete para poder usarlo
+
+``` {r}
+library(ggplot2)
+```
+
+Con el símbolo **“<-”** (como una flecha hacia la izquierda) se asignan cosas (valores, nombres) a los objetos. Luego ejecuto el nombre con las teclas Ctrl+Enter y veo el resultado de lo que asigné.
+
+``` {r}
+tipico <- "Hola Mundo"
+tipico # Ctrl+Enter para ver el objeto
+```
+
+
+También se puede usar el signo igual, aunque puede confundir después cuando tipeamos código
+
+``` {r}
+tipica = "Hola Mundo"
+
+tipica
+```
+
+Por lo general, en R se usa más el símbolo "**<-**" porque el símbolo "=" se suele usar dentro de las funciones para asignar valores a los parámetros.
+
+
+Dos signos iguales se usan para analizar si dos cosas son iguales
+
+``` {r}
+tipico == tipica
+```
+
+
+Para más información, ver los operadores relacionales en este
+<link>[link](https://bookdown.org/jboscomendoza/r-principiantes4/operadores-relacionales.html).
+
+Se usa el numeral o hashtag (#) para hacer comentarios
+
+`{r print('# Esto es un comentario')}`
+
+# Libro Ciencia de Datos Capítulo 2
+
+Cargo los datos que vamos a usar de esta url y lo asigno al objeto 'mortalidad'
+
+``` {r}
+mortalidad <- read.csv('https://bitsandbricks.github.io/data/mortalidad_infantil_caba_2016.csv')
+```
+
+A partir de ahora, cada vez necesite estos datos, sólo invoco el nombre del objeto
+
+``` {r}
+mortalidad
+```
+
+## Funciones para explorar datasets
+
+La función **dim** (*dimensión*) nos da la cantidad de filas (observaciones) y luego la cantidad de columnas.
+
+``` {r}
+dim(mortalidad) # De dimensión, nos dice la cantidad de columnas y de filas
+```
+
+La función **names** nos da los nombres de las variables, muy útil cuando tenemos muchas columnas.
+
+``` {r}
+names(mortalidad)
+```
+
+La función **head** te permite ver las primeras 6 filas de una tabla.
+
+``` {r}
+head(mortalidad) 
+```
+
+No se usa mucho, pero también existe la función **tail** que muestra las últimas 6 observaciones de un dataset.
+
+``` {r}
+tail(mortalidad) # Te muestra las últimas 6 filas
+```
+
+Tanto con head() como con tail() puedo indicar la cantidad de columnas que quiero ver
+
+``` {r}
+head(mortalidad, 10) 
+```
+
+
+Carguemos la librería *tidyverse*
+``` {r}
+library(tidyverse)
+```
+
+Dentro del paquete **tidyverse** existen varios paquetes para ordenar y limpiar los datos. Una de las funciones de este paquete nos permite ver información de un dataset.
+
+``` {r}
+glimpse(mortalidad)
+```
+
+
+La función **summary** nos da las principales medidas estadísticas de las variables numéricas
+
+  - Min y Max (Mínimo y Máximo valor)
+  - 1st y 3rd Qu. (Primer y tercer cuartil)
+  - Mean y Median (Promedio y mediana)
+
+
+``` {r}
+summary(mortalidad)
+```
+
+Acá hay que prestar atención, porque la variable *Comunas* representa al nombre de las comunas, que por más que sea un número, debiera tratarse como una variable de texto.
+  
+## Nuestro primer gráfico con el paquete ggplot2 (Grammar of graphics plot)
+
+``` {r}
+ggplot(data = mortalidad, aes(x = factor(Comuna), y = Tasa2016)) +
+  geom_col()
+```
+
+
+¿Qué pasa si no uso la función factor()
+
+``` {r}
+ggplot(mortalidad, aes(x = Comuna, y = Tasa2016)) +
+  geom_col()
+```
+
+
+# Análisis geográfico
+
+Carguemos la librería *sf* para análisis espaciales.
+
+``` {r}
+library(sf)
+```
+
+
+Cargo un dataset con información geográfica de los barrios y comunas de la Ciudad Autónoma de Buenos Aires
+
+``` {r}
+comunas <- st_read('https://bitsandbricks.github.io/data/CABA_comunas.geojson')
+```
+
+
+Exploro el dataset
+
+``` {r}
+names(comunas)
+```
+
+
+``` {r}
+head(comunas)
+```
+
+
+Hago un gráfico para ver la Ciudad Autónoma de Buenos Aires
+
+``` {r}
+ggplot(comunas) +
+  geom_sf()
+```
+
+
+Le asigno un color por Comuna
+
+``` {r}
+ggplot(comunas) +
+  geom_sf(aes(fill = comunas))
+```
+
+El gráfico si bien no queda llamativo, es complejo de interpretar los colores, porque hay algunos que son muy similares. Por eso hay que ser muy criteriosos a la hora de usar colores para que nos ayude a distinguir las diferencias fácilmente, por ejemplo, podemos usar la Av. Rivadavia, que cruza la ciudad de Buenos Aires de punta a punta, para dividir a la ciudad en 2: Norte y Sur.
+
+
+``` {r}
+rivadavia <- st_read('https://bitsandbricks.github.io/data/avenida_rivadavia.geojson')
+```
+
+
+Combino los gráficos de Comuna, incluyendo a la Av. Rivadavia
+
+``` {r}
+ggplot(comunas) +
+  geom_sf(aes(fill = comunas)) +
+  geom_sf(data = rivadavia, color = "red")
+```
+
+
+## Agregar nueva columna
+
+Creamos un vector con la región a la que pertenece cada comuna
+
+``` {r}
+nueva_columna <- c("Sur", "Norte", "Sur", "Sur", "Sur", "Norte", "Sur", "Sur", 
+                   "Sur", "Norte", "Norte", "Norte", "Norte", "Norte", "Norte")
+```
+
+La función **mutate** agrega columnas. Y la nueva columna se va a llamar *ubicacion*
+
+``` {r}
+comunas <- mutate(comunas, ubicacion = nueva_columna) 
+```
+
+Acá podemos ver que la columna ubicacion se añadió al final de la tabla comunas
+
+``` {r}
+glimpse(comunas)
+```
+
+    
+Ahora actualizamos el mapa, coloreando las comunas del Sur y del Norte
+
+``` {r}
+ggplot(comunas) +
+  geom_sf(aes(fill = ubicacion)) + 
+  geom_sf(data = rivadavia, color = "red")
+```
+
+
+Agregamos a la tabla de mortalidad la ubicación
+
+``` {r}
+mortalidad <- mutate(mortalidad, ubicacion = nueva_columna)
+
+head(mortalidad)
+```
+
+
+# Analizar la mortalidad por zona de la ciudad
+
+Hagamos un gráfico para analizar la mortalidad infantil por Comuna
+
+``` {r}
+ggplot(comunas) +
+  geom_sf(aes(fill = mortalidad$Tasa2016)) + # Con el símbolo $ se elige la columna específica a graficar
+  geom_sf(data = rivadavia, color = "red") +
+  scale_fill_distiller(palette = "Spectral")
+```
+
+
+Si bien los mapas son llamativos, a veces los gráficos de barra son más claros.
+
+``` {r}
+ggplot(mortalidad) +
+  geom_col(aes(x = factor(Comuna), y = Tasa2016, fill = ubicacion)) +
+  labs(title = "Mortalidad infantil en la Ciudad Autónoma de Buenos Aires", # con esta función le agregamos un título al gráfico
+       subtitle = "Año 2016",
+       y = "tasa") 
+```
+
+En los gráficos de barra, si el orden de las barras no significa nada (como los meses), es una buena práctica ordenar de mayor a menor las barras. Esto lo podemos hacer con la función **reorder**.
+
+```{r}
+ggplot(mortalidad) +
+  geom_col(aes(x = reorder(factor(Comuna), -Tasa2016), y = Tasa2016, fill = ubicacion)) +
+  labs(title = "Mortalidad infantil en la Ciudad Autónoma de Buenos Aires", # con esta función le agregamos un título al gráfico
+       subtitle = "Año 2016",
+       y = "tasa",
+       x="") 
+```
+
+El símbolo "-" (menos o guión) antes de *Tasa2016* dentro de la función reoder, le indica a R que ordene las barras de mayor a menor.
+
+Dividimos los datos por zona. Presten atención a como le decimos a R que filtre los valores de la columna *ubicacion* con un doble signo igual (**==**) según sea zona Sur o Norte.
+
+``` {r}
+comunas_al_sur <- filter(mortalidad, ubicacion == "Sur")
+
+comunas_al_norte <- filter(mortalidad, ubicacion == "Norte")
+```
+
+
+Calculamos la diferencia entre el promedio de mortalidad de unas y otras.
+
+``` {r}
+mean(comunas_al_sur$Tasa2016) / mean(comunas_al_norte$Tasa2016)
+```
+
+Esto nos indica que la mortalidad infantil en las comunas del sur de la ciudad de Buenos Aires es `r round(mean(comunas_al_sur$Tasa2016) / mean(comunas_al_norte$Tasa2016))` veces más alta que en las comunas del norte.
+
