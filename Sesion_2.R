@@ -1,4 +1,3 @@
-s <- livecode::serve_file() # No copien esta línea de código
 
 
 #### Introducción ####
