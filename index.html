@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Sesión 28 - RMarkdown Preview RStudio 1.4</title>
+    <meta charset="utf-8" />
+    <script src="index_files/header-attrs-2.3/header-attrs.js"></script>
+    <link href="index_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="index_files/remark-css-0.0.1/shinobi.css" rel="stylesheet" />
+    <link href="index_files/remark-css-0.0.1/tamu-fonts.css" rel="stylesheet" />
+    <meta name="github-repo" content="r4hr/club_de_r"/>
+    <meta name="twitter:title" content="Sesión abierta Nov. 2020 - Introducción a RMarkdown"/>
+    <meta name="twitter:description" content="Una introducción a cómo realizar informes con la versión preview de RStudio 1.4 por el Club de R para RRHH"/>
+    <meta name="twitter:url" content="https://kiwi-rmarkdown.netlify.app/"/>
+    <meta name="twitter:image:src" content="https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true"/>
+    <meta name="twitter:image:alt" content="Inttroducción a RMarkdown con RStudio 1.4 Desarrollada por el Club de R para RRHH"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@sergiogarciamor"/>
+    <meta name="twitter:site" content="@club_rrhh"/>
+    <meta property="og:title" content="Sesión abierta Nov. 2020 - Introducción a RMarkdown"/>
+    <meta property="og:description" content="Una introducción a cómo realizar informes con la versión preview de RStudio 1.4 por el Club de R para RRHH"/>
+    <meta property="og:url" content="https://kiwi-rmarkdown.netlify.app/"/>
+    <meta property="og:image" content="https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true"/>
+    <meta property="og:image:alt" content="Inttroducción a RMarkdown con RStudio 1.4 Desarrollada por el Club de R para RRHH"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Sergio Garcia Mora"/>
+    <script src="index_files/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="index_files/shareon-1.4.1/shareon.min.css" rel="stylesheet" />
+    <script src="index_files/shareon-1.4.1/shareon.min.js"></script>
+    <link href="index_files/xaringanExtra-shareagain-0.2.4/shareagain.css" rel="stylesheet" />
+    <script src="index_files/xaringanExtra-shareagain-0.2.4/shareagain.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: inverse, top, center
+background-image: url(Archivos/kiwi-fondo.png)
+background-size: cover
+
+
+
+
+
+
+
+
+
+
+???
+
+Image credit: [Designed by Freepik]("http://www.freepik.com")
+
+---
+# Quiénes somos
+
+El [Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan en Recursos Humanos de habla hispana.
+
+Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestros skills y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
+
+Este es un proyecto que ideó [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/), y que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, y cada vez más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
+
+Para más información sobre el Club de R leé [este post](https://r4hr.club/2020/09/23/el-club-de-r-para-rrhh/), o escribinos a [info@r4hr.club](mailto:info@r4hr.club).
+
+---
+# Quiénes somos
+## La encuesta KIWI 🥝 de Sueldos de RRHH para LATAM
+
+Uno de los problemas en el aprendizaje de People Analytics es la falta de datasets para practicar, así que una decisión que tomamos fue el de generar nuestro propio dataset y de abrirlo para toda la comunidad.
+
+Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, **Nerdearla**, y que también organizan una encuesta salarial dos veces por año.
+
+Estas son las motivaciones detrás de esta encuesta. Tener nuestro propio dataset, compartir los resultados y los datos, para que todos los entusiastas de RRHH y de los datos cuenten con una fuente de datos para practicar.
+
+&gt; Si querés conocer la historia detrás del nombre de la encuesta, la podés [conocer aquí](https://r4hr.club/why-kiwi/).
+
+---
+background-color: "#5D6D7E" 
+# Quiénes somos
+## Organizadores
+.pull-left[
+🕵 [Adrián Quiroga](https://www.linkedin.com/in/adrian-quiroga-ab57424b/) 
+
+👩‍💻 [Alithu Castro](https://www.linkedin.com/in/alithucastro/)
+
+👩‍🎓 [Andrea Herpsomer](https://www.linkedin.com/in/andreaherpsomer/)
+
+👩‍🎨 [Carla Cirone](https://www.linkedin.com/in/carla-cirone-0566b095/)
+
+👩‍💻 [Daniela García](https://www.linkedin.com/in/claudia-daniela-garcia-138b1a14b/)
+
+👩‍🚀 [Lucía Huilén Gómez](https://www.linkedin.com/in/luc%C3%ADa-huil%C3%A9n-g%C3%B3mez-93565276/)
+
+👨‍🎤 [Santiago Lardone Quinodoz](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
+
+🐍 [Sebastián Lombraña](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
+
+🤘 [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+👩‍🏫 [Yanel Paulette](https://www.linkedin.com/in/yanelpaulette/)
+]
+
+.pull-right[&lt;img src="Archivos/impresentables.jpg"  /&gt;]
+---
+# Invitados
+
+Habitualmente las presentaciones del Club las hacemos nosotros. Pero una vez al mes, invitamos a un Data Scientist que nos hable sobre un tema de su especialidad. Así hemos tenido a gente como: 
+
+
+--
+
+.pull-left[
+
+&lt;img src="Archivos/pablo_tiscornia.jpg" height="40" width="40" /&gt; [Pablo Tiscornia](https://www.linkedin.com/in/ptiscornia/): Paquete EPH.
+
+&lt;img src="Archivos/pablo_casas.jpg" height="40" width="40" /&gt; [Pablo Casas](https://www.linkedin.com/in/pcasas/): Análisis Exploratorio de Datos con `funModeling`.
+
+&lt;img src="Archivos/ana_diedrichs.jpg" height="40" width="40" /&gt; [Ana Laura Diedrichs](https://www.linkedin.com/in/ana-laura-diedrichs-47038415/): Introducción a control de versiones con Git.
+
+&lt;img src="Archivos/hernan_escudero.jpg" height="40" width="40" /&gt; [Hernán Escudero](https://www.linkedin.com/in/hernanescudero/): Aplicaciones interactivas con `Shiny`.
+
+&lt;img src="Archivos/angie_scetta.jpg" height="40" width="40" /&gt; [Ángeles Scetta](https://www.linkedin.com/in/mar%C3%ADa-de-los-%C3%A1ngeles-scetta-b7b82a80/): Análisis de datos geoespaciales en R.  
+]
+
+--
+
+.pull-right[
+
+### Y nuestros créditos "locales" 👏
+
+&lt;img src="Archivos/alithu_castro.jpg" height="40" width="40" /&gt; [Alithu Castro](https://www.linkedin.com/in/alithucastro/): Estadística y notebooks de R.
+
+&lt;img src="Archivos/luis_grau.jpg" height="40" width="40" /&gt; [Luis Grau](https://www.linkedin.com/in/luis-grau-r-212b3a9/): Formato de tablas con `kable`.
+
+]
+
+---
+# Invitados
+## Suscripción al Club de R para RRHH
+
+Todos los sábados de 10:00 a 11:30 hs. nos reunimos para revisar paquetes, tipos de análisis, proyectos, etc.. Mayormente utilizamos datos de RRHH (salvo los invitados) y en castellano para que sólo nos preocupemos por entender R, y no tener que intentar comprender datos extraños.
+
+--
+
+La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** 🎂.
+
+.right[&lt;img src="Archivos/invitados.jpg" width="35%" /&gt;]
+
+---
+class: inverse center middle
+# Empecemos!
+
+&lt;img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" /&gt;
+
+---
+# RMarkdown
+
+**RMarkdown** es un paquete de R que ya viene incluido en RStudio que permite hacer:
+
+* Informes en HTML
+* Informes en PDF/Word
+* Notebooks
+* Emails
+* Presentaciones
+* Libros
+* Blogs
+* Dashboards
+
+---
+# RMarkdown
+
+Markdown es un lenguaje que existe antes de R, y que nació para facilitar la conversión de texto en código… usando código.
+
+--
+
+Al principio es complejo porque uno no edita el texto con un ícono como en Word o en Powerpoint, y al igual que R tiene una curva de aprendizaje que demanda dedicación, pero una vez que le agarrás la mano es muy difícil soltarlo.
+
+--
+
+En R, permite generar documentos que incluyen el código (visible o no) y la salida de resultados, lo cual a la hora de armar un informe o una presentación con datos y/o gráficos, termina ahorrando tiempo.
+
+---
+# RMarkdown
+## Ventajas
+
+* Correcciones.
+* Evito errores por copypastear mal.
+* Ahorro tiempo.
+* Puedo compartir el análisis.
+* Automatizar informes y pasos repetitivos.
+* No sólo sirve para R.
+
+---
+# RMarkdown
+## Componentes
+
+RMarkdown tiene 3 componentes principales:
+
+1. **Encabezado**: Contiene metadata del documento (qué tipo de documento va a ser).
+
+--
+
+2. **Texto**: Eso.
+
+--
+
+3. **Código**: Que se vuelca en los *chunks* o bloques de código.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

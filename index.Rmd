@@ -1,0 +1,211 @@
+---
+title: "Sesión 28 - RMarkdown Preview RStudio 1.4"
+subtitle: "Club de R para RRHH"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+      highlightStyle: github
+      highlightLines: true
+    language: "spanish"
+
+---
+
+class: inverse, top, center
+background-image: url(Archivos/kiwi-fondo.png)
+background-size: cover
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+```
+
+
+```{r metathis, echo=FALSE}
+library(metathis)
+meta() %>%
+  meta_name("github-repo" = "r4hr/club_de_r") %>% 
+  meta_social(
+    title = "Sesión abierta Nov. 2020 - Introducción a RMarkdown",
+    description = paste(
+      "Una introducción a cómo realizar informes con la versión preview de RStudio 1.4",
+      "por el Club de R para RRHH"),
+    url = "https://kiwi-rmarkdown.netlify.app/",
+    image = "https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true",
+    image_alt = paste(
+      "Inttroducción a RMarkdown con RStudio 1.4", 
+      "Desarrollada por el Club de R para RRHH"
+    ),
+    og_type = "website",
+    og_author = "Sergio Garcia Mora",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@sergiogarciamor",
+    twitter_site = "@club_rrhh"
+  )
+```
+
+```{r xaringanExtra-share-again, echo=FALSE}
+xaringanExtra::use_share_again()
+```
+
+
+
+???
+
+Image credit: [Designed by Freepik]("http://www.freepik.com")
+
+---
+# Quiénes somos
+
+El [Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan en Recursos Humanos de habla hispana.
+
+Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestros skills y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
+
+Este es un proyecto que ideó [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/), y que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, y cada vez más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
+
+Para más información sobre el Club de R leé [este post](https://r4hr.club/2020/09/23/el-club-de-r-para-rrhh/), o escribinos a [info@r4hr.club](mailto:info@r4hr.club).
+
+---
+# Quiénes somos
+## La encuesta KIWI `r emo::ji("kiwi")` de Sueldos de RRHH para LATAM
+
+Uno de los problemas en el aprendizaje de People Analytics es la falta de datasets para practicar, así que una decisión que tomamos fue el de generar nuestro propio dataset y de abrirlo para toda la comunidad.
+
+Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, **Nerdearla**, y que también organizan una encuesta salarial dos veces por año.
+
+Estas son las motivaciones detrás de esta encuesta. Tener nuestro propio dataset, compartir los resultados y los datos, para que todos los entusiastas de RRHH y de los datos cuenten con una fuente de datos para practicar.
+
+> Si querés conocer la historia detrás del nombre de la encuesta, la podés [conocer aquí](https://r4hr.club/why-kiwi/).
+
+---
+background-color: "#5D6D7E" 
+# Quiénes somos
+## Organizadores
+.pull-left[
+`r emo::ji("male_detective")` [Adrián Quiroga](https://www.linkedin.com/in/adrian-quiroga-ab57424b/) 
+
+`r emo::ji("woman_technologist")` [Alithu Castro](https://www.linkedin.com/in/alithucastro/)
+
+`r emo::ji("woman_student")` [Andrea Herpsomer](https://www.linkedin.com/in/andreaherpsomer/)
+
+`r emo::ji("woman_artist")` [Carla Cirone](https://www.linkedin.com/in/carla-cirone-0566b095/)
+
+`r emo::ji("woman_technologist")` [Daniela García](https://www.linkedin.com/in/claudia-daniela-garcia-138b1a14b/)
+
+`r emo::ji("woman_astronaut")` [Lucía Huilén Gómez](https://www.linkedin.com/in/luc%C3%ADa-huil%C3%A9n-g%C3%B3mez-93565276/)
+
+`r emo::ji("man_singer")` [Santiago Lardone Quinodoz](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
+
+`r emo::ji("snake")` [Sebastián Lombraña](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
+
+`r emo::ji("metal")` [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r emo::ji("woman_teacher")` [Yanel Paulette](https://www.linkedin.com/in/yanelpaulette/)
+]
+
+.pull-right[<img src="Archivos/impresentables.jpg"  />]
+---
+# Invitados
+
+Habitualmente las presentaciones del Club las hacemos nosotros. Pero una vez al mes, invitamos a un Data Scientist que nos hable sobre un tema de su especialidad. Así hemos tenido a gente como: 
+
+
+--
+
+.pull-left[
+
+<img src="Archivos/pablo_tiscornia.jpg" height="40" width="40" /> [Pablo Tiscornia](https://www.linkedin.com/in/ptiscornia/): Paquete EPH.
+
+<img src="Archivos/pablo_casas.jpg" height="40" width="40" /> [Pablo Casas](https://www.linkedin.com/in/pcasas/): Análisis Exploratorio de Datos con `funModeling`.
+
+<img src="Archivos/ana_diedrichs.jpg" height="40" width="40" /> [Ana Laura Diedrichs](https://www.linkedin.com/in/ana-laura-diedrichs-47038415/): Introducción a control de versiones con Git.
+
+<img src="Archivos/hernan_escudero.jpg" height="40" width="40" /> [Hernán Escudero](https://www.linkedin.com/in/hernanescudero/): Aplicaciones interactivas con `Shiny`.
+
+<img src="Archivos/angie_scetta.jpg" height="40" width="40" /> [Ángeles Scetta](https://www.linkedin.com/in/mar%C3%ADa-de-los-%C3%A1ngeles-scetta-b7b82a80/): Análisis de datos geoespaciales en R.  
+]
+
+--
+
+.pull-right[
+
+### Y nuestros créditos "locales" `r emo::ji("applause")`
+
+<img src="Archivos/alithu_castro.jpg" height="40" width="40" /> [Alithu Castro](https://www.linkedin.com/in/alithucastro/): Estadística y notebooks de R.
+
+<img src="Archivos/luis_grau.jpg" height="40" width="40" /> [Luis Grau](https://www.linkedin.com/in/luis-grau-r-212b3a9/): Formato de tablas con `kable`.
+
+]
+
+---
+# Invitados
+## Suscripción al Club de R para RRHH
+
+Todos los sábados de 10:00 a 11:30 hs. nos reunimos para revisar paquetes, tipos de análisis, proyectos, etc.. Mayormente utilizamos datos de RRHH (salvo los invitados) y en castellano para que sólo nos preocupemos por entender R, y no tener que intentar comprender datos extraños.
+
+--
+
+La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** `r emo::ji("party")`.
+
+.right[<img src="Archivos/invitados.jpg" width="35%" />]
+
+---
+class: inverse center middle
+# Empecemos!
+
+<img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" />
+
+---
+# RMarkdown
+
+**RMarkdown** es un paquete de R que ya viene incluido en RStudio que permite hacer:
+
+* Informes en HTML
+* Informes en PDF/Word
+* Notebooks
+* Emails
+* Presentaciones
+* Libros
+* Blogs
+* Dashboards
+
+---
+# RMarkdown
+
+Markdown es un lenguaje que existe antes de R, y que nació para facilitar la conversión de texto en código… usando código.
+
+--
+
+Al principio es complejo porque uno no edita el texto con un ícono como en Word o en Powerpoint, y al igual que R tiene una curva de aprendizaje que demanda dedicación, pero una vez que le agarrás la mano es muy difícil soltarlo.
+
+--
+
+En R, permite generar documentos que incluyen el código (visible o no) y la salida de resultados, lo cual a la hora de armar un informe o una presentación con datos y/o gráficos, termina ahorrando tiempo.
+
+---
+# RMarkdown
+## Ventajas
+
+* Correcciones.
+* Evito errores por copypastear mal.
+* Ahorro tiempo.
+* Puedo compartir el análisis.
+* Automatizar informes y pasos repetitivos.
+* No sólo sirve para R.
+
+---
+# RMarkdown
+## Componentes
+
+RMarkdown tiene 3 componentes principales:
+
+1. **Encabezado**: Contiene metadata del documento (qué tipo de documento va a ser).
+
+--
+
+2. **Texto**: Eso.
+
+--
+
+3. **Código**: Que se vuelca en los *chunks* o bloques de código.
