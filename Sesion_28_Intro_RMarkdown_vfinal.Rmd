@@ -41,7 +41,7 @@ col_graf <- "#5DADE2"
 # Carga de los sueldos
 sueldos <- sheets_read("1f3MCA81NnjI48C03GxxGu69i2hKZLrpxf4tHzKkXL_k")
 
-# Filramos los sueldos entre los percentiles 5 y 95
+# Filtramos los sueldos entre los percentiles 5 y 95
 resumen_numerico <- profiling_num(sueldos)
 percentil_05 <- resumen_numerico[6,6]
 percentil_95 <- resumen_numerico[6,10]

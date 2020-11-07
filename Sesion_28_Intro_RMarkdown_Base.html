@@ -453,6 +453,7 @@ sueldos &lt;- sheets_read(&quot;1f3MCA81NnjI48C03GxxGu69i2hKZLrpxf4tHzKkXL_k&quo
 ## See gargle&#39;s &quot;Non-interactive auth&quot; vignette for more details:
 ## https://gargle.r-lib.org/articles/non-interactive-auth.html</code></pre>
 <pre><code>## The googlesheets4 package is using a cached token for sergio@d4hr.com.</code></pre>
+<pre><code>## Auto-refreshing stale OAuth token.</code></pre>
 <pre><code>## Reading from &quot;Copia Encuesta de Sueldos - Resumida&quot;</code></pre>
 <pre><code>## Range &quot;Hoja 1&quot;</code></pre>
 <pre class="r"><code># Filramos los sueldos entre los percentiles 5 y 95
@@ -480,7 +481,8 @@ puestos &lt;- sueldos %&gt;%
   group_by(puesto) %&gt;% 
   summarise(sueldo_promedio = mean(sueldo_bruto))</code></pre>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>ggplot(puestos, aes(x = sueldo_promedio, 
+<pre class="r"><code># Hacemos el gráfico
+ggplot(puestos, aes(x = sueldo_promedio, 
                     y = reorder(puesto, sueldo_promedio))) +
   geom_col() +
   labs(title = &quot;Sueldo promedio por puesto&quot;,
@@ -512,7 +514,7 @@ puestos2 &lt;- salarios %&gt;%
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#oqvafjqpkb .gt_table {
+#lahszwmvey .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -537,7 +539,7 @@ puestos2 &lt;- salarios %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_heading {
+#lahszwmvey .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -549,7 +551,7 @@ puestos2 &lt;- salarios %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_title {
+#lahszwmvey .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -559,7 +561,7 @@ puestos2 &lt;- salarios %&gt;%
   border-bottom-width: 0;
 }
 
-#oqvafjqpkb .gt_subtitle {
+#lahszwmvey .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -569,13 +571,13 @@ puestos2 &lt;- salarios %&gt;%
   border-top-width: 0;
 }
 
-#oqvafjqpkb .gt_bottom_border {
+#lahszwmvey .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_col_headings {
+#lahszwmvey .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -590,7 +592,7 @@ puestos2 &lt;- salarios %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_col_heading {
+#lahszwmvey .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -610,7 +612,7 @@ puestos2 &lt;- salarios %&gt;%
   overflow-x: hidden;
 }
 
-#oqvafjqpkb .gt_column_spanner_outer {
+#lahszwmvey .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -622,15 +624,15 @@ puestos2 &lt;- salarios %&gt;%
   padding-right: 4px;
 }
 
-#oqvafjqpkb .gt_column_spanner_outer:first-child {
+#lahszwmvey .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oqvafjqpkb .gt_column_spanner_outer:last-child {
+#lahszwmvey .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oqvafjqpkb .gt_column_spanner {
+#lahszwmvey .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -642,7 +644,7 @@ puestos2 &lt;- salarios %&gt;%
   width: 100%;
 }
 
-#oqvafjqpkb .gt_group_heading {
+#lahszwmvey .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -664,7 +666,7 @@ puestos2 &lt;- salarios %&gt;%
   vertical-align: middle;
 }
 
-#oqvafjqpkb .gt_empty_group_heading {
+#lahszwmvey .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -679,15 +681,15 @@ puestos2 &lt;- salarios %&gt;%
   vertical-align: middle;
 }
 
-#oqvafjqpkb .gt_from_md > :first-child {
+#lahszwmvey .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oqvafjqpkb .gt_from_md > :last-child {
+#lahszwmvey .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oqvafjqpkb .gt_row {
+#lahszwmvey .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -706,7 +708,7 @@ puestos2 &lt;- salarios %&gt;%
   overflow-x: hidden;
 }
 
-#oqvafjqpkb .gt_stub {
+#lahszwmvey .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -718,7 +720,7 @@ puestos2 &lt;- salarios %&gt;%
   padding-left: 12px;
 }
 
-#oqvafjqpkb .gt_summary_row {
+#lahszwmvey .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -728,7 +730,7 @@ puestos2 &lt;- salarios %&gt;%
   padding-right: 5px;
 }
 
-#oqvafjqpkb .gt_first_summary_row {
+#lahszwmvey .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -738,7 +740,7 @@ puestos2 &lt;- salarios %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_grand_summary_row {
+#lahszwmvey .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -748,7 +750,7 @@ puestos2 &lt;- salarios %&gt;%
   padding-right: 5px;
 }
 
-#oqvafjqpkb .gt_first_grand_summary_row {
+#lahszwmvey .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -758,11 +760,11 @@ puestos2 &lt;- salarios %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_striped {
+#lahszwmvey .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oqvafjqpkb .gt_table_body {
+#lahszwmvey .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -771,7 +773,7 @@ puestos2 &lt;- salarios %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_footnotes {
+#lahszwmvey .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -785,13 +787,13 @@ puestos2 &lt;- salarios %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_footnote {
+#lahszwmvey .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#oqvafjqpkb .gt_sourcenotes {
+#lahszwmvey .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,46 +807,46 @@ puestos2 &lt;- salarios %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#oqvafjqpkb .gt_sourcenote {
+#lahszwmvey .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#oqvafjqpkb .gt_left {
+#lahszwmvey .gt_left {
   text-align: left;
 }
 
-#oqvafjqpkb .gt_center {
+#lahszwmvey .gt_center {
   text-align: center;
 }
 
-#oqvafjqpkb .gt_right {
+#lahszwmvey .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oqvafjqpkb .gt_font_normal {
+#lahszwmvey .gt_font_normal {
   font-weight: normal;
 }
 
-#oqvafjqpkb .gt_font_bold {
+#lahszwmvey .gt_font_bold {
   font-weight: bold;
 }
 
-#oqvafjqpkb .gt_font_italic {
+#lahszwmvey .gt_font_italic {
   font-style: italic;
 }
 
-#oqvafjqpkb .gt_super {
+#lahszwmvey .gt_super {
   font-size: 65%;
 }
 
-#oqvafjqpkb .gt_footnote_marks {
+#lahszwmvey .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="oqvafjqpkb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="lahszwmvey" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
       <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Sueldo promedio por puesto</th>
