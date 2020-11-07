@@ -10,16 +10,16 @@
     <meta name="github-repo" content="r4hr/club_de_r"/>
     <meta name="twitter:title" content="Sesión abierta Nov. 2020 - Introducción a RMarkdown"/>
     <meta name="twitter:description" content="Una introducción a cómo realizar informes con la versión preview de RStudio 1.4 por el Club de R para RRHH"/>
-    <meta name="twitter:url" content="https://kiwi-rmarkdown.netlify.app/"/>
-    <meta name="twitter:image:src" content="https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true"/>
+    <meta name="twitter:url" content="https://clubder-rmarkdown.netlify.app/"/>
+    <meta name="twitter:image:src" content="https://github.com/r4hr/club_de_r/blob/master/Archivos/kiwi-fondo.png"/>
     <meta name="twitter:image:alt" content="Inttroducción a RMarkdown con RStudio 1.4 Desarrollada por el Club de R para RRHH"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:creator" content="@sergiogarciamor"/>
     <meta name="twitter:site" content="@club_rrhh"/>
     <meta property="og:title" content="Sesión abierta Nov. 2020 - Introducción a RMarkdown"/>
     <meta property="og:description" content="Una introducción a cómo realizar informes con la versión preview de RStudio 1.4 por el Club de R para RRHH"/>
-    <meta property="og:url" content="https://kiwi-rmarkdown.netlify.app/"/>
-    <meta property="og:image" content="https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true"/>
+    <meta property="og:url" content="https://clubder-rmarkdown.netlify.app/"/>
+    <meta property="og:image" content="https://github.com/r4hr/club_de_r/blob/master/Archivos/kiwi-fondo.png"/>
     <meta property="og:image:alt" content="Inttroducción a RMarkdown con RStudio 1.4 Desarrollada por el Club de R para RRHH"/>
     <meta property="og:type" content="website"/>
     <meta property="og:locale" content="en_US"/>
@@ -142,7 +142,7 @@ Todos los sábados de 10:00 a 11:30 hs. nos reunimos para revisar paquetes, tipo
 
 --
 
-La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** 🎂.
+La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** 🎉.
 
 .right[&lt;img src="Archivos/invitados.jpg" width="35%" /&gt;]
 
@@ -166,6 +166,7 @@ class: inverse center middle
 * Blogs
 * Dashboards
 
+.right[&lt;img src="https://rubenfcasal.github.io/bookdown_intro/images/rmarkdown.png" width="15%" /&gt;]
 ---
 # RMarkdown
 
@@ -179,6 +180,7 @@ Al principio es complejo porque uno no edita el texto con un ícono como en Word
 
 En R, permite generar documentos que incluyen el código (visible o no) y la salida de resultados, lo cual a la hora de armar un informe o una presentación con datos y/o gráficos, termina ahorrando tiempo.
 
+.right[&lt;img src="https://rubenfcasal.github.io/bookdown_intro/images/rmarkdown.png" width="15%" /&gt;]
 ---
 # RMarkdown
 ## Ventajas
@@ -190,6 +192,7 @@ En R, permite generar documentos que incluyen el código (visible o no) y la sal
 * Automatizar informes y pasos repetitivos.
 * No sólo sirve para R.
 
+.right[&lt;img src="https://rubenfcasal.github.io/bookdown_intro/images/rmarkdown.png" width="15%" /&gt;]
 ---
 # RMarkdown
 ## Componentes
@@ -205,6 +208,179 @@ RMarkdown tiene 3 componentes principales:
 --
 
 3. **Código**: Que se vuelca en los *chunks* o bloques de código.
+
+--
+
+.center[&lt;img src="Archivos/componentes.png" width="70%" /&gt;]
+
+---
+# RMarkdown
+## Componentes en versión RStudio 1.4
+
+&lt;br&gt;
+.center[&lt;img src="Archivos/componentes-1.png" width="70%" /&gt;]
+
+---
+# RMarkdown
+## Tipos de documentos
+
+Estos son los tipos de documentos que podemos generar en RMarkdown
+
+.pull-left[
+### Documentos
+
+* github_document
+* html_document
+* latex_document
+* md_document
+* odt_document
+* pdf_document
+* rtf_document
+* word_document
+]
+
+--
+
+.pull-right[
+### Presentaciones
+* beamer_presentation
+* ioslides_presentation
+* powerpoint_presentation
+* slidy_presentation
+
+Si bien no es estrictamente de RMarkdown pero también está el paquete **Xaringan** (el que uso en las presentaciones habitualmente).
+]
+---
+class: inverse
+# Cheatsheet 
+## (machete, cola, trencito, copiatín, plage, batería, torpedo, chuleta, etc.)
+
+Los *cheatsheet* son documentos con resúmenes de las principales funciones de los paquetes más utilizados.
+
+La comunidad de R de hispanoamérica ha traducido unos cuantos, gracias a quienes podemos contar hoy con un cheatsheet en [castellano](https://drive.google.com/file/d/169ceviH1YChh4cALSGCFkSmAvnFoQ0aJ/view?usp=sharing).
+
+También contamos con un documento en [inglés](https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf?_ga=2.143643697.583415055.1594393652-581652334.1578054321). 
+
+.left[&lt;img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQVQqH4cIAbVEQPo0IktXDPR31cSKCjStDnPA&amp;usqp=CAU" /&gt;]
+
+---
+# El encabezado
+
+El *encabezado* de un documento de RMarkdown contiene la metadata del archivo:
+
+
+```r
+---
+title: "Untitled"
+author: "Sergio"
+date: "6/11/2020"
+output: html_document
+---
+```
+
+---
+# El encabezado
+
+.left-column[
+La lógica del encabezado (en adelante YAML) se rige por el CSS (Cascading Style Sheets) que es el lenguaje de estilos de programación en HTML.
+
+Lo importante es respetar los espacios y sangrías.
+
+]
+
+.right-column[
+
+```r
+---
+title: "Sesión 28 - Introducción a RMarkdown"
+subtitle: "Club de R para RRHH"
+author: "Sergio de Data 4HR"
+date: "Noviembre 2020"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: pygments
+    toc: true
+    toc_float: true
+    code_download: true
+    code_folding: hide
+---
+```
+
+]
+
+
+---
+# Editar texto
+
+En las versiones *"clásicas"* de RMarkdown, para controlar la estética del texto podíamos usar algunos símbolos.
+
+`# Título`
+`## Subtítulo`
+
+Un asterisco o guión bajo para poner texto en *cursiva*. Ej: `*sobresaliente*`.
+
+--
+
+Dos asteriscos o guiones bajos para poner texto en **negrita**. Ej: `**sobresaliente**`.
+
+--
+
+Por ejemplo
+
+`# Título`
+
+Texto libre
+
+`*  Ítem 1`
+
+`*  Ítem 2`
+
+`*  Ítem 3`
+
+`Texto en **negrita**. Texto en *cursiva*`.
+
+---
+background-image: url(https://i0.wp.com/www.scienceofnoise.net/wp-content/uploads/2019/12/pink-floyd-the-wall-.jpg)
+background-size: contain
+# Ejemplo
+
+---
+# Ejemplo
+
+Copien y peguen esto en el documento de RMarkdown
+
+`# The Wall`
+`## Disco 1`
+`### Lado 1`
+
+1. In the Flesh?
+2. The Thin Ice
+3. Another Brick in the Wall (Part I)
+4. The Happiest Days of Our Lives
+5. Another Brick in the Wall (Part II)
+6. Mother
+
+---
+# Ejemplo
+## La versión preview de RStudio 1.4
+
+Si activamos el **compás** van a poder ver que aparece una **barra de edición** que es parte de la versión preview de RStudio 1.4 y que no está en las versiones anteriores del software.
+
+&lt;img src="Archivos/compas.png" /&gt;
+
+.center[&lt;img src="Archivos/barra.png" width="45%" /&gt;]
+
+---
+# Bloques de código
+
+La forma más rápida de crear un bloque de código es usándo las teclas *Ctrl + Alt + I*.
+
+&lt;img src="Archivos/chunk.png" /&gt;
+
+---
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
