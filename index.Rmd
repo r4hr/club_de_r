@@ -507,7 +507,7 @@ class: inverse, center, middle
 class: inverse, center, bottom
 
 # `r fontawesome::fa(name = "github-alt", fill = "white")`
-[Repo](https://github.com/r4hr/club_de_r/blob/master/Sesion_Abierta_20_11_RMarkdown.Rproj)
+[Repo](https://github.com/r4hr/club_de_r/blob/master/Sesion_28_Intro_RMarkdown_vfinal.Rmd)
 
 Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
 
