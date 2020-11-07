@@ -154,7 +154,7 @@ La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los 
 class: inverse center middle
 # Empecemos!
 
-<img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" />
+<img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" width="60%" />
 
 ---
 # RMarkdown
@@ -354,7 +354,9 @@ background-size: contain
 Copien y peguen esto en el documento de RMarkdown
 
 `# The Wall`
+
 `## Disco 1`
+
 `### Lado 1`
 
 1. In the Flesh?
@@ -381,6 +383,132 @@ La forma más rápida de crear un bloque de código es usándo las teclas *Ctrl 
 
 <img src="Archivos/chunk.png" />
 
+--
+
+Y podemos usar los objetos que creamos dentro de los bloques de código para automatizar respuestas en el texto libre.
+
+<img src="Archivos/chunk1.png" />
+
+---
+# Bloques de código
+## Opciones
+
+Podemos elegir varias opciones para hacer visible o no el código, definir si queremos mostrar o no los mensajes de error, o incluso si queremos correr el código o sólo mostrarlo sin que haga nada.
+
+Estas opciones las definimos en cada bloque.
+
+.center[<img src="Archivos/chunk-options.png" />]
+
+---
+# Encabezado
+## Temas y estilos
+
+
+```{r eval=FALSE}
+---
+title: "Habits"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+---
+```
+
+Recuerden poner:
+
+* La sangría
+* Los dos puntos al final de `html_document`.
+* La sangría de las opciones como `theme` por ejemplo.
+
+---
+# Encabezado
+## Temas y estilos
+
+.pull-left[
+### Estilos predefinidos
+
+* cerulean, 
+* journal, 
+* flatly, 
+* darkly, 
+* readable, 
+* spacelab, 
+* united, 
+* cosmo, 
+* lumen, 
+* paper, 
+* sandstone, 
+* simplex, 
+* yeti
+]
+
+.pull-right[
+### Code Highlight
+`highlight` establece el estilo para resaltar los bloques en el documento. Las opciones predefinidas son:
+
+* default, 
+* tango, 
+* pygments, 
+* kate, 
+* monochrome, 
+* espresso, 
+* zenburn, 
+* haddock, 
+* breezedark, 
+* textmate
+]
+
+---
+class: inverse center middle
+# Empecemos!
+
+<img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" width="60%" />
+
+---
+class: middle
+# Muchas gracias!
+.pull-left[
+<img src="https://media.giphy.com/media/lLp9dTw6qxcD6/giphy.gif" />
+]
+
+.pull-right[
+Si te gustó esta sesión podés suscribirte escribiéndonos a [info@r4hr.club](mailto:info@r4hr.club) y acceder a todas las sesiones pasadas, y participar de las próximas sesiones con especialistas.
+
+Recuerden compartir sus capturas de pantalla y sensaciones con los hashtags:
+
+* ### #R4HR
+* ### #data4hr
+* ### #PeopleAnalytics
+* ### #RStats_ES
+* ### #BetterWithData
+]
+---
+class: inverse, center, middle
+
+## Seguinos en nuestras redes
+### [link.tree/r4hrclub](https://www.linktr.ee/r4hrclub) `r emo::ji("satellite")`
+<img src="https://media.giphy.com/media/93fsZ7rI488L908x0T/giphy.gif" />
+
+
+
 ---
 
+# Paquetes utilizados
 
+* [ggplot2](https://ggplot2.tidyverse.org): H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
+* [tidyverse](https://doi.org/10.21105/joss.01686): Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686
+* [funModeling](https://CRAN.R-project.org/package=funModeling): Pablo Casas (2020). funModeling: Exploratory Data Analysis and Data Preparation Tool-Box. R package version 1.9.4.
+* [gargle](https://CRAN.R-project.org/package=gargle): Jennifer Bryan, Craig Citro and Hadley Wickham (2020). gargle: Utilities for Working with Google APIs. R package version 0.5.0.
+* [googlesheets4](https://CRAN.R-project.org/package=googlesheets4): Jennifer Bryan (2020). googlesheets4: Access Google Sheets using the Sheets API V4. R package version 0.2.0.
+* [gt](https://CRAN.R-project.org/package=gt): Richard Iannone, Joe Cheng and Barret Schloerke (2020). gt: Easily Create Presentation-Ready Display Tables. R package version 0.2.2.
+* [scales](https://CRAN.R-project.org/package=scales): Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. R package version 1.1.1.
+
+---
+class: inverse, center, bottom
+
+# `r fontawesome::fa(name = "github-alt", fill = "white")`
+[Repo](https://github.com/r4hr/club_de_r/blob/master/Sesion_Abierta_20_11_RMarkdown.Rproj)
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)

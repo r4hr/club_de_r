@@ -1,0 +1,205 @@
+---
+title: "Relevamiento Parcial Sueldos de RRHH Argentina"
+subtitle: "Curso Introducción a R para RRHH"
+author: "Sergio de Data 4HR"
+date: "Octubre 2020"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: pygments
+    toc: true
+    toc_float: true
+    code_download: true
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, dpi=200)
+```
+
+```{r librerias-datos}
+library(tidyverse)
+library(gargle)
+library(googlesheets4)
+library(funModeling)
+library(gt)
+library(scales)
+
+# Estilo de los gráficos
+estilo <- theme(panel.grid = element_blank(),
+                plot.background = element_rect(fill = "#FBFCFC"),
+                panel.background = element_blank())
+
+# Este es un objeto que vamos a utilizar para no tener que tipear siempre lo mismo
+fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH"
+
+
+# Colores predefinidos de los gráficos
+col_genero <- c("#8624F5", "#1FC3AA")
+col_graf <- "#5DADE2"
+
+# Carga de los sueldos
+sueldos <- sheets_read("1f3MCA81NnjI48C03GxxGu69i2hKZLrpxf4tHzKkXL_k")
+
+# Filramos los sueldos entre los percentiles 5 y 95
+resumen_numerico <- profiling_num(sueldos)
+percentil_05 <- resumen_numerico[6,6]
+percentil_95 <- resumen_numerico[6,10]
+
+# Limpiamos un poco más el dataset
+sueldos <- sueldos %>% 
+  filter(between(sueldo_bruto, percentil_05, percentil_95), 
+         aumento < 100,
+         anios_rh < 40,
+         puesto != "Director")
+```
+
+Este es un ejercicio de práctica, realizado durante el curso **"Introducción a R para RRHH"** de [Data 4HR](https://data-4hr.com). Si quieren saber más, pueden contactarme en [mi perfil en LinkedIn](https://www.linkedin.com/in/sergiogarciamora/) o por [Twitter](https://twitter.com/sergiogarciamor).
+
+Los datos utilizados son una muestra de la Encuesta KIWI de Sueldos de RRHH de Latam realizado por el [Club de R para RRHH](https://r4hr.club).
+
+Este es un ejemplo de reporte que se puede hacer utilizando R, con el paquete `RMarkdown`.
+
+# Análisis de sueldos de RRHH por puesto
+
+```{r puestos}
+sueldos <- sueldos %>% 
+  mutate(puesto = factor(puesto, 
+                         levels = c("Administrativo", "Analista", "HRBP", 
+                                    "Responsable", "Jefe", "Gerente"))) 
+
+puestos <- sueldos %>% 
+  group_by(puesto) %>% 
+  summarise(sueldo_promedio = mean(sueldo_bruto))
+
+ggplot(puestos, aes(x = sueldo_promedio, 
+                    y = reorder(puesto, sueldo_promedio))) +
+  geom_col(fill = "#5DADE2") +
+  labs(title = "Sueldo promedio por puesto",
+       subtitle = "En AR$",
+       x = "", y="",
+       caption = fuente) +
+  estilo +
+  scale_x_continuous(labels = comma_format(big.mark = ".", decimal.mark = ";")) +
+  theme(panel.grid.major.x = element_line(colour = "#CACFD2"))
+```
+
+Para realizar este gráfico filtramos los sueldos por encima de `r paste0("AR$ ",comma(percentil_05, big.mark = ".", decimal.mark = ";"))` (percentil 5), y por debajo de `r paste0("AR$ ",comma(percentil_95, big.mark = ".", decimal.mark = ";"))` (percentil 95).
+
+## Tabla de Sueldos
+
+```{r}
+salarios <- sueldos %>% 
+  mutate(puesto = factor(puesto, 
+                         levels = c("Gerente", "Jefe", "Responsable",
+                                     "HRBP", "Analista", "Administrativo"))) 
+
+puestos2 <- salarios %>% 
+  group_by(puesto) %>% 
+  summarise(sueldo_promedio = mean(sueldo_bruto))
+
+gt(puestos2) %>% 
+  tab_header(title = "Sueldo promedio por puesto") %>% 
+  cols_label(puesto = "Puesto", 
+             sueldo_promedio = "Sueldo Promedio") %>% 
+  fmt_currency(columns = c("sueldo_promedio"),
+               currency = "ARS",
+               decimals = 0)
+  
+```
+
+## Dispersión de sueldos por puesto y género
+
+En este *boxplot* podemos apreciar las amplitudes en los sueldos de cada puesto por género. Mientras más larga sea la caja, más amplia es la variación de los sueldos, y al contrario, mientras más chica sea la caja, hay una mayor concentración de los sueldos.
+
+A los puntos que aparecen por encima de cada uno de los gráficos, se los denomina `outlier`, y son valores extremos.
+
+```{r}
+ggplot(salarios, aes(x = puesto, y = sueldo_bruto, fill = genero)) +
+  geom_boxplot() +
+  labs(title = "Dispersión de sueldos por puesto y género",
+       x = "", y = "",
+       caption = fuente, 
+       fill = "Género") +
+  scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ",")) +
+  scale_fill_manual(values = col_genero) +
+  estilo +
+  theme(panel.grid.major.y = element_line(colour = "#CACFD2"))
+
+```
+
+Este tipo de gráficos, los *boxplots*, proveen de mucha información estadística.
+
+-   El límite inferior de la caja es el 1° cuartil (1Q).
+-   La línea dentro de la caja, es la mediana.
+-   El límite superior de la caja es el 3° cuartil (3Q).
+-   Las líneas que salen de la caja son los límites para indicar los valores outliers y se calculan **1,5 por el Rango Intercuartil (3Q - 1Q)**.
+-   Los puntos que vemos más allá de las líneas son *outliers*.
+
+Por ejemplo, este gráfico nos permite ver que en el caso de los gerentes, no hay una diferencia muy amplia en la **mediana** de los sueldos de hombres y mujeres. En cambio vemos que la caja del gráfico de las mujeres es más amplia que la de los varones. Esto quiere decir que hay una porción de mujeres como Gerente de RRHH que cobran menos que sus pares hombres, y que también hay una porción de mujeres que cobran más que los varones.
+
+## Relación entre años de experiencia y sueldo
+
+Con el siguiente gráfico queremos ver cuál es la relación entre los años de experiencia y el sueldo bruto.
+
+```{r}
+modelo_lineal <- broom::tidy(lm(data = sueldos, 
+                                sueldo_bruto ~ anios_rh))
+
+modelo_lineal$estimate <- dollar(modelo_lineal$estimate,
+                                 prefix = "AR$ ",    # Podemos controlar el símbolo utilizado
+                                 big.mark = ".",     # Cambia el separador de miles
+                                 decimal.mark = ",") # Cambia el separador decimal
+
+
+ggplot(sueldos, aes(x = anios_rh, y = sueldo_bruto)) +
+  geom_point(alpha = .7, size = 1.5, color = col_graf) +
+  geom_smooth(method = "lm") +
+  labs(title = "Relación entre años de experiencia y sueldos de RRHH",
+       subtitle = "En pesos argentinos",
+       x = "Años de Experiencia",
+       y = "Sueldo Bruto",
+       caption = fuente) +
+  scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ",")) +
+  estilo
+```
+
+Podemos ver una relación positiva entre los años de experiencia y el sueldo, es decir que a medida que aumentan los años de experiencia (nos movemos hacia la derecha en el eje horizontal), sube el sueldo bruto (en el eje vertical).
+
+En promedio, una persona con cero años de experiencia en RRHH cobra un sueldo bruto de `r modelo_lineal[1,2]`. Y con cada año de experiencia, el sueldo aumenta en `r modelo_lineal[2,2]`.
+
+# Ratio de Empleados de RRHH por Dotación
+
+Con este indicador queremos analizar la cantidad de empleados que hay en el área de RRHH en relación a la dotación de la empresa.
+
+```{r ratio}
+
+ ratio <- sueldos %>% 
+  select(rubro, empleados, empleados_rh) %>% 
+  mutate(ratio_rh_dotacion = empleados/empleados_rh) %>% 
+  group_by(rubro) %>% 
+  summarise(ratio_promedio = round(mean(ratio_rh_dotacion))) %>% 
+  filter(ratio_promedio != Inf) 
+
+ggplot(ratio, aes(x=ratio_promedio, 
+                         y = reorder(rubro, ratio_promedio)))+
+  geom_point(color = col_graf, size = 4)+
+  geom_segment(aes(y = rubro, yend= rubro, x=0, xend=ratio_promedio),
+               color="#5D6D7E") +
+  estilo +
+  labs(title="Ratio de Empleados de RH \n por Dotación",
+       subtitle = "Detallado por rubro de la empresa", 
+       caption = fuente, 
+       x="", y= "") +
+  theme(panel.grid.major.x = element_line(colour = "#CACFD2"))
+```
+
+# Agradecimientos
+
+Agradezco a todos los participantes del curso **"Introducción a R para RRHH"** que dictamos en [Data 4HR](https://data-4hr.com). Para conocer nuestras próximas fechas, y todas nuestras actividades de formación podés entrar en [este link](https://www.curselo.com.ar/data4hr) o por mail a [sergio\@d4hr.com](mailto:sergio@d4hr.com).
+
+Este es un curso en castellano, que utiliza datos de RRHH, para facilitar el aprendizaje del uso de este lenguaje de análisis de datos.
+
+Y si ya sabés algo de R y te interesa ser parte de una comunidad de R enfocada en RRHH, te invitamos a seguirnos en el [Club de R para RRHH](https://r4hr.club).
+
+<br><br><br>

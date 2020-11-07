@@ -142,7 +142,7 @@ Todos los sábados de 10:00 a 11:30 hs. nos reunimos para revisar paquetes, tipo
 
 --
 
-La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** 🎉.
+La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los honorarios a los invitados, y a las licencias de algunas plataformas, pero desde **noviembre, la sesión del primer sábado de cada mes será abierta y gratuita** 🎈.
 
 .right[&lt;img src="Archivos/invitados.jpg" width="35%" /&gt;]
 
@@ -150,7 +150,7 @@ La suscripción al Club tiene costo, que dedicamos principalmente a pagarlo los 
 class: inverse center middle
 # Empecemos!
 
-&lt;img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" /&gt;
+&lt;img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" width="60%" /&gt;
 
 ---
 # RMarkdown
@@ -351,7 +351,9 @@ background-size: contain
 Copien y peguen esto en el documento de RMarkdown
 
 `# The Wall`
+
 `## Disco 1`
+
 `### Lado 1`
 
 1. In the Flesh?
@@ -378,9 +380,136 @@ La forma más rápida de crear un bloque de código es usándo las teclas *Ctrl 
 
 &lt;img src="Archivos/chunk.png" /&gt;
 
+--
+
+Y podemos usar los objetos que creamos dentro de los bloques de código para automatizar respuestas en el texto libre.
+
+&lt;img src="Archivos/chunk1.png" /&gt;
+
+---
+# Bloques de código
+## Opciones
+
+Podemos elegir varias opciones para hacer visible o no el código, definir si queremos mostrar o no los mensajes de error, o incluso si queremos correr el código o sólo mostrarlo sin que haga nada.
+
+Estas opciones las definimos en cada bloque.
+
+.center[&lt;img src="Archivos/chunk-options.png" /&gt;]
+
+---
+# Encabezado
+## Temas y estilos
+
+
+
+```r
+---
+title: "Habits"
+output:
+  html_document:
+    theme: united
+    highlight: tango
+---
+```
+
+Recuerden poner:
+
+* La sangría
+* Los dos puntos al final de `html_document`.
+* La sangría de las opciones como `theme` por ejemplo.
+
+---
+# Encabezado
+## Temas y estilos
+
+.pull-left[
+### Estilos predefinidos
+
+* cerulean, 
+* journal, 
+* flatly, 
+* darkly, 
+* readable, 
+* spacelab, 
+* united, 
+* cosmo, 
+* lumen, 
+* paper, 
+* sandstone, 
+* simplex, 
+* yeti
+]
+
+.pull-right[
+### Code Highlight
+`highlight` establece el estilo para resaltar los bloques en el documento. Las opciones predefinidas son:
+
+* default, 
+* tango, 
+* pygments, 
+* kate, 
+* monochrome, 
+* espresso, 
+* zenburn, 
+* haddock, 
+* breezedark, 
+* textmate
+]
+
+---
+class: inverse center middle
+# Empecemos!
+
+&lt;img src="https://media.giphy.com/media/adikIKGu30u6A/giphy.gif" width="60%" /&gt;
+
+---
+class: middle
+# Muchas gracias!
+.pull-left[
+&lt;img src="https://media.giphy.com/media/lLp9dTw6qxcD6/giphy.gif" /&gt;
+]
+
+.pull-right[
+Si te gustó esta sesión podés suscribirte escribiéndonos a [info@r4hr.club](mailto:info@r4hr.club) y acceder a todas las sesiones pasadas, y participar de las próximas sesiones con especialistas.
+
+Recuerden compartir sus capturas de pantalla y sensaciones con los hashtags:
+
+* ### #R4HR
+* ### #data4hr
+* ### #PeopleAnalytics
+* ### #RStats_ES
+* ### #BetterWithData
+]
+---
+class: inverse, center, middle
+
+## Seguinos en nuestras redes
+### [link.tree/r4hrclub](https://www.linktr.ee/r4hrclub) 📡
+&lt;img src="https://media.giphy.com/media/93fsZ7rI488L908x0T/giphy.gif" /&gt;
+
+
+
 ---
 
+# Paquetes utilizados
 
+* [ggplot2](https://ggplot2.tidyverse.org): H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2016.
+* [tidyverse](https://doi.org/10.21105/joss.01686): Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686
+* [funModeling](https://CRAN.R-project.org/package=funModeling): Pablo Casas (2020). funModeling: Exploratory Data Analysis and Data Preparation Tool-Box. R package version 1.9.4.
+* [gargle](https://CRAN.R-project.org/package=gargle): Jennifer Bryan, Craig Citro and Hadley Wickham (2020). gargle: Utilities for Working with Google APIs. R package version 0.5.0.
+* [googlesheets4](https://CRAN.R-project.org/package=googlesheets4): Jennifer Bryan (2020). googlesheets4: Access Google Sheets using the Sheets API V4. R package version 0.2.0.
+* [gt](https://CRAN.R-project.org/package=gt): Richard Iannone, Joe Cheng and Barret Schloerke (2020). gt: Easily Create Presentation-Ready Display Tables. R package version 0.2.2.
+* [scales](https://CRAN.R-project.org/package=scales): Hadley Wickham and Dana Seidel (2020). scales: Scale Functions for Visualization. R package version 1.1.1.
+
+---
+class: inverse, center, bottom
+
+# &lt;svg style="height:0.8em;top:.04em;position:relative;fill:white;" viewBox="0 0 480 512"&gt;&lt;path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/&gt;&lt;/svg&gt;
+[Repo](https://github.com/r4hr/club_de_r/blob/master/Sesion_Abierta_20_11_RMarkdown.Rproj)
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
