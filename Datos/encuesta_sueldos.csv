@@ -1,0 +1,465 @@
+genero,edad,universidad,rubro,empleados,origen_capital,empleados_rh,puesto,personas_a_cargo,anios_rh,sueldo_bruto,aumento,erp,satisfaccion,buscando_trabajo
+Femenino,31,Universidad Privada,Función pública,400,Nacional,6,Administrativo,0,8,41000,0,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Alimentación; bebidas; tabaco,150,Nacional,3,Administrativo,0,9,40000,10,Tango,4,"No,  pero escucho ofertas"
+Masculino,25,Universidad Privada,"Minería (carbón, otra minería)",186,Nacional,2,Administrativo,0,2,43954.43,0,Tango,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,Servicios profesionales,4,Nacional,1,Administrativo,0,3,40000,20,Enlatado propio,3,"Sí, activamente"
+Femenino,24,Universidad Privada,Construcción,80,Nacional,1,Administrativo,0,1,15000,0,Tango,2,"Sí, activamente"
+Femenino,30,Universidad Privada,Servicios de salud,135,Nacional,3,Administrativo,0,6,57000,0,Enlatado propio,3,"Sí, activamente"
+Femenino,39,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",15,Nacional,1,Administrativo,0,6,66700,49,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Femenino,23,Universidad Privada,Alimentación; bebidas; tabaco,10000,Nacional,40,Administrativo,0,3,54506,0,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Privada,Educación,300,Nacional,2,Administrativo,0,5,21450,0,SIU-MAPUCHE,NA,NA
+Femenino,30,Universidad Privada,Servicios de salud,65,Nacional,3,Administrativo,0,6,50000,30,Bejerman,NA,NA
+Femenino,32,Universidad Privada,Servicios profesionales,10000,Multinacional,10,Administrativo,4,5,94050,43,RH Pro,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Servicios de consultoría,120,Multinacional,15,Administrativo,0,8,42345,0,Nucleus,3,"Sí, activamente"
+Femenino,25,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),22000,Nacional,2,Administrativo,0,2,22000,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,24,Universidad Pública,Comercio,94,Nacional,2,Administrativo,0,1,30000,5,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,24,Universidad Pública,Comercio,94,Nacional,2,Administrativo,0,1,30000,5,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,Servicios de salud,117,Nacional,2,Administrativo,0,4,44840,4,No tenemos sistema de gestión,1,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,Petróleo y producción de gas; refinación de petróleo,225,Multinacional,6,Administrativo,0,5,65000,0,Workday,3,"Sí, activamente"
+Masculino,46,Universidad Pública,Construcción,250,Nacional,2,Administrativo,0,18,65000,15,Tango,4,No estoy buscando cambiar
+Femenino,38,Universidad Pública,Función pública,800,Nacional,2,Administrativo,0,6,37000,7,Enlatado propio,4,No estoy buscando cambiar
+Femenino,24,Universidad Pública,Comercio,94,Nacional,2,Administrativo,0,1,30000,5,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,25,Universidad Pública,Servicios de salud,1900,Nacional,11,Administrativo,0,3,58000,2.5,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,35,Universidad Pública,Servicios de salud,30,Nacional,8,Administrativo,0,2,2,10,Tango,1,"Sí, activamente"
+Femenino,28,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",50,Multinacional,5,Administrativo,0,4,54000,13.5,Bejerman,3,"No,  pero escucho ofertas"
+Femenino,43,Universidad Pública,Servicios de salud,500,Nacional,10,Administrativo,0,0,68000,0,Tango,2,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,Otros,10000,Nacional,300,Administrativo,0,5,34000,7,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Femenino,35,Universidad Privada,Comercio,1433,Nacional,10,Analista,0,7,55700,20,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,24,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",270,Nacional,7,Analista,0,2,47000,25,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,36,Universidad Privada,Otros,170,Multinacional,3,Analista,0,12,100000,35,RH Pro,NA,NA
+Femenino,41,Universidad Privada,Transporte (incluyendo aviación civil; ferrocarriles por carretera),1000,Nacional,8,Analista,0,15,49000,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,27,Universidad Privada,Producción de metales básicos,5350,Multinacional,160,Analista,0,3,218000,10,SAP / SuccessFactors,4,No estoy buscando cambiar
+Femenino,25,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",200,Nacional,5,Analista,0,5,29000,14,SUGAR CRM,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",300,Nacional,6,Analista,0,10,29400,46,Tango,3,"Sí, activamente"
+Masculino,36,Universidad Privada,Textiles; vestido; cuero; calzado,450,Multinacional,5,Analista,0,10,35000,0,HR Process,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,Otros,50,Multinacional,4,Analista,0,4,30000,10,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,28,Universidad Privada,Construcción,200,Nacional,5,Analista,0,5,60000,15,Tango,3,"No,  pero escucho ofertas"
+Masculino,35,Universidad Privada,Construcción,600,Nacional,5,Analista,0,15,75000,12,Tango,4,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,60000,Multinacional,2500,Analista,0,10,105000,26,Workday,4,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,Servicios de consultoría,300,Multinacional,3,Analista,70,5,650000,45,Enlatado propio,5,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Otros,126,Multinacional,4,Analista,0,9,59000,12,Enlatado propio,3,"Sí, activamente"
+Femenino,24,Universidad Privada,"Servicios de correos, y de telecomunicaciones",80,Nacional,2,Analista,0,2,38000,0,No tenemos sistema de gestión,4,"Sí, activamente"
+Femenino,25,Universidad Privada,Servicios de salud,44,Nacional,1,Analista,44,1,37000,2000,Tango,3,"Sí, activamente"
+Femenino,29,Universidad Privada,Otros,70,Nacional,1,Analista,0,7,39000,0,Flexxus,1,"Sí, activamente"
+Femenino,34,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",23,Nacional,1,Analista,0,5,65000,25,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Femenino,30,Universidad Privada,Otros,66,Nacional,1,Analista,0,9,79000,30,No tenemos sistema de gestión,NA,NA
+Masculino,29,Universidad Privada,Bancos; banca online;,5000,Nacional,0,Analista,0,0,90000,23,Meta4,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",90,Nacional,3,Analista,0,5,64000,20,HC Work,NA,NA
+Femenino,32,Universidad Privada,Servicios de salud,270,Nacional,9,Analista,0,5,56000,23,Orange HRM,2,"Sí, activamente"
+Femenino,34,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",3500,Multinacional,50,Analista,0,8,76000,0,SAP / SuccessFactors,1,"Sí, activamente"
+Femenino,23,Universidad Privada,Educación,1300,Nacional,12,Analista,0,3,62000,5,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,27,Universidad Privada,Servicios de consultoría,3,Nacional,2,Analista,0,2,40000,25,Asana,4,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Otros,308,Nacional,4,Analista,0,8,93000,15,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Masculino,34,Universidad Privada,Otros,265,Multinacional,3,Analista,0,12,79000,12,Bejerman,NA,NA
+Femenino,33,Universidad Privada,"Terminales automotrices, fábricas autopartistas, y afines",300,Nacional,2,Analista,0,5,55000,80,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,"Terminales automotrices, fábricas autopartistas, y afines",300,Nacional,2,Analista,0,5,55000,80,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,25,Universidad Privada,Textiles; vestido; cuero; calzado,83,Nacional,2,Analista,0,4,28000,5,No tenemos sistema de gestión,2,"Sí, activamente"
+Masculino,30,Universidad Privada,Educación,105,Nacional,1,Analista,0,4,40000,15,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,34,Universidad Privada,Servicios de consultoría,250,Multinacional,7,Analista,2,2,65500,40,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,40,Universidad Privada,"Agricultura; plantaciones,otros sectores rurales",600,Nacional,9,Analista,0,7,60000,20,Worknet,4,"No,  pero escucho ofertas"
+Femenino,39,Universidad Privada,Servicios de salud,300,Nacional,5,Analista,0,10,109000,20,No tenemos sistema de gestión,3,No estoy buscando cambiar
+Masculino,24,Universidad Privada,"Hotelería, restauración, turismo",3500,Multinacional,100,Analista,0,1,90000,29,Enlatado propio,5,No estoy buscando cambiar
+Femenino,26,Universidad Privada,Otros,400,Nacional,5,Analista,0,7,39323,0,Enlatado propio,2,"Sí, activamente"
+Femenino,36,Universidad Privada,Comercio,2500,Multinacional,12,Analista,0,16,76000,16,Meta4,NA,NA
+Femenino,37,Universidad Privada,Alimentación; bebidas; tabaco,136,Nacional,2,Analista,0,10,81500,25,Softland,4,"No,  pero escucho ofertas"
+Masculino,31,Universidad Privada,Servicios financieros; seguros,760,Nacional,10,Analista,0,10,96684.6,24,Buxis,2,"Sí, activamente"
+Femenino,21,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",360,Multinacional,7,Analista,0,2,66000,10,Totvs,5,No estoy buscando cambiar
+Femenino,27,Universidad Privada,Otros,1100,Multinacional,13,Analista,120,2,45500,30,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,28,Universidad Privada,Alimentación; bebidas; tabaco,2400,Multinacional,26,Analista,0,5,69000,8,No tenemos sistema de gestión,NA,NA
+Femenino,30,Universidad Privada,Servicios profesionales,450,Multinacional,55,Analista,0,4,97000,28,Workday,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,Otros,1300,Nacional,20,Analista,0,6,43000,15,Calipso,3,"Sí, activamente"
+Femenino,23,Universidad Privada,Servicios de consultoría,50,Multinacional,10,Analista,0,0,22500,0,No tenemos sistema de gestión,NA,NA
+Masculino,31,Universidad Privada,"Hotelería, restauración, turismo",300,Nacional,5,Analista,0,6,70000,0,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,25,Universidad Privada,Transporte (incluyendo aviación civil; ferrocarriles por carretera),63,Nacional,4,Analista,0,1.5,40000,10,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,28,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",70,Nacional,3,Analista,0,5,60000,21,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,Otros,350,Nacional,7,Analista,0,10,77000,17,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,Servicios financieros; seguros,500,Nacional,8,Analista,0,7,45000,9,Tango,2,"Sí, activamente"
+Masculino,31,Universidad Privada,Transporte (incluyendo aviación civil; ferrocarriles por carretera),450,Nacional,4,Analista,0,5,55000,10,SIT propio de la empresa,NA,NA
+Masculino,29,Universidad Privada,Servicios financieros; seguros,3000,Nacional,76,Analista,0,5,68000,25,Meta4,4,No estoy buscando cambiar
+Femenino,33,Universidad Privada,Comercio,3500,Multinacional,17,Analista,0,10,53346,0,Enlatado propio,NA,NA
+Femenino,26,Universidad Privada,Servicios de salud,8500,Nacional,12,Analista,0,1,43000,10,sql,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",190,Multinacional,2,Analista,0,4,58000,0,Bejerman,2,"Sí, activamente"
+Masculino,24,Universidad Privada,Otros,100,Nacional,3,Analista,0,2,48000,0,Enlatado propio,3,"No,  pero escucho ofertas"
+Masculino,36,Universidad Privada,Otros,1200,Nacional,7,Analista,2,14,134000,34,Time Aware y Nexus HR,4,No estoy buscando cambiar
+Femenino,30,Universidad Privada,Otros,1900,Nacional,23,Analista,0,5,100000,12,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,36,Universidad Privada,Alimentación; bebidas; tabaco,2000,Multinacional,10,Analista,0,10,12000,10,Ds,NA,NA
+Femenino,26,Universidad Privada,Servicios profesionales,2500,Multinacional,30,Analista,0,3,79000,22.7,Payroll,NA,NA
+Femenino,29,Universidad Privada,Servicios de salud,284,Nacional,5,Analista,0,6,78000,20,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,25,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",120,Nacional,5,Analista,0,5,60375,35,Microsoft Dynamics,2,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,Servicios profesionales,3500,Multinacional,30,Analista,1,3,55000,26,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,29,Universidad Privada,Servicios financieros; seguros,1000,Nacional,15,Analista,0,7,95000,0,No tenemos sistema de gestión,NA,NA
+Femenino,32,Universidad Privada,Comercio,80,Nacional,2,Analista,0,4,55000,15,Preses,4,"Sí, activamente"
+Femenino,35,Universidad Privada,Transporte (incluyendo aviación civil; ferrocarriles por carretera),570,Nacional,7,Analista,0,1,37000,12,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,Comercio,1500,Nacional,16,Analista,2,10,51000,0,SAP / SuccessFactors,2,"Sí, activamente"
+Femenino,28,Universidad Privada,Alimentación; bebidas; tabaco,5000,Multinacional,20,Analista,0,6,74000,0,Oracle HCM,5,No estoy buscando cambiar
+Femenino,35,Universidad Privada,Alimentación; bebidas; tabaco,2000,Nacional,18,Analista,0,9,92740,17,SAP / SuccessFactors,5,"No,  pero escucho ofertas"
+Masculino,26,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",70,Multinacional,5,Analista,0,3,60000,0,Bamboo HR,NA,NA
+Femenino,22,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",100,Nacional,5,Analista,0,2,48998,12,Microsoft Dynamics,3,No estoy buscando cambiar
+Femenino,22,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",80,Nacional,5,Analista,0,3,38500,8,Microsoft Dynamics,4,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,Otros,5000,Multinacional,40,Analista,0,8,50000,5,No tenemos sistema de gestión,1,"No,  pero escucho ofertas"
+Femenino,27,Universidad Privada,Servicios de salud,150,Nacional,3,Analista,1,6,82215,0,Bejerman,NA,NA
+Femenino,26,Universidad Privada,Otros,1500,Nacional,5,Analista,0,3,42000,0,Bejerman,3,"No,  pero escucho ofertas"
+Masculino,41,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",2000,Multinacional,20,Analista,0,20,79000,20,Workday,3,"Sí, activamente"
+Femenino,26,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",100,Nacional,3,Analista,0,5,73600,15,No tenemos sistema de gestión,3,"Sí, activamente"
+Masculino,31,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",1600,Multinacional,25,Analista,0,5,70000,26,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,26,Universidad Pública,"Hotelería, restauración, turismo",360,Nacional,10,Analista,0,3,65000,0,RAET,4,"Sí, activamente"
+Femenino,24,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",180,Nacional,5,Analista,0,2,52000,30,Bejerman,4,No estoy buscando cambiar
+Femenino,36,Universidad Pública,Comercio,75,Nacional,2,Analista,3,10,71500,14,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Otros,3000,Nacional,20,Analista,0,5,60000,10,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Pública,Otros,350,Nacional,5,Analista,0,3,50282,4000,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Masculino,27,Universidad Pública,Servicios de salud,400,Nacional,4,Analista,0,5,55000,8,Bejerman,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",250,Multinacional,8,Analista,0,5,80000,23.7,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Femenino,32,Universidad Pública,Servicios de consultoría,400,Multinacional,8,Analista,0,8,67000,22,SAP / SuccessFactors,4,No estoy buscando cambiar
+Femenino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",120,Nacional,3,Analista,0,5,78000,26,Tryton uno propio,4,No estoy buscando cambiar
+Femenino,40,Universidad Pública,Producción de metales básicos,100,Nacional,2,Analista,0,11,35000,0,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,27,Universidad Pública,Servicios de consultoría,20,Nacional,13,Analista,0,2,20900,0,Enlatado propio,3,"Sí, activamente"
+Femenino,30,Universidad Pública,Construcción,500,Nacional,6,Analista,0,9,90000,0,Enlatado propio,3,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,Petróleo y producción de gas; refinación de petróleo,500,Nacional,10,Analista,0,8,70000,7.3,calipso,3,No estoy buscando cambiar
+Femenino,23,Universidad Pública,Servicios de salud,6500,Nacional,60,Analista,0,3,54000,15,SAP / SuccessFactors,3,"Sí, activamente"
+Femenino,33,Universidad Pública,Otros,350,Nacional,6,Analista,0,6,39600,7,Bejerman,1,"Sí, activamente"
+Masculino,36,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",4000,Multinacional,90,Analista,0,12,75000,0,SAP / SuccessFactors,NA,NA
+Femenino,26,Universidad Pública,Otros,800,Nacional,4,Analista,0,3,46900,0,Isis payroll,2,"Sí, activamente"
+Masculino,50,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",382,Multinacional,6,Analista,0,12,78000,10,Meta4,5,No estoy buscando cambiar
+Masculino,34,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),4000,Nacional,50,Analista,0,9,85000,20,Enlatado propio,NA,NA
+Femenino,26,Universidad Pública,Servicios de consultoría,10000,Multinacional,10,Analista,0,4,67000,7,RH Pro,1,"Sí, activamente"
+Femenino,24,Universidad Pública,Servicios de consultoría,200,Nacional,6,Analista,0,2,34086,30,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Masculino,27,Universidad Pública,Petróleo y producción de gas; refinación de petróleo,300,Nacional,5,Analista,0,5,70000,30,Meta4,NA,NA
+Femenino,27,Universidad Pública,Servicios de salud,1000,Nacional,12,Analista,0,5,65000,25,Nucleus,3,"No,  pero escucho ofertas"
+Femenino,35,Universidad Pública,Servicios públicos (agua;gas; electricidad),1400,Nacional,40,Analista,0,12,130000,12,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,28,Universidad Pública,Servicios de salud,270,Nacional,9,Analista,0,3,51500,28,Orange HM,3,"No,  pero escucho ofertas"
+Masculino,35,Universidad Pública,"Servicios de correos, y de telecomunicaciones",1850,Nacional,16,Analista,0,4,58000,4000,Pharao,NA,NA
+Femenino,27,Universidad Pública,Transporte marítimo; puertos;,1600,Multinacional,20,Analista,0,2,60000,20,SAP / SuccessFactors,NA,NA
+Femenino,32,Universidad Pública,Otros,200,Multinacional,4,Analista,0,7,72500,13,Workday,4,"No,  pero escucho ofertas"
+Femenino,37,Universidad Pública,Función pública,4000,Nacional,50,Analista,0,12,66000,0,Meta4,3,"No,  pero escucho ofertas"
+Masculino,31,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",1600,Multinacional,25,Analista,0,5,70000,26,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,32,Universidad Pública,Función pública,4000,Nacional,3,Analista,0,7,38,15,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",14000,Nacional,150,Analista,0,7,110000,50,SAP / SuccessFactors,2,"Sí, activamente"
+Femenino,32,Universidad Pública,Servicios financieros; seguros,230,Nacional,4,Analista,0,4,50600,10,Enlatado propio,3,"No,  pero escucho ofertas"
+Masculino,41,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",100,Nacional,3,Analista,0,14,48000,20.7,Workday,5,No estoy buscando cambiar
+Femenino,25,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",300,Nacional,4,Analista,0,2,37000,18,Bas laboro,4,"No,  pero escucho ofertas"
+Femenino,40,Universidad Pública,Otros,50,Nacional,5,Analista,0,10,45000,2,Bejerman,2,"Sí, activamente"
+Femenino,26,Universidad Pública,Alimentación; bebidas; tabaco,1300,Nacional,11,Analista,0,1,37000,1,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,27,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",300,Nacional,4,Analista,0,4,40700,10,Meta4,3,"No,  pero escucho ofertas"
+Masculino,48,Universidad Pública,Construcción,235,Multinacional,2,Analista,0,20,110000,0,Oracle HCM,3,"Sí, activamente"
+Femenino,30,Universidad Pública,Otros,250,Nacional,114,Analista,0,2,45000,10,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,41,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",24000,Nacional,300,Analista,0,22,65000,5,SAP / SuccessFactors,NA,NA
+Femenino,36,Universidad Pública,Servicios financieros; seguros,900,Nacional,13,Analista,0,10,78000,0,Na,NA,NA
+Femenino,29,Universidad Pública,Servicios profesionales,650,Multinacional,12,Analista,0,6,59800,32,Workday,4,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,Transporte marítimo; puertos;,500,Nacional,4,Analista,0,5,90000,20,Tango,4,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,"Servicios de correos, y de telecomunicaciones",23000,Nacional,200,Analista,0,5,86400,4,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Masculino,26,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",230,Multinacional,9,Analista,1,3,76046,25,No tenemos sistema de gestión,NA,NA
+Femenino,26,Universidad Pública,Servicios profesionales,10,Nacional,3,Analista,1,6,89156,15,Bejerman,4,"No,  pero escucho ofertas"
+Masculino,31,Universidad Pública,Servicios de salud,500,Nacional,5,Analista,0,8,52000,10,Tango,3,"Sí, activamente"
+Femenino,32,Universidad Pública,Función pública,7000,Nacional,60,Analista,0,0,60000,15,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,Medios de comunicación; cultura; gráficos,40,Nacional,1,Analista,0,8,78600,10,SAP / SuccessFactors,3,"Sí, activamente"
+Femenino,23,Universidad Pública,Servicios de salud,1100,Nacional,22,Analista,0,3,82170,10,Meta4,2,"Sí, activamente"
+Femenino,24,Universidad Pública,Bancos; banca online;,500,Multinacional,21,Analista,0,2,56000,5,Comeet,4,"No,  pero escucho ofertas"
+Masculino,31,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",1600,Multinacional,25,Analista,0,5,70000,26,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,44,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",140,Multinacional,3,Analista,0,15,80000,25,No tenemos sistema de gestión,3,"Sí, activamente"
+Masculino,45,Universidad Pública,Servicios de salud,1300,Nacional,7,Analista,0,12,60600,24,Bejerman,4,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",250,Multinacional,15,Analista,0,4,90100,18,Enlatado propio,4,No estoy buscando cambiar
+Femenino,32,Universidad Pública,Otros,1800,Nacional,9,Analista,0,5,40000,14,Tango,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",6500,Multinacional,200,Analista,0,6,60200,26,Oracle HCM,4,No estoy buscando cambiar
+Masculino,43,Universidad Pública,Servicios financieros; seguros,1200,Multinacional,9,Analista,0,15,140000,50,RH Pro,1,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,Servicios de salud,3000,Nacional,24,Analista,0,9,64497,30,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,32,Universidad Pública,"Servicios de correos, y de telecomunicaciones",175,Nacional,5,Analista,1,10,97700,25,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,Servicios de consultoría,700,Nacional,700,Analista,0,10,75000,5,Enlatado propio,NA,NA
+Femenino,34,Universidad Pública,Otros,100,Nacional,2,Analista,0,10,85000,0,No tenemos sistema de gestión,1,"Sí, activamente"
+Masculino,25,Universidad Pública,Otros,700,Nacional,10,Analista,0,6,60000,22,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,26,Universidad Pública,Servicios de consultoría,300,Multinacional,6,Analista,2,3,57000,17,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,26,Universidad Pública,Otros,4000,Nacional,12,Analista,0,1,30000,50,Enlatado propio,1,"Sí, activamente"
+Femenino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",100,Nacional,7,Analista,0,6,70000,39,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Masculino,33,Universidad Pública,Función pública,360,Nacional,11,Analista,1,11,115000,7,Tango,3,"No,  pero escucho ofertas"
+Masculino,25,Universidad Pública,Servicios de consultoría,10000,Multinacional,400,Analista,0,2,52500,25,Workday,2,"No,  pero escucho ofertas"
+Masculino,22,Universidad Pública,Servicios públicos (agua;gas; electricidad),4800,Nacional,100,Analista,0,1,56000,20,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,24,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",300,Multinacional,12,Analista,0,3,49000,20,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,22,Universidad Pública,Servicios de salud,2000,Nacional,19,Analista,0,3,70000,20,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,27,Universidad Pública,Servicios de salud,900,Nacional,7,Analista,0,1,40000,0,SAP / SuccessFactors,2,"Sí, activamente"
+Femenino,31,Universidad Pública,Educación,1500,Nacional,12,Analista,0,9,90000,15,Softland,3,"No,  pero escucho ofertas"
+Masculino,28,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",6000,Nacional,40,Analista,0,2,48000,15,Propio de la empresa,2,"Sí, activamente"
+Femenino,29,Universidad Pública,Función pública,50000,Nacional,160,Analista,0,4,58770,25,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",16,Nacional,1,Analista,0,3,30250,10,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,47,Universidad Pública,Otros,650,Nacional,5,Analista,0,15,55000,5.5,RH Pro,NA,NA
+Femenino,28,Universidad Pública,Construcción,200,Nacional,2,Analista,0,4,52000,0,isis,3,"Sí, activamente"
+Masculino,32,Universidad Pública,Servicios de consultoría,4000,Multinacional,3,Analista,0,6,125000,7,SAP / SuccessFactors,2,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Servicios profesionales,10000,Nacional,50,Analista,0,11,52000,13,Ktna,5,"Sí, activamente"
+Femenino,25,Universidad Pública,Comercio,2000,Multinacional,40,Analista,0,5,54000,0,SAP / SuccessFactors,NA,NA
+Femenino,26,Universidad Pública,Petróleo y producción de gas; refinación de petróleo,3000,Multinacional,500,Analista,0,3,80000,20,SAP / SuccessFactors,4,No estoy buscando cambiar
+Femenino,30,Universidad Pública,Servicios financieros; seguros,270,Multinacional,4,Analista,0,5,90000,46,Oracle HCM,5,"No,  pero escucho ofertas"
+Femenino,24,Universidad Pública,Bancos; banca online;,300,Nacional,4,Analista,0,2,75000,22,Adp,3,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),1000,Multinacional,15,Analista,0,12,90000,13,Nexus,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,Otros,350,Nacional,6,Analista,0,6,52000,10,Bejerman,1,"Sí, activamente"
+Femenino,48,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",9,Multinacional,2,Analista,0,30,49000,12,No tenemos sistema de gestión,NA,NA
+Femenino,35,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",230,Nacional,4,Analista,0,12,40000,15,HC Work,3,"Sí, activamente"
+Femenino,40,Universidad Pública,Comercio,100,Multinacional,1,Responsable,100,8,83000,38,SAP / SuccessFactors,5,"No,  pero escucho ofertas"
+Masculino,39,Universidad Privada,Otros,200,Multinacional,4,Responsable,0,15,120000,25,Gv,5,"No,  pero escucho ofertas"
+Masculino,29,Universidad Privada,Función pública,520,Nacional,7,Director,7,6,60000,0,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,30,Universidad Privada,Función pública,508,Nacional,6,Director,4,3,15000,6,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Función pública,1400,Nacional,20,Director,20,3,128000,0,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",300,Multinacional,17,Director,7,14,288000,0,Bamboo HR,4,"No,  pero escucho ofertas"
+Masculino,29,Universidad Privada,Función pública,520,Nacional,7,Director,7,6,60000,0,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,32,Universidad Privada,Medios de comunicación; cultura; gráficos,40,Nacional,1,Director,0,10,157500,35,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Masculino,47,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",200,Nacional,5,Director,4,28,250000,0,Jira,3,"No,  pero escucho ofertas"
+Femenino,39,Universidad Privada,Servicios de salud,200,Nacional,8,Director,7,15,115000,26,Tango,4,"No,  pero escucho ofertas"
+Femenino,40,Universidad Pública,Educación,250,Multinacional,3,Director,2,15,350000,40,No tenemos sistema de gestión,NA,NA
+Femenino,40,Universidad Pública,Educación,250,Multinacional,3,Director,2,15,350000,40,No tenemos sistema de gestión,NA,NA
+Femenino,40,Universidad Pública,Educación,250,Multinacional,3,Director,2,15,350000,40,No tenemos sistema de gestión,NA,NA
+Femenino,50,Universidad Pública,Otros,300,Nacional,3,Director,3,15,360000,7,RH Pro,3,"No,  pero escucho ofertas"
+Masculino,37,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",1200,Multinacional,12,Director,5,15,338000,12,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,33,Universidad Pública,Función pública,6500,Nacional,62,Director,9,8,129528,25,Nexus Hr,3,"No,  pero escucho ofertas"
+Masculino,25,Universidad Privada,Comercio,30,Nacional,1,Responsable,0,2,48000,8,Desconozco,3,No estoy buscando cambiar
+Masculino,37,Universidad Privada,Otros,115,Nacional,1,Responsable,0,11,80000,8,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,40,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",70,Nacional,3,HRBP,0,10,82000,26,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,35,Universidad Privada,Otros,250,Nacional,5,Analista,0,9,60000,15,RH Pro,3,"Sí, activamente"
+Masculino,49,Universidad Privada,Servicios financieros; seguros,110,Nacional,2,Gerente,1,20,250000,23,Bejerman,5,"No,  pero escucho ofertas"
+Femenino,39,Universidad Privada,Servicios de consultoría,10,Nacional,5,Gerente,9,10,150000,60,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Masculino,39,Universidad Privada,"Agricultura; plantaciones,otros sectores rurales",320,Nacional,5,Gerente,10,10,230000,10,sistema propio,NA,NA
+Femenino,26,Universidad Privada,Servicios de salud,556,Nacional,3,Gerente,2,4,80000,10,Tango,NA,NA
+Femenino,43,Universidad Privada,Alimentación; bebidas; tabaco,450,Nacional,4,Gerente,10,15,225000,25,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,47,Universidad Privada,Servicios de salud,460,Nacional,4,Gerente,3,12,190000,15,Bejerman,3,"No,  pero escucho ofertas"
+Masculino,35,Universidad Privada,Producción de metales básicos,3000,Multinacional,90,Gerente,6,14,140000,10,SAP / SuccessFactors,NA,NA
+Femenino,44,Universidad Privada,Industrias químicas,122,Multinacional,3,Gerente,0,20,290000,40,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Medios de comunicación; cultura; gráficos,170,Multinacional,5,Gerente,3,9,185000,20,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Masculino,54,Universidad Privada,Comercio,870,Nacional,10,Gerente,10,30,150000,0,Nucleus,4,"No,  pero escucho ofertas"
+Femenino,40,Universidad Privada,Comercio,200,Nacional,3,Gerente,1,121,135000,0,Bejerman,3,"Sí, activamente"
+Masculino,52,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,3000,Multinacional,65,Gerente,26,25,250,0,Meta4,NA,NA
+Masculino,36,Universidad Privada,Servicios financieros; seguros,75,Nacional,3,Gerente,4,12,147000,49,FactorialHR,1,"Sí, activamente"
+Masculino,42,Universidad Privada,Industrias químicas,138,Multinacional,5,Gerente,5,18,201300,17,YAM,4,"No,  pero escucho ofertas"
+Masculino,34,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",2700,Multinacional,100,Gerente,3,13,221000,29,SAP / SuccessFactors,NA,NA
+Femenino,31,Universidad Privada,Función pública,180,Nacional,3,Gerente,80,7,110600,0,Tango,NA,NA
+Femenino,47,Universidad Privada,Servicios de salud,30,Nacional,1,Gerente,10,20,78000,1,Bejerman,3,"Sí, activamente"
+Masculino,40,Universidad Privada,Construcción,1700,Nacional,8,Gerente,2,15,325000,15,Softland,3,"No,  pero escucho ofertas"
+Masculino,53,Universidad Privada,Servicios públicos (agua;gas; electricidad),1350,Multinacional,14,Gerente,13,33,316000,33,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,43,Universidad Privada,"Terminales automotrices, fábricas autopartistas, y afines",220,Nacional,3,Gerente,3,25,290000,19,No tenemos sistema de gestión,4,"Sí, activamente"
+Femenino,31,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",86,Nacional,2,Gerente,1,2,170000,35,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,32,Universidad Pública,"Hotelería, restauración, turismo",700,Nacional,4,Gerente,3,10,86747,50,Tango,5,No estoy buscando cambiar
+Masculino,40,Universidad Pública,Alimentación; bebidas; tabaco,120,Nacional,2,Gerente,6,13,245000,24,Infocor,5,No estoy buscando cambiar
+Femenino,28,Universidad Pública,Otros,250,Nacional,2,Gerente,1,12,140000,35,Tango,5,No estoy buscando cambiar
+Masculino,45,Universidad Pública,Otros,600,Nacional,5,Gerente,4,15,250000,15,isis,NA,NA
+Masculino,43,Universidad Pública,Servicios de consultoría,350,Multinacional,7,Gerente,10,10,140000,32,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,47,Universidad Pública,Otros,200,Nacional,2,Gerente,8,10,148000,10,Terciarizado con Arizmedi,4,"No,  pero escucho ofertas"
+Masculino,49,Universidad Pública,Servicios de salud,15000,Nacional,350,Gerente,14,18,145000,0,SAP / SuccessFactors,NA,NA
+Masculino,48,Universidad Pública,Servicios de salud,1000,Nacional,10,Gerente,10,18,200000,19,Bejerman,4,"No,  pero escucho ofertas"
+Femenino,42,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",90,Nacional,8,Gerente,10,20,160000,35,No tenemos sistema de gestión,NA,NA
+Femenino,38,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",200,Nacional,4,Gerente,5,15,186000,10,Bamboo HR,NA,NA
+Femenino,33,Universidad Pública,Comercio,312,Nacional,4,Gerente,2,7,147000,15,RH Pro,4,"No,  pero escucho ofertas"
+Masculino,49,Universidad Pública,"Servicios de correos, y de telecomunicaciones",30,Multinacional,1,Gerente,0,30,2140000,54,Softland,4,"No,  pero escucho ofertas"
+Femenino,42,Universidad Pública,Comercio,320,Nacional,5,Gerente,4,16,180000,12,Enlatado propio,4,No estoy buscando cambiar
+Masculino,37,Universidad Pública,Transporte marítimo; puertos;,90,Nacional,2,Gerente,1,15,125000,0,Tango,NA,NA
+Masculino,37,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",750,Multinacional,24,Gerente,0,14,165000,20,Cornerstone,4,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",1100,Multinacional,20,Gerente,7,10,232000,25,Oracle HCM,3,"No,  pero escucho ofertas"
+Masculino,38,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",200,Nacional,5,Gerente,6,12,240000,15,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",40,Multinacional,1,Gerente,0,10,194000,28,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,32,Universidad Privada,Alimentación; bebidas; tabaco,7500,Multinacional,25,HRBP,0,14,85500,10,Oracle HCM,2,"Sí, activamente"
+Femenino,34,Universidad Privada,"Minería (carbón, otra minería)",500,Multinacional,10,HRBP,0,12,85000,30,Nucleus,2,"Sí, activamente"
+Masculino,26,Universidad Privada,"Terminales automotrices, fábricas autopartistas, y afines",800,Multinacional,11,HRBP,0,5,90000,10,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Femenino,36,Universidad Privada,Servicios de salud,1200,Nacional,18,HRBP,800,10,100000,4,RH Pro,1,"Sí, activamente"
+Masculino,26,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",44,Nacional,3,HRBP,1,2,84000,62,Enlatado propio,5,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,"Minería (carbón, otra minería)",500,Multinacional,10,HRBP,0,12,85000,30,Nucleus,2,"Sí, activamente"
+Femenino,26,Universidad Privada,Servicios de consultoría,200,Multinacional,3,HRBP,2,8,101000,20,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Masculino,27,Universidad Privada,Educación,2000,Nacional,15,HRBP,0,6,75000,15,Enlatado propio,NA,NA
+Femenino,26,Universidad Privada,Servicios de consultoría,200,Multinacional,3,HRBP,2,8,101000,20,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Femenino,38,Universidad Privada,Servicios públicos (agua;gas; electricidad),1700,Nacional,25,HRBP,0,17,150000,12,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Masculino,34,Universidad Privada,Servicios de salud,2500,Nacional,30,HRBP,0,3,180000,40,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Servicios profesionales,15,Nacional,1,HRBP,0,6,47,5,No tenemos sistema de gestión,1,"Sí, activamente"
+Femenino,35,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",750,Nacional,10,HRBP,0,11,120000,30,RH Pro,3,"Sí, activamente"
+Masculino,34,Universidad Privada,Servicios de salud,2500,Nacional,30,HRBP,0,3,180000,40,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Masculino,27,Universidad Privada,Educación,2000,Nacional,15,HRBP,0,6,75000,29,Enlatado propio,NA,NA
+Femenino,35,Universidad Privada,Otros,23000,Multinacional,8,HRBP,0,7,10700,15,SAP / SuccessFactors,NA,NA
+Masculino,37,Universidad Privada,Servicios de consultoría,4000,Multinacional,50,HRBP,7,15,55000,15,Workday,2,"Sí, activamente"
+Masculino,31,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",65,Nacional,2,HRBP,0,6,90000,38,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Masculino,33,Universidad Pública,Otros,6000,Multinacional,55,HRBP,8,8,55000,50,SAP / SuccessFactors,5,"No,  pero escucho ofertas"
+Masculino,29,Universidad Pública,Medios de comunicación; cultura; gráficos,700,Multinacional,9,HRBP,2,5,80000,17,RH Pro,4,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,Textiles; vestido; cuero; calzado,450,Nacional,7,HRBP,0,9,65662,30,Buenos Aires software,3,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Industrias químicas,10,Multinacional,1,HRBP,0,5,60565,17,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,25,Universidad Pública,Educación,900,Nacional,7,HRBP,0,4,56600,20,SAP / SuccessFactors,4,No estoy buscando cambiar
+Masculino,30,Universidad Pública,"Servicios de correos, y de telecomunicaciones",5000,Nacional,90,HRBP,0,7,81000,20,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",15000,Multinacional,130,HRBP,1,8,130000,50,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Masculino,32,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",500,Multinacional,5,HRBP,0,10,110000,14,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",70,Multinacional,2,HRBP,0,2,57000,5,Oracle HCM,4,"Sí, activamente"
+Femenino,31,Universidad Pública,Otros,370,Nacional,3,HRBP,1,7,105000,17,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,40,Universidad Pública,Otros,2400,Nacional,8,HRBP,5,8,50000,0,Tango,3,"Sí, activamente"
+Masculino,30,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",1000,Multinacional,15,HRBP,0,7,85000,13,SAP / SuccessFactors,5,"No,  pero escucho ofertas"
+Masculino,29,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",400,Nacional,6,HRBP,0,6,60000,20,RH Pro,NA,NA
+Masculino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",2500,Multinacional,20,HRBP,0,6,156000,20,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Pública,Servicios de salud,30,Multinacional,10,HRBP,1,7,71000,25,RH Pro y SSFF,3,"No,  pero escucho ofertas"
+Femenino,28,Universidad Pública,Otros,800,Nacional,8,HRBP,0,7,72250,0,GV,3,"Sí, activamente"
+Masculino,33,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",4000,Multinacional,120,HRBP,0,10,150000,43,Workday,3,"No,  pero escucho ofertas"
+Masculino,28,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",40,Nacional,2,HRBP,0,1,55000,30,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Masculino,38,Universidad Pública,Bancos; banca online;,60,Nacional,1,HRBP,0,16,220000,42,No tenemos sistema de gestión,NA,NA
+Femenino,31,Universidad Pública,Otros,500,Multinacional,15,HRBP,0,11,205000,40,Oracle HCM,3,"Sí, activamente"
+Femenino,23,Universidad Pública,Servicios de consultoría,20,Nacional,18,HRBP,0,0,30000,0,Enlatado propio,3,No estoy buscando cambiar
+Femenino,38,Universidad Pública,Otros,408,Multinacional,6,HRBP,0,15,131000,12.8,Sherlock,3,"Sí, activamente"
+Femenino,33,Universidad Pública,Otros,44000,Multinacional,10,HRBP,0,9,106000,25,No tenemos sistema de gestión,2,"Sí, activamente"
+Masculino,28,Universidad Pública,Alimentación; bebidas; tabaco,1100,Nacional,9,HRBP,0,4,130000,25,Nexus HR,3,"Sí, activamente"
+Femenino,34,Universidad Pública,Alimentación; bebidas; tabaco,350,Nacional,5,HRBP,0,4,85500,26,Softland,4,No estoy buscando cambiar
+Masculino,33,Universidad Privada,Educación,80,Nacional,1,Jefe,3,4,30900,10,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Privada,Servicios financieros; seguros,125,Nacional,3,Jefe,2,10,162000,40,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,36,Universidad Privada,Textiles; vestido; cuero; calzado,270,Multinacional,2,Jefe,1,10,93000,16,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Femenino,26,Universidad Privada,Servicios de salud,7,Nacional,1,Jefe,5,1,36500,5,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Femenino,35,Universidad Privada,Servicios de salud,250,Nacional,3,Jefe,2,13,178000,0,Tango,NA,NA
+Masculino,40,Universidad Privada,Alimentación; bebidas; tabaco,600,Nacional,3,Jefe,2,12,85000,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,45,Universidad Privada,Comercio,135,Multinacional,2,Jefe,1,15,61697,5,Enlatado propio,3,"Sí, activamente"
+Femenino,36,Universidad Privada,Comercio,134,Nacional,1,Jefe,0,11,75000,10,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,34,Universidad Privada,Otros,250,Nacional,4,Jefe,3,18,75000,30,Bejerman,4,"No,  pero escucho ofertas"
+Femenino,51,Universidad Privada,Alimentación; bebidas; tabaco,600,Nacional,7,Jefe,7,20,150000,0,Bejerman,1,"Sí, activamente"
+Femenino,63,Universidad Privada,Silvicultura; madera; celulosa; papel,80,Nacional,2,Jefe,1,24,96000,9,Bejerman,1,"Sí, activamente"
+Masculino,33,Universidad Privada,Otros,2800,Multinacional,20,Jefe,7,10,127000,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,30,Universidad Privada,Alimentación; bebidas; tabaco,6000,Multinacional,100,Jefe,0,5,120000,15.4,SAP / SuccessFactors,NA,NA
+Masculino,31,Universidad Privada,Alimentación; bebidas; tabaco,13000,Nacional,100,Jefe,0,12,182000,20,Oracle HCM,NA,NA
+Masculino,33,Universidad Privada,Servicios de salud,1950,Nacional,33,Jefe,4,11,145000,23,RH Pro,5,"No,  pero escucho ofertas"
+Femenino,63,Universidad Privada,Silvicultura; madera; celulosa; papel,80,Nacional,2,Jefe,1,24,96000,9,Bejerman,1,"Sí, activamente"
+Femenino,36,Universidad Privada,Otros,115,Nacional,1,Jefe,0,4,100000,14.52,No tenemos sistema de gestión,1,"Sí, activamente"
+Masculino,58,Universidad Privada,Otros,70,Nacional,1,Jefe,0,30,75610,22,ISIS,1,"Sí, activamente"
+Masculino,44,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,490,Multinacional,8,Jefe,0,19,256000,0,Oracle HCM,5,"No,  pero escucho ofertas"
+Masculino,38,Universidad Privada,Servicios de salud,400,Nacional,4,Jefe,2,14,89000,12,Bejerman,5,No estoy buscando cambiar
+Masculino,39,Universidad Privada,Servicios de salud,190,Nacional,2,Jefe,1,15,160000,8,Tango,3,"No,  pero escucho ofertas"
+Femenino,32,Universidad Privada,Servicios de consultoría,200,Nacional,22,Jefe,2,8,44000,2,No tenemos sistema de gestión,1,"Sí, activamente"
+Masculino,42,Universidad Privada,"Hotelería, restauración, turismo",300,Nacional,3,Jefe,2,15,120000,0,Tango,4,No estoy buscando cambiar
+Femenino,40,Universidad Privada,Servicios públicos (agua;gas; electricidad),450,Multinacional,15,Jefe,4,18,220000,23,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",130,Nacional,2,Jefe,1,7,60250,17,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,39,Universidad Privada,Textiles; vestido; cuero; calzado,122,Nacional,2,Jefe,5,17,70000,12,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,54,Universidad Privada,"Terminales automotrices, fábricas autopartistas, y afines",100,Nacional,2,Jefe,1,35,73000,12,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,33,Universidad Privada,Servicios de salud,50,Nacional,3,Jefe,35,5,72000,13,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,37,Universidad Pública,"Hotelería, restauración, turismo",450,Nacional,5,Jefe,4,12,73000,0,Microsoft Dynamics,4,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,"Minería (carbón, otra minería)",15,Nacional,1,Jefe,0,7,190000,56,Tango,4,"No,  pero escucho ofertas"
+Femenino,35,Universidad Pública,"Minería (carbón, otra minería)",150,Nacional,2,Jefe,5,8,70800,20,Tango,3,"Sí, activamente"
+Femenino,36,Universidad Pública,Construcción,120,Nacional,1,Jefe,0,14,100000,5,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,36,Universidad Pública,Comercio,65,Multinacional,1,Jefe,65,12,68000,23,Meta4,2,"Sí, activamente"
+Femenino,38,Universidad Pública,"Agricultura; plantaciones,otros sectores rurales",352,Nacional,6,Jefe,5,12,105000,19,GESPER - Noanet,4,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,Servicios de salud,800,Nacional,3,Jefe,2,9,106024,117,Isis Payroll,4,"No,  pero escucho ofertas"
+Femenino,37,Universidad Pública,Alimentación; bebidas; tabaco,1700,Multinacional,25,Jefe,3,18,107000,10,RH Pro,NA,NA
+Masculino,29,Universidad Pública,Función pública,25000,Nacional,50,Jefe,2,6,92000,7,Enlatado propio,4,"No,  pero escucho ofertas"
+Masculino,40,Universidad Pública,Construcción,322,Nacional,7,Jefe,6,15,89800,39,Tango,3,"Sí, activamente"
+Femenino,22,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",100,Nacional,2,Jefe,95,3,45000,20,Microsoft Dynamics,3,"No,  pero escucho ofertas"
+Masculino,47,Universidad Pública,"Servicios de correos, y de telecomunicaciones",4000,Multinacional,35,Jefe,20,0,130000,0,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),5500,Nacional,75,Jefe,4,7,82500,0,Nexus HR,3,"No,  pero escucho ofertas"
+Masculino,32,Universidad Pública,Otros,170,Nacional,15,Jefe,3,8,185000,10,PRESEA - Neuralsoft,4,"No,  pero escucho ofertas"
+Masculino,37,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),95,Nacional,3,Jefe,2,12,181000,17,Tango,2,"No,  pero escucho ofertas"
+Femenino,39,Universidad Pública,Industrias químicas,200,Nacional,2,Jefe,0,15,140000,12,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Masculino,25,Universidad Pública,Servicios de salud,80,Nacional,1,Jefe,2,2,55000,13,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,Petróleo y producción de gas; refinación de petróleo,5500,Nacional,210,Jefe,6,5,270000,30,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,34,Universidad Pública,Servicios de salud,150,Nacional,2,Jefe,1,14,118000,5,No tenemos sistema de gestión,1,"Sí, activamente"
+Masculino,31,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",635,Nacional,7,Jefe,1,15,200,24,SAP / SuccessFactors,2,"Sí, activamente"
+Femenino,50,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),10000,Nacional,120,Jefe,5,20,115000,0,Meta4,4,"No,  pero escucho ofertas"
+Femenino,50,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),10000,Nacional,120,Jefe,5,20,115000,0,Meta4,4,"No,  pero escucho ofertas"
+Masculino,33,Universidad Pública,Construcción,3000,Nacional,10,Jefe,1,10,103000,15,Softland,NA,NA
+Masculino,36,Universidad Pública,Alimentación; bebidas; tabaco,300,Multinacional,3,Jefe,2,10,106000,18,Meta4,4,No estoy buscando cambiar
+Masculino,53,Universidad Pública,Otros,50,Multinacional,0,Jefe,0,0,60000,0,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,45,Universidad Pública,Alimentación; bebidas; tabaco,2500,Nacional,30,Jefe,3,20,113000,15,RH Pro,4,No estoy buscando cambiar
+Femenino,46,Universidad Pública,Otros,1000,Nacional,7,Jefe,5,15,94389,25,Tango,4,"No,  pero escucho ofertas"
+Femenino,41,Universidad Pública,"Minería (carbón, otra minería)",600,Multinacional,10,Jefe,6,13,160000,25,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,52,Universidad Pública,Otros,30,Nacional,1,Jefe,0,30,120000,0,No tenemos sistema de gestión,NA,NA
+Femenino,33,Universidad Pública,Función pública,200,Nacional,5,Jefe,1,12,111000,0,Bejerman + propio,3,"No,  pero escucho ofertas"
+Femenino,43,Universidad Pública,Textiles; vestido; cuero; calzado,200,Nacional,2,Jefe,1,21,160000,40,Global Dynamics,4,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",80,Multinacional,5,Analista,0,3,56000,9.5,Enlatado propio,2,"No,  pero escucho ofertas"
+Femenino,46,Universidad Pública,Servicios profesionales,65,Nacional,3,HRBP,0,20,74200,28,Pemasys para recruiting,3,"Sí, activamente"
+Femenino,34,Universidad Privada,"Agricultura; plantaciones,otros sectores rurales",65,Nacional,1,Responsable,1,2,55000,20,Enlatado propio,4,"No,  pero escucho ofertas"
+Femenino,38,Universidad Privada,Comercio,110,Nacional,2,Responsable,0,20,40000,10,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,27,Universidad Privada,Servicios públicos (agua;gas; electricidad),143,Nacional,2,Responsable,1,5,54000,25,Tango,3,"Sí, activamente"
+Femenino,29,Universidad Privada,Servicios financieros; seguros,250,Nacional,3,Responsable,2,8,62000,0,Enlatado propio,2,"Sí, activamente"
+Femenino,31,Universidad Privada,Comercio,46,Nacional,1,Responsable,0,8,50000,10,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,40,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,200,Nacional,7,Responsable,2,14,140000,0,Tango,3,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Servicios de consultoría,3000,Nacional,3,Responsable,50,8,45000,20,No tenemos sistema de gestión,NA,NA
+Femenino,23,Universidad Privada,Servicios de salud,500,Nacional,4,Responsable,2,2,62000,15,Tango,5,No estoy buscando cambiar
+Femenino,43,Universidad Privada,Comercio,85,Nacional,2,Responsable,1,10,75000,10,No tenemos sistema de gestión,3,"Sí, activamente"
+Masculino,49,Universidad Privada,Transporte (incluyendo aviación civil; ferrocarriles por carretera),215,Nacional,1,Responsable,0,10,84000,0,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Masculino,38,Universidad Privada,Comercio,86,Nacional,1,Responsable,80,12,38500,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,28,Universidad Privada,Comercio,30,Nacional,1,Responsable,0,2,22000,0,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,41,Universidad Privada,Textiles; vestido; cuero; calzado,300,Multinacional,3,Responsable,0,15,63000,13,SAP / SuccessFactors,NA,NA
+Femenino,27,Universidad Privada,Alimentación; bebidas; tabaco,57,Multinacional,1,Responsable,0,4,73000,14,Enlatado propio,3,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Comercio,120,Multinacional,1,Responsable,0,11,81000,15,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,26,Universidad Privada,"Agricultura; plantaciones,otros sectores rurales",80,Nacional,1,Responsable,0,4,51282,5,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,35,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",50,Nacional,1,Responsable,0,7,120000,19,Enlatado propio,5,No estoy buscando cambiar
+Femenino,34,Universidad Privada,Comercio,120,Multinacional,1,Responsable,0,11,81000,15,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,Construcción,70,Nacional,2,Responsable,1,7,50000,0,Tango,NA,NA
+Femenino,30,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",24,Nacional,3,Responsable,0,5,70000,15,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,27,Universidad Privada,Alimentación; bebidas; tabaco,57,Multinacional,1,Responsable,0,4,73000,14,Enlatado propio,3,"No,  pero escucho ofertas"
+Masculino,35,Universidad Privada,Medios de comunicación; cultura; gráficos,700,Nacional,7,Responsable,0,10,102000,39,Nucleus,3,"No,  pero escucho ofertas"
+Femenino,39,Universidad Privada,Comercio,350,Nacional,2,Responsable,1,2,85000,0,No tenemos sistema de gestión,NA,NA
+Femenino,34,Universidad Privada,"Hotelería, restauración, turismo",45,Nacional,1,Responsable,0,9,70000,0,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,39,Universidad Privada,Servicios de salud,55,Nacional,1,Responsable,0,3,87000,0,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Comercio,30,Nacional,1,Responsable,0,2,22000,0,No tenemos sistema de gestión,2,"Sí, activamente"
+Femenino,24,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,10,Nacional,1,Responsable,0,4,48000,55,Bejerman,NA,NA
+Masculino,33,Universidad Privada,Otros,120,Multinacional,1,Responsable,0,6,72000,20,No tenemos sistema de gestión,NA,NA
+Masculino,45,Universidad Privada,Otros,500,Nacional,5,Responsable,0,5,75000,10,Tango,4,"No,  pero escucho ofertas"
+Femenino,40,Universidad Privada,Servicios profesionales,190,Nacional,6,Responsable,1,14,110000,15,Odoo,4,"No,  pero escucho ofertas"
+Femenino,45,Universidad Privada,Otros,3500,Multinacional,10,Responsable,0,25,71000,20,No tenemos sistema de gestión,3,"Sí, activamente"
+Masculino,33,Universidad Privada,Otros,120,Multinacional,1,Responsable,0,6,72000,20,No tenemos sistema de gestión,NA,NA
+Femenino,39,Universidad Privada,"Hotelería, restauración, turismo",350,Nacional,3,Responsable,0,6,51100,0,Enlatado propio,2,"No,  pero escucho ofertas"
+Masculino,29,Universidad Privada,Función pública,4000,Nacional,35,Responsable,0,8,62700,0,Meta4,2,"Sí, activamente"
+Femenino,40,Universidad Privada,Servicios de consultoría,16,Nacional,16,Responsable,0,15,150000,30,Enlatado propio,NA,NA
+Masculino,40,Universidad Privada,Alimentación; bebidas; tabaco,100,Nacional,1,Responsable,0,8,75000,0,Bejerman,4,"Sí, activamente"
+Femenino,40,Universidad Privada,"Hotelería, restauración, turismo",28,Multinacional,1,Responsable,0,16,86000,0,arizmendi,4,"No,  pero escucho ofertas"
+Masculino,44,Universidad Privada,Educación,150,Nacional,4,Responsable,3,10,85000,0,No tenemos sistema de gestión,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Privada,Comercio,150,Nacional,4,Responsable,3,4,40009,15,Enlatado propio,2,"Sí, activamente"
+Femenino,33,Universidad Privada,Función pública,1900,Nacional,60,Responsable,2,6,79000,20,Meta4,4,"No,  pero escucho ofertas"
+Femenino,36,Universidad Privada,Comercio,3000,Multinacional,15,Responsable,4,8,88000,10,Nexus,3,"No,  pero escucho ofertas"
+Masculino,26,Universidad Privada,Servicios de salud,25,Nacional,1,Responsable,0,3,80000,15,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,25,Universidad Privada,"Hotelería, restauración, turismo",56,Nacional,1,Responsable,0,6,31000,0,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,35,Universidad Privada,Comercio,50,Nacional,1,Responsable,0,10,30000,0,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,30,Universidad Privada,Comercio,600,Nacional,7,Responsable,0,5,88020,42,Bejerman,3,"No,  pero escucho ofertas"
+Femenino,27,Universidad Privada,Otros,60,Nacional,1,Responsable,0,4,44000,5,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,45,Universidad Privada,Servicios profesionales,95,Nacional,2,Responsable,2,12,80000,15,Softland,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Privada,Otros,25,Nacional,1,Responsable,0,5,60000,0,Tango,NA,NA
+Masculino,42,Universidad Privada,Servicios financieros; seguros,250,Nacional,7,Responsable,0,15,135000,30.5,Oracle HCM,4,"No,  pero escucho ofertas"
+Femenino,32,Universidad Privada,Alimentación; bebidas; tabaco,400,Nacional,2,Responsable,1,12,68064,30,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,37,Universidad Privada,"Agricultura; plantaciones,otros sectores rurales",35,Nacional,1,Responsable,0,2,35000,0,New holland,5,"No,  pero escucho ofertas"
+Femenino,36,Universidad Privada,Textiles; vestido; cuero; calzado,350,Nacional,2,Responsable,0,7,40000,0,I check,NA,NA
+Femenino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",92,Nacional,2,Responsable,1,4,98948,25,No tenemos sistema de gestión,NA,NA
+Masculino,37,Universidad Pública,Servicios financieros; seguros,150,Multinacional,3,Responsable,0,13,142000,46,No tenemos sistema de gestión,2,"No,  pero escucho ofertas"
+Masculino,27,Universidad Pública,Función pública,100,Nacional,4,Responsable,50,3,35000,0,Bejerman,4,"No,  pero escucho ofertas"
+Femenino,30,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",45,Nacional,1,Responsable,1,5,69500,12.69,Tango,2,"Sí, activamente"
+Femenino,33,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",20,Nacional,1,Responsable,0,10,95000,35,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,36,Universidad Pública,"Servicios de correos, y de telecomunicaciones",400,Nacional,6,Responsable,2,13,120000,14,Pectra,4,"Sí, activamente"
+Femenino,42,Universidad Pública,Textiles; vestido; cuero; calzado,30,Nacional,1,Responsable,0,17,32000,5,holistor,2,"Sí, activamente"
+Femenino,35,Universidad Pública,Servicios profesionales,15,Nacional,2,Responsable,0,1,34000,10,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,Transporte (incluyendo aviación civil; ferrocarriles por carretera),150,Nacional,4,Responsable,3,2,66266,40,BFG,3,"Sí, activamente"
+Femenino,30,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",92,Nacional,2,Responsable,1,4,98948,25,No tenemos sistema de gestión,NA,NA
+Femenino,45,Universidad Pública,Servicios públicos (agua;gas; electricidad),326,Nacional,5,Responsable,0,12,73000,10,HQ Solutions,1,"Sí, activamente"
+Masculino,52,Universidad Pública,Función pública,60000,Nacional,0,Responsable,0,0,54000,20,No tenemos sistema de gestión,NA,NA
+Femenino,29,Universidad Pública,Comercio,150,Nacional,1,Responsable,0,2,40000,20,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,38,Universidad Pública,Otros,180,Nacional,6,Responsable,1,7,40000,0,No tenemos sistema de gestión,4,"Sí, activamente"
+Femenino,38,Universidad Pública,Construcción,137,Nacional,2,Responsable,1,14,118000,0,softland,2,"Sí, activamente"
+Femenino,35,Universidad Pública,Comercio,100,Nacional,1,Responsable,0,13,50000,0,No tenemos sistema de gestión,NA,NA
+Femenino,48,Universidad Pública,Servicios de salud,30,Nacional,1,Responsable,0,15,60000,10,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,44,Universidad Pública,Construcción,20,Nacional,1,Responsable,0,12,61000,10,Bejerman,1,"Sí, activamente"
+Femenino,34,Universidad Pública,Función pública,200,Nacional,10,Responsable,1,10,52000,7,No tenemos sistema de gestión,4,No estoy buscando cambiar
+Masculino,40,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",600,Nacional,5,Responsable,0,15,75000,10,Bejerman,3,"No,  pero escucho ofertas"
+Femenino,32,Universidad Pública,Industrias químicas,28,Nacional,1,Responsable,0,8,75000,5,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,27,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",100,Nacional,3,Responsable,0,3,72000,40,No tenemos sistema de gestión,NA,NA
+Femenino,26,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",20,Nacional,2,Responsable,1,4,80360,40,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Masculino,40,Universidad Pública,Alimentación; bebidas; tabaco,520,Nacional,7,Responsable,2,15,109000,25,nexus ERP,4,"No,  pero escucho ofertas"
+Femenino,28,Universidad Pública,Servicios financieros; seguros,25,Nacional,1,Responsable,0,5,50600,0,CATEDRAL,3,"No,  pero escucho ofertas"
+Masculino,47,Universidad Pública,Otros,5000,Nacional,60,Responsable,12,28,150000,7,SARHA,1,"Sí, activamente"
+Masculino,38,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",70,Nacional,3,Responsable,1,15,112000,12,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,47,Universidad Pública,"Tecnologías de Información, Sistemas, y afines",300,Multinacional,10,Responsable,4,24,130000,12,SAP / SuccessFactors,2,"Sí, activamente"
+Femenino,31,Universidad Pública,Servicios profesionales,86,Multinacional,8,Responsable,0,4,74000,50,Axton,NA,NA
+Masculino,36,Universidad Pública,Otros,150,Nacional,3,Responsable,1,8,120000,20,bejerman y tango,NA,NA
+Femenino,29,Universidad Pública,Servicios profesionales,460,Multinacional,4,Responsable,0,8,96300,51,No tenemos sistema de gestión,5,"No,  pero escucho ofertas"
+Masculino,30,Universidad Pública,"Agricultura; plantaciones,otros sectores rurales",350,Nacional,3,Responsable,0,7,75000,20,Finnegans - HCM,4,"Sí, activamente"
+Masculino,29,Universidad Pública,Construcción,350,Nacional,6,Responsable,1,4,70500,0,MAP (K2B - GeneXus,2,"Sí, activamente"
+Masculino,38,Universidad Pública,Otros,130,Nacional,2,Responsable,0,11,102000,20,Tango,4,"No,  pero escucho ofertas"
+Femenino,27,Universidad Pública,Construcción,450,Nacional,3,Responsable,0,3,45800,30,Tango,4,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Otros,65,Nacional,1,Responsable,0,2,49000,11,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,41,Universidad Pública,Servicios de salud,44,Nacional,1,Responsable,44,4,78000,15,RH Pro,2,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Otros,65,Nacional,1,Responsable,0,2,49000,11,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,31,Universidad Pública,Otros,65,Nacional,1,Responsable,0,2,49000,11,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Femenino,34,Universidad Pública,Comercio,64,Nacional,2,Responsable,3,6.5,87136,28,No tenemos sistema de gestión,3,"No,  pero escucho ofertas"
+Masculino,37,Universidad Pública,Servicios de salud,1000,Nacional,7,Responsable,0,17,130000,30,RH Pro,3,"No,  pero escucho ofertas"
+Femenino,29,Universidad Pública,Comercio,500,Nacional,7,Responsable,0,9,60000,0,Tango,3,"Sí, activamente"
+Femenino,26,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",170,Nacional,4,Analista,2,3,54200,30,hiring room,3,"No,  pero escucho ofertas"
+Femenino,31,Universidad Privada,Servicios profesionales,3400,Multinacional,16,Analista,4,4,67000,25,SAP / SuccessFactors,3,"No,  pero escucho ofertas"
+Masculino,28,Universidad Pública,Servicios de consultoría,3000,Multinacional,20,HRBP,2,2,84000,45,SAP / SuccessFactors,NA,NA
+Femenino,39,Universidad Privada,Construcción,50,Nacional,2,Responsable,1,14,30000,0,Tango,3,"No,  pero escucho ofertas"
+Femenino,27,Universidad Privada,Construcción,80,Nacional,1,Responsable,0,2,50000,10,No tenemos sistema de gestión,3,"Sí, activamente"
+Femenino,31,Universidad Privada,Petróleo y producción de gas; refinación de petróleo,75000,Multinacional,1500,Responsable,0,7,150000,22,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,34,Universidad Privada,Servicios de salud,10000,Nacional,150,Responsable,5,10,123000,9,SAP / SuccessFactors,4,"No,  pero escucho ofertas"
+Femenino,44,Universidad Privada,Educación,5000,Nacional,800,Responsable,0,3,55000,0,Enlatado propio,3,"No,  pero escucho ofertas"
+Masculino,34,Universidad Privada,"Tecnologías de Información, Sistemas, y afines",700,Multinacional,60,Responsable,2,8,105000,28,SAP / SuccessFactors,NA,NA
+Femenino,38,Universidad Privada,Alimentación; bebidas; tabaco,51,Multinacional,2,Responsable,1,15,98500,24,No tenemos sistema de gestión,5,No estoy buscando cambiar
+Femenino,35,Universidad Pública,"Agricultura; plantaciones,otros sectores rurales",1600,Nacional,11,Responsable,2,9,103000,55,BUENOS AIRES SOFTWARE,4,"Sí, activamente"
+Masculino,29,Universidad Pública,Industrias químicas,460,Nacional,5,Responsable,0,10,116000,15,Enlatado propio,1,"Sí, activamente"
+Femenino,26,Universidad Pública,Servicios profesionales,22,Nacional,3,Responsable,2,6,60000,20,Tango,4,"No,  pero escucho ofertas"
+Masculino,37,Universidad Pública,Función pública,500,Nacional,15,Responsable,5,15,150,0,No recuerdo nombre,NA,NA
+Femenino,37,Universidad Pública,"Terminales automotrices, fábricas autopartistas, y afines",400,Multinacional,6,Responsable,4,13,140000,0,Meta4,3,"Sí, activamente"
