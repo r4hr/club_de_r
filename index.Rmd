@@ -509,6 +509,9 @@ class: inverse, center, bottom
 # `r fontawesome::fa(name = "github-alt", fill = "white")`
 [Repo](https://github.com/r4hr/club_de_r/blob/master/Sesion_28_Intro_RMarkdown_vfinal.Rmd)
 
+
 Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
 
 Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Introducción a RMarkdown con RStudio 1.4</span> por <a xmlns:cc="http://creativecommons.org/ns#" href="https://clubder-rmarkdown.netlify.app/#1" property="cc:attributionName" rel="cc:attributionURL">Club de R para RRHH</a> se distribuye bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Licencia Creative Commons Atribución-NoComercial 4.0 Internacional</a>.<br />Basada en una obra en <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/r4hr/club_de_r" rel="dct:source">https://github.com/r4hr/club_de_r</a>.<br />Permisos más allá del alcance de esta licencia pueden estar disponibles en <a xmlns:cc="http://creativecommons.org/ns#" href="https://r4hr.club" rel="cc:morePermissions">https://r4hr.club</a>.

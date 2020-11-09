@@ -39,7 +39,8 @@ col_genero <- c("#8624F5", "#1FC3AA")
 col_graf <- "#5DADE2"
 
 # Carga de los sueldos
-sueldos <- sheets_read("1f3MCA81NnjI48C03GxxGu69i2hKZLrpxf4tHzKkXL_k")
+sueldos <- read_delim("https://raw.githubusercontent.com/r4hr/club_de_r/master/Datos/encuesta_sueldos.csv", delim = ",")
+
 
 # Filtramos los sueldos entre los percentiles 5 y 95
 resumen_numerico <- profiling_num(sueldos)
@@ -54,9 +55,9 @@ sueldos <- sueldos %>%
          puesto != "Director")
 ```
 
-Este es un ejercicio de práctica, realizado durante el curso **"Introducción a R para RRHH"** de [Data 4HR](https://data-4hr.com). Si quieren saber más, pueden contactarme en [mi perfil en LinkedIn](https://www.linkedin.com/in/sergiogarciamora/) o por [Twitter](https://twitter.com/sergiogarciamor).
+Este es un ejercicio de práctica, realizado durante el curso **"Introducción a R para RRHH"** de [Data 4HR](https://data-4hr.com). Si quieren saber más, pueden contactarme en [mi perfil en LinkedIn](https://www.linkedin.com/in/sergiogarciamora/) o por [Twitter](https://twitter.com/sergiogarciamor) 🧞.
 
-Los datos utilizados son una muestra de la Encuesta KIWI de Sueldos de RRHH de Latam realizado por el [Club de R para RRHH](https://r4hr.club).
+Los datos utilizados son una muestra de la Encuesta KIWI de Sueldos de RRHH de Latam realizado por el [Club de R para RRHH](https://r4hr.club)🥝.
 
 Este es un ejemplo de reporte que se puede hacer utilizando R, con el paquete `RMarkdown`.
 
@@ -201,5 +202,9 @@ Agradezco a todos los participantes del curso **"Introducción a R para RRHH"** 
 Este es un curso en castellano, que utiliza datos de RRHH, para facilitar el aprendizaje del uso de este lenguaje de análisis de datos.
 
 Y si ya sabés algo de R y te interesa ser parte de una comunidad de R enfocada en RRHH, te invitamos a seguirnos en el [Club de R para RRHH](https://r4hr.club).
+
+<br>
+
+![](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)
 
 <br><br><br>
