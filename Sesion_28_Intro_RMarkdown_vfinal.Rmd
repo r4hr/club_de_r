@@ -1,8 +1,8 @@
 ---
 title: "Relevamiento Parcial Sueldos de RRHH Argentina"
-subtitle: "Curso Introducción a R para RRHH"
-author: "Sergio de Data 4HR"
-date: "Octubre 2020"
+subtitle: "Club de R para RRHH"
+author: "Sergio Garcia Mora"
+date: "Noviembre 2020"
 output: 
   html_document:
     theme: spacelab
