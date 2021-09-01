@@ -1,0 +1,666 @@
+---
+title: "Club de R para RRHH"
+date: "12/05/2020"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+
+
+---
+class: inverse, top, center
+background-image: url(Archivos/CLUB_DE_R_Linkedin.png)
+
+# Sesión 3 - Gráficos con ggplot2
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+class: inverse, middle, right
+
+### Contacto
+
+<img src="Archivos/eu.jpg" width="150px"/>
+
+`r icon::fa("linkedin-in")` [Sergio Garcia Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r icon::fa("twitter")` [sergiogarciamor](https://twitter.com/sergiogarciamor)
+
+`r icon::fa("link")`[Información del Club de R para RRHH](https://data-4hr.com/2020/04/29/club-de-r/)
+
+---
+
+class: left, top
+
+<img src="Archivos/ggplot2.jpg" width=15% align="right" />
+
+# Haciendo gráficos con ggplot2    
+
+El paquete *ggplot2* es uno de los paquetes de *tidyverse*, y que está basado en la teoría de **"grammar of graphics"** (la gramática de los gráficos), porque permite construir los gráficos por capas, controlando las características individuales de cada uno.
+
+Esto quiere decir que podemos hacer el gráfico que se nos ocurra. Como por ejemplo estos que hizo Antonio Vazquez Brust (el mismo que escribió Ciencia de Datos para Gente Sociable) en su cuenta de [twitter](https://twitter.com/vazquezbrust/status/1261327807969402887?s=20).
+
+.pull-left[<img src="Archivos/delirio_1.jpg" width=60% align="right" />]
+.pull-right[<img src="Archivos/delirio_3.jpg" width=60% align="left" />]
+
+
+
+---
+
+# La gramática de los gráficos
+
+Como decíamos anteriormente los gráficos en ggplot2 se construyen por capas:
+
+--
+
+![](Archivos/grammar_graphics_details.png)
+
+--
+
+Esto implica que podemos controlar desde la **estructura** del gráfico (títulos, ejes) hasta todo lo que pasa dentro de la **visualización**.
+
+---
+
+# La gramática de los gráficos
+## Las capas de ggplot2
+
+En **ggplot2** las capas que podemos controlar:
+
+--
+
+* **Datos**: Cuál es el conjunto de datos que vamos a visualizar.
+
+--
+
+* **Aesthetics**: Acá volcamos las variables que vamos a graficar y que vamos a *mapear* en los ejes.
+
+--
+* **Geometría**: Es la forma geométrica (*geom*) que va a tomar la representación de los datos en la visualización (líneas, barras, puntos, etc.).
+
+--
+
+Estos son los elementos básicos para hacer un gráfico.
+
+---
+
+# La gramática de los gráficos
+## Las capas de ggplot2
+
+Otros elementos que podemos controlar con **ggplot2** son:
+
+--
+
+* **Facets**: Los *facets* nos permiten separar un mismo gráfico por categorías (por ejemplo, pensando en datos de RRHH unidades de negocio, países, áreas, etc.).
+
+--
+
+* **Estadística**: Podemos incluir dentro de los gráficos algún elemento que represente un cálculo estadístico, como ser promedios o regresiones lineales por ejemplo.
+
+--
+
+* **Coordenadas**: Nos permiten controlar la orientación de los gráficos, por ejemplo para hacer más legibles los ejes.
+
+--
+
+* **Temas**: En *themes* podemos controlar todos los aspectos estéticos de un gráfico, tanto de la estructura como de la visualización.
+
+---
+# Haciendo gráficos en ggplot2
+
+La sintaxis básica para hacer cualquier gráfico en ggplot2 es la siguiente:
+
+```{r eval=FALSE}
+ggplot(data, aes(x,y)) +
+  geom_col()
+```
+
+--
+Para hacer un gráfico mínimamente necesitamos:
+
+* data: La fuente de datos.
+* aes: Las variables a graficar
+* geom: El tipo de gráfico que vamos a hacer.
+
+--
+
+Instalar y cargar este paquete es igual que con el resto de los paquetes
+```{r eval=FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+*Nota: Si ya tenemos instalado tidyverse, no es necesario volver a instalar ggplot2, porque es uno de los paquetes que está integrado dentro de tidyverse.*
+
+---
+
+# Gráficos básicos en ggplot2
+## Nuestro dataset
+
+En primer lugar vamos a cargar los datos de *nomina* y de *puestos* y crear un dataframe filtrando los empleados mensuales.
+
+```{r datos, message = FALSE, warning=FALSE}
+library(googlesheets4) 
+library(gargle)
+library(tidyverse)
+library(gt)
+library(ggthemes)
+nomina <- sheets_read("1UliFjEjab9skkSGp_QVYv3ZQc132dqBLV-97vppQtAg")
+puestos <- sheets_read("1UliFjEjab9skkSGp_QVYv3ZQc132dqBLV-97vppQtAg", sheet = "Puestos")
+
+mensuales <- nomina %>%
+  mutate(ID_CAT = unlist(ID_CAT),
+         ID_CAT = as.factor(ID_CAT)) %>%
+  filter(!ID_CAT %in% c("1", "2", "3", "4", "5")) %>%
+  left_join(puestos) %>%
+  mutate(Rangos_Edad = case_when(
+    EDAD %in% 18:30 ~ "Hasta 30",
+    EDAD %in% 31:40 ~ "Entre 31 y 40",
+    EDAD %in% 41:50 ~ "Entre 41 y 50",
+    EDAD %in% 51:70 ~ "Más de 50"),
+    Rangos_Edad = factor(Rangos_Edad, levels = c("Hasta 30", "Entre 31 y 40",
+                                                 "Entre 41 y 50", "Más de 50")))
+```
+
+---
+# Gráficos básicos en ggplot2
+## Nuestro dataset
+
+Exploremos nuestro dataset:
+```{r}
+glimpse(mensuales)
+```
+
+---
+
+# Gráficos básicos en ggplot2
+## Histogramas
+
+Los histogramas son gráficos que nos permiten crear un gráfico de barras, en la que cada barra representa un rango de valores. Es muy útil para conocer la **distribución** de una variable numérica.
+
+---
+
+# Gráficos básicos en ggplot2
+## Histogramas
+
+.pull-left[
+```{r hist-basico, fig.show= 'hide'}
+ggplot(mensuales, aes(SUELDO)) +
+  geom_histogram()
+```
+]
+
+.pull-right[
+```{r ref.label = 'hist-basico', echo=FALSE, message=FALSE, warning=FALSE}
+```
+]
+
+---
+# Gráficos básicos en ggplot2
+## Histogramas
+
+Por default, ggplot2 intenta representar los datos en *"cajones"* (bins). Podemos modificar la cantidad de bins con el parámetro **bins** por ejemplo.
+
+Y si queremos controlar el rango de cada bin, podemos usar el parámetro **bindwidth**.
+
+```{r echo = FALSE, out.width="35%"}
+ggplot(mensuales, aes(SUELDO))+
+  geom_histogram(bins = 15)+
+  ggtitle("bins = 15")
+ggplot(mensuales, aes(SUELDO))+
+  geom_histogram(binwidth = 5000)+
+  ggtitle("bindwidth = 5000")
+```
+
+---
+# Gráficos básicos en ggplot2
+## Boxplots
+
+Los boxplots son gráficos que contienen una gran cantidad de información estadística.
+
+<img src="Archivos/boxplot.png" width=50% align="center" />
+
+En este gráfico podemos ver:
+
+* Los cuartiles 1 y 3 (Q1 y Q3) en los bordes de la caja.
+* La mediana que es la linea dentro de la caja.
+* Los outliers, representados en puntos, que son observaciones que superan una vez y media (1,5 veces) el rango intercuartil.
+
+---
+
+# Gráficos básicos en ggplot2
+## Boxplots
+
+.pull-left[
+```{r boxplot-basico, fig.show= 'hide'}
+ggplot(mensuales, aes(SUELDO)) +
+  geom_boxplot()
+```
+]
+
+.pull-right[
+```{r ref.label = 'boxplot-basico', echo=FALSE, message=FALSE, warning=FALSE}
+```
+]
+
+--- 
+
+# Gráficos básicos en ggplot2
+## Boxplots por categorías
+
+.left[Los boxplots también se pueden graficar individualmente por variables categóricas:]
+
+.pull-left[
+```{r bpdos, fig.show= 'hide'}
+ggplot(mensuales, aes(x= PUESTO, y = SUELDO)) +
+  geom_boxplot()+
+  theme(axis.text.x = element_text(angle = 90))
+```
+]
+
+.pull-right[
+```{r ref.label = 'bpdos', echo=FALSE, message=FALSE, warning=FALSE}
+```
+]
+
+---
+
+# Gráficos básicos en ggplot2
+## Barras
+
+Los gráficos de columna son uno de los tipos de gráficos más populares por su sencilla interpretación, y la rápida comparación entre resultados, gracias a que es muy fácil comparar el largo de las barras.
+
+En ggplot2 existen dos *geoms* para hacer gráficos de barras: *geom_col* y *geom_bar*. La diferencia entre uno y otro es que *geom_col* permite visualizar el valor de las observaciones, mientras que *geom_bar* cuenta la cantidad de filas en las que aparece cada observación.
+
+---
+
+# Gráficos básicos en ggplot2
+## Barras
+
+```{r echo = FALSE, out.width="45%", message=FALSE, warning=FALSE}
+mensuales %>%
+  group_by(PUESTO) %>%
+  summarise(Sueldo_Promedio = mean(SUELDO)) %>%
+  ggplot(aes(x = PUESTO, y = Sueldo_Promedio))+
+  geom_col()+ ggtitle("geom_col") +
+  theme(axis.text.x = element_text(angle = 90))
+ggplot(mensuales, aes(x = PUESTO))+
+  geom_bar()+ ggtitle("geom_bar")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+---
+
+# Gráficos básicos en ggplot2
+## Barras con geom_bar
+
+.left[En esencia, con geom_bar, lo que podemos hacer es **contar** cantidad de veces que se repite un valor dentro de una columna. Hay algunas variantes, por ejemplo apilar los segmentos:]
+
+.pull-left[
+```{r bar-pila, fig.show= 'hide'}
+ggplot(mensuales, aes(x = AREA, fill = Rangos_Edad))+
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90))+
+  ggtitle("Empleados por rango de edad por área")
+```
+]
+
+.pull-right[
+```{r ref.label = 'bar-pila', echo=FALSE, message=FALSE, warning=FALSE, out.width="80%"}
+```
+]
+
+---
+
+# Gráficos básicos en ggplot2
+## Barras con geom_bar
+
+.left[Algo muy útil en los geom_bar es la posibilidad de hacer un gráfico calculando la proporción de cada categoría agregando *position = "fill"*]
+
+.pull-left[
+```{r bar-fill, fig.show= 'hide'}
+ggplot(mensuales, aes(x = AREA, fill = Rangos_Edad))+
+  geom_bar(position = "fill") +
+  theme(axis.text.x = element_text(angle = 90))+
+  ggtitle("Proporción de rangos de edad por área")
+```
+]
+
+.pull-right[
+```{r ref.label = 'bar-fill', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+---
+# Gráficos básicos en ggplot2
+## Barras con geom_bar
+
+.left[También podemos posicionar una barra al lado de la otra con *position = "dodge"*]
+
+.pull-left[
+```{r bar-dodge, fig.show= 'hide'}
+mensuales %>%
+  filter(AREA %in% c("LAMINADO", "TEMPLADO")) %>%
+  ggplot(aes(x = AREA, fill = Rangos_Edad))+
+  geom_bar(position = "dodge")+
+  ggtitle("Rangos de edad en Laminado y Templado")
+```
+]
+
+.pull-right[
+```{r ref.label = 'bar-dodge', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+---
+# Gráficos básicos en ggplot2
+## Barras con geom_col
+
+.left[Con los gráficos de columna podemos graficar el valor de cada observación, independientemente de la cantidad de veces que se repita la fila en el dataset.
+
+Cuando usamos geom_col es necesario indicar la variable en **x**, y también en **y**.]
+
+.pull-left[
+```{r col-basico, fig.show= 'hide'}
+mensuales %>%
+  group_by(PUESTO) %>%
+  summarise(Sueldo_Promedio = mean(SUELDO)) %>%
+  ggplot(aes(x = PUESTO, y = Sueldo_Promedio))+
+  geom_col()+
+  ggtitle("Sueldos promedios por puestos")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+]
+
+.pull-right[
+```{r ref.label = 'col-basico', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+
+---
+
+# Gráficos básicos en ggplot2
+## Barras con geom_col
+
+.left[Para facilitar la lectura del gráfico de barras, y siempre y cuando la variable categórica no sea ordinal, es una buena práctica ordenar las barras de mayor a menor para facilitar la comprensión del gráfico. Esto lo podemos hacer con la función **reorder**.]
+
+.pull-left[
+```{r col-order, fig.show= 'hide'}
+mensuales %>%
+  group_by(PUESTO) %>%
+  summarise(Sueldo_Promedio = mean(SUELDO)) %>%
+  ggplot(aes(x = reorder(PUESTO, -Sueldo_Promedio), y = Sueldo_Promedio))+
+  geom_col()+
+  ggtitle("Sueldos promedios por puesto")+
+  theme(axis.text.x = element_text(angle = 90))
+```
+]
+
+.pull-right[
+```{r ref.label = 'col-order', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+---
+# Gráficos básicos en ggplot2
+## Líneas
+
+Los gráficos de línea por naturaleza se usan para reflejar la evolución de una variable en el tiempo.
+
+--
+
+Para hacer una representación de este gráfico, vamos a usar una nueva fuente de datos extraída de [Kaggle](https://www.kaggle.com/rhuebner/human-resources-data-set/data).-
+
+--
+
+También usaremos la librería **lubridate** para asegurarnos que la columna que contenga fechas sea bien interpretada.
+
+
+---
+
+# Gráficos básicos en ggplot2
+## Líneas
+
+Primero creamos un objeto con los datos de origen. Luego hacemos una selección de las variables género y fecha de terminación (Sex, DateofTermination respectivamente.)
+
+```{r message=FALSE, warning=FALSE}
+library(lubridate)
+hr_data <- read.csv("HRDataset_v13.csv")
+hr_terminate <- hr_data %>%
+  select(Sex, DateofTermination) %>%
+  filter(DateofTermination != "") %>%
+  mutate(DateofTermination = mdy(DateofTermination),
+         Year_Termination = year(DateofTermination),
+         Sex = factor(Sex),
+         Count = 1) %>%
+  group_by(Year_Termination, Sex) %>%
+  summarise(Terminations = sum(Count))
+```
+
+Agregamos una columna con un valor igual a 1 para poder sumar los casos con la función summarise.
+
+---
+
+# Gráficos básicos en ggplot2
+## Líneas
+
+.left[Creemos un gráfico de líneas básico]
+
+.pull-left[
+```{r linea-basico, fig.show= 'hide'}
+ggplot(hr_terminate, aes(x = Year_Termination, y = Terminations, color = Sex))+
+    geom_line(size = 1)
+```
+]
+
+.pull-right[
+```{r ref.label = 'linea-basico', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+---
+
+# Gráficos básicos en ggplot2
+## Líneas
+
+.left[Podemos agregar algunas mejoras al gráfico]
+
+.pull-left[
+```{r linea-tune, fig.show= 'hide'}
+ggplot(hr_terminate, aes(x = Year_Termination, y = Terminations, color = Sex))+
+  geom_line(size = 1) +
+  geom_point(size = 2)+
+  theme_minimal() +
+  labs(title = "Bajas por año y género",
+       x = "",
+       y = "")
+```
+]
+
+.pull-right[
+```{r ref.label = 'linea-tune', echo=FALSE, message=FALSE, warning=FALSE, out.width="85%"}
+```
+]
+
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+
+Los gráficos, o diagramas de dispersión, son una gran forma de visualizar relaciones entre variables numéricas, concentraciones de datos, entre otras cosas.
+
+Este tipo de gráfico nos va a servir de introducción para nuestros primeros modelos estadísticos.
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+### La encuesta de Sysarmy
+
+Sysarmy es una comunidad que es *"el soporte de quienes dan soporte"*. Además de un podcast y de organizar actividades para la comunidad de IT, son conocidos por realizar dos veces por año, una encuesta abierta de sueldos del mercado de tecnología.
+
+En el Club de R, esta vez vamos a utilizar la encuesta de sueldos publicada en su [blog]("https://sysarmy.com/blog/posts/resultados-de-la-encuesta-de-sueldos-2020-1/") para ejercitar con datos relacionados con RRHH.
+
+
+---
+
+## La encuesta
+
+Sysarmy difunde la encuesta en una hoja de cáculo de Google.
+
+<img src="Archivos/EncuestaSysArmy.png" width=60% align="center" />
+
+Como podemos apreciar, los datos recién comienzan en la fila 10, así que tenemos que usar un parámetro para empezar a leer los datos omitiendo las primeras 9 filas
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, cache = TRUE}
+gs4_deauth() # No hace falta registrarse en google para acceder al archivo
+options(scipen = 999) # Cambia la notación científica de los gráficos
+
+encuesta_sysarmy <- sheets_read("1_db6zEAMvr-1GQjJb4hV-rSQfJ9w6GmezbqKJ2JJn7I", skip = 9)
+```
+
+
+---
+
+### La encuesta
+
+Tenemos ahora un dataset de `r nrow(encuesta_sysarmy)` observaciones y de `r ncol(encuesta_sysarmy)` columnas o variables. Como es una encuesta muy informal hay que explorar el dataset para poder trabajar con algo manejable, porque por ejemplo hay uno que en la columna de *Trabajo de* puso:
+
+> *"Lucho constantemente contra el desorden en los repositorios de pibes que no saben usar Git ni el framework con el que laburamos"*
+
+Y si buscamos el sueldo máximo en la columna de *Salario bruto (en tu moneda local)* vemos que es de `r max(encuesta_sysarmy$"Salario mensual BRUTO (en tu moneda local)")`.
+
+Así que vamos a filtrar los sueldos entre AR$ 20.000 y 1.000.000 y buscar los 3 puestos con más observaciones, y los analizaremos por género y por años de experiencia.
+
+---
+
+### La encuesta: preprocesamiento
+
+```{r warning = FALSE}
+seleccion <- c("Años de experiencia","Trabajo de","Salario mensual BRUTO (en tu moneda local)", "Me identifico" )
+
+sysarmy <- encuesta_sysarmy %>%
+  select(seleccion)
+
+
+sysarmy <- sysarmy %>%
+  rename(Sueldo = "Salario mensual BRUTO (en tu moneda local)",
+        Puesto = "Trabajo de",
+        Experiencia = "Años de experiencia",
+        Sexo = "Me identifico") %>%
+  filter(between(Sueldo,20000,1000000)) %>%
+  mutate(Experiencia = unlist(Experiencia), 
+         Experiencia = as.numeric(Experiencia),
+         Puesto = factor(Puesto),
+         Sexo = factor(Sexo))
+           
+summary(sysarmy)
+```
+
+
+---
+
+### La encuesta: preprocesamiento
+
+Por último, ahora que tenemos un dataframe limpio para trabajar, filtremos por los tres puestos que tienen más observaciones:
+
+```{r}
+analisis_puestos <- sysarmy %>%
+  filter(Puesto %in% c("Developer", "SysAdmin / DevOps / SRE", "Technical Leader"))
+```
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+
+.left[Los **scatter plots** sirven tanto para relacionar datos numéricos, como también para analizar relaciones entre variables categóricas y numéricos. Primero analicemos dos variables numéricas, el sueldo bruto, y los años de experiencia.]
+
+.pull-left[
+```{r scatter-basic, fig.show= 'hide'}
+ggplot(analisis_puestos, aes(x = Sueldo, y = Experiencia))+
+  geom_point()
+```
+]
+
+.pull-right[
+```{r ref.label = 'scatter-basic', echo=FALSE, message=FALSE, warning=FALSE, out.width="80%"}
+```
+]
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+
+.left[También podemos analizar la distribución de los sueldos por puesto.]
+
+.pull-left[
+```{r scatter-cat, fig.show= 'hide'}
+ggplot(analisis_puestos, aes(x = Puesto, y = Sueldo)) +
+  geom_point()
+```
+]
+
+.pull-right[
+```{r ref.label = 'scatter-cat', echo=FALSE, message=FALSE, warning=FALSE}
+```
+]
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+
+Cuando hacemos gráficos de dispersión, dos parámetros muy útiles para analizar donde hay más concentración de datos, son los parámetros **jitter** y **alpha**.
+
+--
+
+**Jitter** le añade un poco de ruido a los datos para evitar la superposición de puntos, pero manteniendo la distribución de los datos. Hablando mal y pronto, lo que hace es mover un poquito los puntos dentro del gráfico para que sean más visibles.
+
+--
+
+Otro parámetro muy útil es **alpha** que le añade transparencia a los puntos, lo cual nos ayuda a ver donde hay más concentración de datos, en donde haya más oscuridad del color.
+
+-- 
+
+También se puede jugar con el parámetro **size** o **shape** para modificar el tamaño, o la forma de los puntos.
+
+
+---
+
+# Gráficos básicos en ggplot2
+## Gráficos de dispersión - Scatter plots
+
+.left[En este gráfico ponemos todos estos parámetros en práctica.]
+
+.pull-left[
+```{r scatter-fin, fig.show= 'hide'}
+ggplot(analisis_puestos, aes(x = Puesto, y = Sueldo, color = Sexo)) +
+  geom_point(position = "jitter", alpha = 0.5, size = 2) +
+  scale_color_colorblind() + # Del paquete ggthemes
+  labs(title = "Sueldos brutos por puesto",
+       subtitle = "Argentina 2020",
+       caption = "Fuente: Encuesta de Sueldos Sysarmy 2020.1",
+       x = "", y = "")+
+  scale_y_continuous(labels = scales::comma_format(big.mark = ".", decimal.mark = ","))
+```
+]
+
+.pull-right[
+```{r ref.label = 'scatter-fin', echo=FALSE, message=FALSE, warning=FALSE}
+```
+]
+
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
