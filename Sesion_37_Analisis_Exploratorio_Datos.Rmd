@@ -1,0 +1,505 @@
+---
+title: "Análisis Exploratorio de Datos"
+author: "Sergio | R4HR Club de R para RRHH"
+date: "31/8/2021"
+output: 
+  html_document:
+    theme: lumen
+    highlight: pygments
+    toc: true
+    toc_float: true
+    code_folding: show
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, out.width = "80%", fig.retina = 3)
+```
+
+![](https://secure.meetupstatic.com/photos/event/8/5/e/d/clean_498394285.jpeg)
+
+# Bienvenidxs a R4HR Club de R para RRHH
+
+Bienvenidos al meetup de R4HR Club de R para RRHH. Nuestro primer meetup auspiciado por [R Consortium](https://www.r-consortium.org/).
+
+**R4HR Club de R para RRHH** es una comunidad de aprendizaje del lenguaje de programación R para las personas que trabajen o quieran trabajar en Recursos Humanos. Las personas que integramos esta comunidad provenimos de distintas partes del mundo, y contamos con distintas experiencias, personalidades, habilidades e historias. De toda esta diversidad se nutre nuestra comunidad. Por eso buscamos:
+
+-   Generar contenido en castellano.
+-   Utilizar datos y un lenguaje familiar con la profesión.
+-   Contar casos de uso de aplicación en RRHH.
+
+Todas las personas que participan de nuestros eventos, comunidades y redes tienen que cumplir con nuestro [código de conducta](https://r4hr.club/codigo-de-conducta/). Te invitamos a seguirnos en todas nuestras redes sociales en [este link](https://linktr.ee/r4hrclub).
+
+También pueden revisar todo nuestro contenido disponible en [nuestro Google Drive](https://drive.google.com/drive/folders/1Qck3z_t6XLRXb2vbN-00931DgdJZ0yse?usp=sharing), en [este canal de YouTube](https://youtube.com/playlist?list=PLZuVytUJrxQlcqu6l-P3ou4vV2mRJU2Ka) y en nuestro [repositorio de GitHub](https://github.com/r4hr/club_de_r)
+
+Todo nuestro contenido es abierto, y se puede usar libremente citando la fuente 💪.
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Licencia Creative Commons" style="border-width:0"/></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional</a>.
+
+Si quieren correr el código de este documento es un script común de R pueden hacer lo siguiente. Esto funciona si el archivo está en la misma carpeta del proyecto.
+
+```{r previa, eval=FALSE}
+knitr::purl("Sesion_37_Analisis_Exploratorio_Datos.Rmd")
+```
+
+# Análisis Exploratorio de Datos
+
+El **Análisis Exploratorio de Datos** (EDA por sus siglas en inglés) es una etapa fundamental en cualquier proyecto de datos, ya sea un tablero o un modelo predictivo.
+
+Esta etapa es importante en parte porque te permite explorar preguntas iniciales y poner a prueba tus intuiciones. También es un proceso crítico porque hacemos un análisis de la calidad de los datos. El objetivo de la etapa es desarrollar un entendimiento de los datos.
+
+Es un proceso que permite poner en práctica las habilidades de visualización, de limpieza y transformación de datos, y hacer los ajustes que sean necesarios previo al desarrollo de un proyecto.
+
+El libro [**R para Ciencia de Datos**](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html) escrito por Hadley Wickham y Garrett Grolemund y traducido por la comunidad de R Latinoamericana tiene un montón de información y guía para hacerlo paso a paso usando el conjuto de paquetes de tidyverse También vamos a explorar otros paquetes que hacen algunas cosas de manera muy simple.
+
+## Crear proyectos en RStudio
+
+Trabajar con proyectos en RStudio hace que todo el trabajo sea más sencillo. Los proyectos crean una carpeta en nuestra PC en donde se almacenarán los archivos, tablas, scripts, y hace que todo sea más organizado.
+
+Para crear un proyecto tenés podés entrar en: \* *File* \* *New project*
+
+Y luego poner el nombre de la carpeta.
+
+![](Archivos/new_project.png){width="337"}
+
+![](Archivos/new_projecto.png)
+
+## Instalar paquetes o librerías
+
+Los paquetes o librerías son extensiones desarrolladas por la comunidad o por empresas que facilitan el uso de R y expanden sus capacidades. En este encuentro vamos a usar los siguientes paquetes:
+
+-   `DataExplorer`: Desarrollado por Boxuan Cui, [Link a su web](https://CRAN.R-project.org/package=DataExplorer).
+
+-   `funModeling`: Desarrollado por Pablo Casas. [Link al libro](https://librovivodecienciadedatos.ai/).
+
+-   `tidyverse`: Desarrollado por Hadley Wickham y muchos más. [Link a la web](https://www.tidyverse.org/).
+
+Este último paquete, `tidyverse` es una colección de paquetes que permiten realizar muchas tareas de exploración, limpieza y transformación de datos.
+
+Para utilizar un paquete, lo primero que tenemos que hacer es instalarlos. Eso lo hacemos con la función `install.packages()` y dentro del paréntesis tenemos que poner el nombre del paquete. **Tengan en cuenta que:**
+
+-   R es un lenguaje *case sensitive* o sea que hay que prestar atención a mayúsculas y minúsculas.
+
+-   Para instalar los paquetes hay que usar comillas
+
+Este es un paso que hacemos una sola vez por computadora.
+
+Para correr el código se tienen que parar en la línea de código que quieren usar y apretar las teclas `Ctrl` + `Enter` o bien el triángulo verde (como si fuera un ícono de *"Play"* ▶️)
+
+```{r paquetes, eval = FALSE}
+# Instalar los paquetes DataExplorer, funModeling, y tidyverse
+install.packages("DataExplorer")
+install.packages("funModeling")
+install.packages("tidyverse")
+```
+
+Esto lo que hace es instalar paquetes desde [CRAN](https://cran.r-project.org/), que es un repositorio donde se publican los paquetes, asegurando un estándar de calidad y de documentación que hace que trabajar con cualquier paquete de CRAN sea seguro.
+
+Para usar las funciones de los paquetes que instalamos, ahora tenemos que **cargarlos.** Esto lo que hace es de alguna manera *"activar"* el paquete y que podamos empezar sus funciones.
+
+Para cargar un paquete tenemos que usar la función `library()`. Recuerden prestar atención a las mayúsculas y minúsculas. Ahora no son necesarias las comillas.
+
+Una de las formas en las que nos damos cuenta que el paquete está instalado es cuando empezamos a escribir su nombre y nos aparece el nombre del paquete para autocompletar. Esta es una de las ventajas de trabajar en RStudio.
+
+```{r carga-paquetes}
+# Cargar los paquetes DataExplorer, funModeling, y tidyverse
+library(DataExplorer)
+library(funModeling)
+library(tidyverse)
+
+```
+
+## Los datos
+
+Vamos a trabajar con dos versiones de la [Encuesta KIWI de Sueldos de RH](https://rpubs.com/Data4HR/encuesta-kiwi-2020) que hicimos el año pasado desde R4HR.
+
+-   `kiwi_ar.RDS`: Una versión limpia y organizada de la encuesta. El formato `.RDS` es propio de R y matiene algunas características de los datos. Están filtradas únicamente las respuestas de Argentina.
+
+-   `encuesta_cruda.csv`: La versión cruda de la encuesta con todas las respuestas.
+
+Para cargar los archivos, tenemos que prestar atención:
+
+-   La ubicación del archivo. En nuestro caso están en una carpeta llamada `datos`.
+
+-   Recuerden que R es case sensitive, atención a mayúsculas y minúsculas.
+
+-   La ubicación, el nombre y la extensión del archivo tienen que estar entre comillas.
+
+Carguemos los datos. Para cargar el archivo `.RDS` vamos a usar la función de R base `readRDS()`. Para el archivo `.csv` vamos a usar la función `read.csv()` también de R base. Usamos esa función porque las columnas están separadas por un punto y coma (`;`).
+
+```{r datos}
+# Cargar la versión limpia de la encuesta
+kiwi <- readRDS("datos/kiwi_ar.RDS")
+
+# Cargar el archivo crudo
+crudo <- read.csv("datos/encuesta_cruda.csv", fileEncoding = "latin1", sep = ";")
+```
+
+> Recuerden:
+>
+> La instalación de los paquetes se hace **una sola vez** por computadora.
+>
+> La carga de los paquetese se hace **cada vez que se abre** un script.
+
+# Exploración de datos con R base
+
+R base contiene algunas funciones muy útiles para una primera exploración de datos. Vamos a practicar con la tabla `kiwi`.
+
+Una de esas funciones es `View()`. En RStudio abre una pestaña mostrando la tabla de datos.
+
+```{r eda-base1, eval=FALSE}
+View(kiwi)
+```
+
+Nos hacemos los cancheros programando en R pero siempre miramos una tabla 😜.
+
+Una función que nos permite ver la *estructura* del dataset es `str()`.
+
+```{r eda-base2}
+# Usar la función str() con el data frame kiwi
+str(kiwi)
+```
+
+La función `str()` nos brinda esta información:
+
+-   Qué tipo de objeto es: En este caso es un `tibble` que es un tipo de data frame propio de `tidyverse`.
+
+-   Su tamaño: filas y columnas. ¿Se animan a decir cuántas filas y cuántas columnas tiene esta tabla?
+
+-   El nombre de cada fila:: Después del signo `$`.
+
+-   Qué tipo de variable es: `chr`, `num`, `int`, o `Factor`. No tenemos en este dataset, pero también existen las variables `logical` o `lgl`.
+
+-   Una muestra de los primeros registros.
+
+En el paquete `tidyverse` hay una función similar que se llama `glimpse()`. Probemos la función y veamos qué diferencias hay.
+
+```{r eda-base3}
+# Usar la función glimpse() con el data frame kiwi
+glimpse(kiwi)
+```
+
+Aporta información similar, excepto por el tipo de objeto, pero `glimpse()` tiene una salida un poco más prolija. Además a las variables `num` las identifica como `dbl`.
+
+Ahora probemos la función `summary()`. Como el data frame tiene muchas columnas vamos a seleccionar sólo 4 columnas. Una por cada tipo de variable.
+
+```{r eda-base4}
+# Creo una tabla con sólo 4 variables
+kiwi_2 <- kiwi %>% 
+  select(genero, contactos_linkedin, id, puesto) # Elijo las columnas que deseo
+
+# Correr la función summary() con el data frame kiwi_2
+summary(kiwi_2)
+```
+
+Con las variables de tipo `character` lo único que nos indica es la cantidad de filas que tiene. En cambio, con las variables de tipo `Factor` como es en este caso la variable `puesto`, nos muestra la cantidad de casos para cada rol dentro de la columna.
+
+En cambio, con las variables numéricas, no importa si son `numeric` o `integer`, obtenemos la siguiente información:
+
+-   `Min.`: el valor mínimo
+
+-   `1st Qu.`: el valor del primer cuartil
+
+-   `Median`: la mediana
+
+-   `Mean`: el promedio
+
+-   `3rd Qu.`: el valor del tercer cuartil
+
+-   `Max`: el valor máximo
+
+-   `NA's`: la cantidad de datos nulos (celdas vacías en esa columna).
+
+La última función que veremos ahora es `names()`, que la información que aporta es 🥁🥁🥁 los nombres de las columnas
+
+```{r eda-base5}
+# Usemos la función names() con kiwi
+names(kiwi)
+# Usemos la función names() con crudo =P
+names(crudo)
+```
+
+😱, no? En las palabras de Morfeo en Matrix:
+
+![](https://memegenerator.net/img/instances/73097588.jpg){width="300"}
+
+En la introducción del meetup les decíamos que el análisis exploratorio de datos es también visual. R base tiene la función `plot` que permite hacer gráficos. Probemos primero haciendo un gráfico por variable. La lógica de la sintaxis es la siguiente: `nombre_dataframe$nombre_variable`. Por ejemplo, para graficar la variable `edad` tengo que escribir:
+
+```{r eda-base6}
+plot(kiwi$edad)
+
+# Prueben graficar la variable puesto
+plot(kiwi$puesto)
+# Prueben graficar la variable genero
+kiwi$genero <- as.factor(kiwi$genero)
+
+plot(kiwi$genero)
+
+```
+
+Al final del encuentro veremos otra manera de hacer gráficos.
+
+# DataExplorer
+
+![](https://github.com/boxuancui/DataExplorer/raw/master/man/figures/logo.png){width="142"}
+
+El paquete `DataExplorer` desarrollado por [Boxuan Cui](https://www.linkedin.com/in/boxuancui/) tiene tres objetivos principales:
+
+1.  Realizar análisis exploratorios de datos.
+
+2.  Desarrollar tareas de feature engineering
+
+3.  Generar reportes.
+
+Hoy solo veremos los puntos 1 y 3.
+
+Para el análisis exploratorio, una de las primeras funciones que vemos en la [documentación del paquete](https://cran.r-project.org/web/packages/DataExplorer/vignettes/dataexplorer-intro.html#exploratory-data-analysis) es la función `introduce()`. Usando el signo de interrogación delante de la función podemos abrir la ayuda de la función.
+
+```{r de-1}
+# Revisar la ayuda de la función introduce()
+?introduce()
+
+# Usar la función con la tabla kiwi
+introduce(kiwi)
+```
+
+Esta función nos permite ver:
+
+-   `rows`: la cantidad de filas
+
+-   `columns`: la cantidad de variables
+
+-   `discrete_columns`: la cantidad de variables discretas
+
+-   `continuos_columns`: el número de [variables continuas](https://bookdown.org/aquintela/EBE/variables-discretas-y-continuas.html)
+
+-   `all_missing_columns`: columnas que sólo contienen valores nulos
+
+-   `total_missing_values`: cantidad de celdas con valores nulos
+
+-   `complete_rows`: total de filas que no tienen ningún dato faltante
+
+-   `total_observations`: Es la cantidad total de celdas
+
+-   `memory_usage`: es el tamaño estimado del data frame en bytes.
+
+Toda esta información también la podemos ver visualmente con la función `plot_intro()`. Y con la función `plot_missing()` podemos ver el porcentaje de datos nulos por columna, y la misma función establece si es problemático o no.
+
+```{r de-2}
+# Usar la función plot_intro()
+plot_intro(kiwi)
+
+# Usar la función plot_missing()
+plot_missing(kiwi)
+
+# Usar la función plot_missing() modificando el parámetro missing_only
+plot_missing(kiwi, missing_only = TRUE)
+
+```
+
+Otra función interesante es `plot_bar()` que hace gráficos de barra de todas las variables discretas.
+
+```{r de-3}
+# Usar la función plot_bar() con el data frame kiwi
+plot_bar(kiwi, maxcat = 20)
+```
+
+El primer intento no sale del todo bien porque hay respuestas con mucho texto. Probemos modificando el parámetro `maxcat = 20`.
+
+Otro parámetro interesante dentro de `plot_bar()` es `by` que le indica a la función que realice los gráficos pero explicados por alguna variable de interés. Lo que hace es generar gráficos de barras apilados al 100% para ver cómo se distribuyen las proporciones de las variables.
+
+```{r de-4}
+# Repitamos el gráfico anterior pero con by = "genero"
+plot_bar(kiwi, maxcat = 20, by = "genero")
+
+
+```
+
+Algo que siempre debemos hacer con las variables numéricas es analizar su distribución. Para eso podemos usar la función `plot_histogram()`.
+
+```{r de-5}
+# Usar la función plot_histogram() para analizar las variables numéricas
+plot_histogram(kiwi)
+```
+
+Este análisis ya nos permite detectar algunas anomalías, por ejemplo en las variables `anios_en_empresa` y `anios_experiencia` tenemos varios valores imposibles. ¿Pueden ver cuáles son? Un tema aparte es el `id` que si bien está representado por un número no deberíamos usarlo para los análisis. Una forma de resolverlo es usando la función `drop_column()` del paquete `DataExplorer` o `select()` de `tidyverse`.
+
+```{r de-6}
+# Opción 1: drop_column()
+kiwi_3 <- drop_columns(kiwi, 
+             ind = "id")
+
+# Opción 2: select()
+kiwi_3b <- kiwi %>% 
+  select(-id)
+```
+
+Algo que también podemos apreciar es que las variables `satisfaccion` y la variable `valoracion_gestion_empresa` si bien están representadas por números, en realidad son variables *ordinales* y por lo tanto deberíamos cambiarlas a variables de tipo factor. Para eso usaremos la función `update_columns()`.
+
+```{r de-7}
+# Sobrescribir un objeto usando la función update_columns()
+kiwi_4 <- update_columns(kiwi_3,                                          # data frame
+                         c("satisfaccion", "valoracion_gestion_empresa"), # columnas a modificar
+                         what = as.factor)                                # a qué tipo
+
+# Probar los cambios 
+summary(kiwi_4$satisfaccion)
+```
+
+Este paquete tiene varias opciones de gráficos. Prueben crear un nuevo data frame con 4 variables numéricas y una variable categórica usando la función `select()` y probar las siguientes funciones.
+
+Para probar las funciones pueden usar algunos de los bloques de código anteriores o bien abrir uno nuevo apretando las teclas `Ctrl` + `Alt` + `I`. Prueben modificar los gráficos modificando el parámetro `by` con la variable categórica que hayan elegido.
+
+-   `plot_qq()`
+
+-   `plot_scatterplot()`
+
+-   `plot_boxplot()`
+
+Hay varias funciones muy interesantes para descubrir que están explicadas en la [página del paquete.](https://cran.r-project.org/web/packages/DataExplorer/vignettes/dataexplorer-intro.html#exploratory-data-analysis)
+
+La última función que vamos a ver de este paquete se llama `create_report()` y prepárense para 🤯.
+
+```{r de-8, eval=FALSE}
+# Usar la función create_report()
+create_report(kiwi)
+```
+
+Prueben crear un data frame con 5 variables. Una de ellas tiene que ser `genero` el resto pueden ser dos categóricas y dos numéricas por ejemplo y corran la función de la siguiente manera: `create_report(kiwi_4, y = "genero").`
+
+# funModeling
+
+![](https://camo.githubusercontent.com/52411c3ab2079010da71b6749d45912eee7890207895dff78ebe91f239e91521/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f64617461736369656e63656865726f65732e636f6d2f696d672f626c6f672f66756e4d6f64656c696e675f6c6f676f5f68712e706e67){width="176"}
+
+`funModeling` es un paquete desarrollado por [Pablo Casas](https://www.linkedin.com/in/pcasas/), a quien tuvimos el placer de tener en R4HR en la [sesión 9](https://drive.google.com/file/d/1P8vZN8jhlavV995wjiXK54jF0kdc2GFt/view?usp=sharing). Si todavía están explorando qué lenguajes estudiar pueden explorar sus cursos gratuitos de la [Escuela de Datos Vivos](https://escueladedatosvivos.ai/). Respecto del paquete, Pablo escribió un libro explicando sus funciones y mucho más, que se llama [Libro Vivo de Ciencia de Datos](https://librovivodecienciaded).
+
+Las salidas de este paquete generan mucha información así que para los fines prácticos de este encuentro, seleccionemos 7 variables:
+
+```{r fm-1}
+# Seleccionemos 7 variables
+kiwi_7 <- kiwi %>% 
+  select(sueldo_bruto, puesto, rubro, anios_experiencia, satisfaccion, dotacion, contactos_linkedin)
+```
+
+La primera función que vamos a explorar se llama `status()`. Probemosla con nuestro nuevo data frame reducido.
+
+```{r fm-2}
+# Usar la función status()
+status(kiwi_7)
+```
+
+Esta función nos aporta la siguiente información:
+
+-   La cantidad de `0`, `NA` y valores infinitos: `q_zeros`, `q_na,` y `q_inf` respectivamente y el porcentaje que representan.
+
+-   Que tipo de variable contiene cada columna: `type`
+
+-   La cantidad de valores únicos que contiene la variable: `unique`.
+
+Este último dato es importante especialmente en variables de tipo `factor` o `character` porque nos da una idea de la *cardinalidad* de la variable. Por ejemplo la variable `puesto` tiene 6 valores únicos (*Administrativo, Analista, HRBP, Responsable, Jefe, Gerente*), su cardinalidad es mucho menor que el de la variable `rubro` donde tenemos 27 valores únicos.
+
+Esto nos sirve para identificar variables que podemos utilizar para agrupar, lo cual también puede hacerse con variables numéricas como `satisfaccion`, ya que al tener tan pocos valores únicos, nos da una idea de que puede ser una variable ordinal que podríamos convertir a `factor` por ejemplo.
+
+Otra función muy útil para analizar variables categóricas u ordinales es la función `freq()`. Veamos que hace:
+
+```{r fm-3}
+# Usar la función freq() en kiwi_7
+freq(kiwi_7)
+```
+
+Esta función nos provee una tabla de frecuencias, es decir, la cantidad de veces que aparece cada valor (es decir su frecuencia), el porcentaje que representa, y el porcentaje acumulado de cada valor (si quieren cancherear frente a un/a estadístico/a esta última columna esto se llama *frecuencia acumulada relativa*).
+
+Para las variables núméricas vamos a ver dos funciones. La primera se llama `plot_num()` y la siguiente es `profiling_num()`.
+
+```{r fm-4}
+# Correr la función plot_num() en kiwi_7
+plot_num(kiwi_7)
+```
+
+En estos gráficos lo que vemos es la distribución de las variables numéricas en forma de **histogramas.** O al menos esa es la intención, porque por la presencia de los **outliers** no podemos apreciar mucho la distribución de los datos con este tipo de gráficos.
+
+Probemos ahora la función `profiling_num()`.
+
+```{r fm-5}
+# Usar la función profiling_num() en kiwi_7
+profiling_num(kiwi_7)
+
+```
+
+Acá tenemos un montón de información:
+
+-   Lo primero que vemos es el promedio (`mean)` y el desvío estándar (`std_dev`).
+
+-   Luego vemos el coeficiente de variación (`variation_coef`) que es el resultado de dividir el desvío estándar por el promedio.
+
+-   Luego vemos el valor en los percentiles 1, 5, 25, 50, 75, 95, 99.
+
+-   Luego vemos el sesgo (`skewness`) que tiene que ver con la simetría de la distribución de los datos y el `kurtosis` que a grosso modo indica la presencia de valores extremos.
+
+-   El rango intercuartil (`iqr`) que es la diferencia entre el tercer cuartil *menos* el primer cuartil. O lo que es lo mismo, el percentil 75 menos el percentil 25.
+
+-   Después tenemos dos rangos, entre los percentiles 1 y 99, y entre los percentiles 10 y 90.
+
+Es mucha información estadística, ¿no? Pero veamos para qué nos puede servir. Los resultados de `profiling_num()` los podemos guardar en una tabla y usarlo para limpiar nuestros datos.
+
+```{r fm-6}
+# Crear un objeto con el análisis de profiling_num()
+var_num <- profiling_num(kiwi_7)
+
+# Ver el contenido de var_num
+var_num   # Apretar Ctrl + Enter
+```
+
+Ahora tenemos una tabla, un data frame, de la cual podemos usar sus celdas. En particular ahora nos interesan de la fila de `sueldo_bruto` las celdas correspondientes a los percentiles 5 y 95 para utilizar en un filtro. Para lograr eso tenemos que seguir la siguiente lógica: `nombre_dataframe[fila,columna]`.
+
+```{r fm-7}
+# Guardamos el valor de los percentiles 5 y 95 en un objeto cada uno.
+p05 <- var_num[1,6]   # El valor de la fila 1, columna 6
+p95 <- var_num[1,10]  # El valor de la fila 1, columna 10
+  
+# Veamos el contenido de ambos valores
+p05
+p95
+```
+
+Ahora podemos usar esos valores como **filtros** de la variable `sueldo_bruto`.
+
+```{r fm-8}
+# Filtramos las filas que estén por encima de p05 y por debajo de p95
+kiwi_8 <- kiwi_7 %>%
+  filter(between(sueldo_bruto,   # Columna a filtrar
+         p05,                    # Umbral mínimo
+         p95))                    # Umbral máximo
+
+# Probemos la función summary() en kiwi_8
+summary(kiwi_8)
+
+# Corramos la función plot_num() en kiwi_8
+plot_num(kiwi_8)
+```
+
+# Explorando intuiciones
+
+Dijimos que el Análisis Exploratorio de Datos sirve también para explorar intuiciones. Una de ellas está relacionada con la satisfacción, ¿está relacionada con el salario? Veamos cómo podemos responder a ello.
+
+Sabemos que la columna `satisfaccion` tiene campos nulos, por lo que tenemos que filtrarlos.
+
+```{r intuicion-1}
+# Filtramos todo lo que no sea un NA de la variable satisfaccion
+kiwi_9 <- kiwi_8 %>% 
+  filter(!is.na(satisfaccion)) # El signo ! es el operador lógico NOT
+
+# Probemos hacer un boxplot
+ggplot(kiwi_9, aes(x = factor(satisfaccion), y = sueldo_bruto)) +
+  geom_boxplot()
+```
+
+## Seguir aprendiendo
+
+Pueden probar en este documento cambiando variables, usar otro dataset, ya sea el dataset `crudo` o alguno propio. Cuando terminen, corran este documento con el botón de `knit` o bien con las teclas `Ctrl` + `Shift` + `K`. Eso va a generar un documento que pueden publicar en línea y compartir en sus redes lo que aprendieron.
+
+En los resultados que publicamos de la [Encuesta KIWI de Sueldos de RH](https://rpubs.com/Data4HR/encuesta-kiwi-2020) pueden ver cómo utilizamos todas estas técnicas para limpiar el archivo `crudo` que usamos en esta sesión y que pueden replicar por su cuenta.
+
+Aprovechen el contenido de nuestro [Google Drive](https://drive.google.com/drive/folders/1Qck3z_t6XLRXb2vbN-00931DgdJZ0yse?usp=sharing) y de nuestro [repositorio de GitHub](https://github.com/r4hr/club_de_r). Particularmente busquen las sesiones relacionadas con dplyr, ggplot2, y forcats que son complementos excelentes de este encuentro.
+
+Súmense a nuestro [canal de Slack](https://join.slack.com/t/r4hr/shared_invite/zt-ocriyx5e-nqXuwWeDyOKm2ICUJjhu6g) y participen haciendo consultas y compartiendo contenido de valor.
