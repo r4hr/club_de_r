@@ -1,0 +1,335 @@
+---
+title: "Club de R para RRHH"
+date: "06/06/2020"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+    language: "spanish"
+    
+
+
+---
+class: inverse, top, center
+background-image: url(Archivos/CLUB_DE_R_Linkedin.png)
+
+# Sesión 14 - Forcats y variables ordinales
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+class: inverse, middle, right
+
+### Contacto
+
+<img src="Archivos/eu.jpg" width="150px"/>
+
+`r icons::fontawesome("linkedin-in")` [Sergio Garcia Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r icons::fontawesome("twitter")` [sergiogarciamor](https://twitter.com/sergiogarciamor)
+
+`r icons::fontawesome("link")`[Información del Club de R para RRHH](https://data-4hr.com/2020/04/29/club-de-r/)
+
+---
+# Variables de tipo factor
+
+Las variables de tipo `factor` generan mucha resistencia entre muchos data scientists, de hecho hubo toda una movida para que las variables de tipo `character` se cargaran automáticamente como tal, y que no vengan por default como *factors* cuando cargabas un csv (se cambió de hecho en la versión 4.0 de R, lanzada a fines de abril de 2020).
+
+--
+
+Pero como cuenta [Roger Peng](https://www.linkedin.com/in/roger-peng-6b39a095/) en un post de [su blog](https://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/), las variables de tipo factor tienen muchas ventajas.
+
+--
+
+* Internamente almacenan un número para guardar el orden de los factores, lo que hace que sea más rápido el procesamiento y ocupe menos espacio.
+
+--
+
+* Algunos algoritmos usan las variables de tipo factor y las transforman a variables *dummy* para computar.
+
+--
+
+* En particular, me gustan también porque facilita ordenar variables para graficar.
+
+---
+# Las variables de tipo factor
+## Modelos
+
+El paquete `funModeling` permite ver con qué tipo de datos se pueden trabajar con algunos algoritmos con la función `metadata_models`. 
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+library(funModeling)
+library(gt)
+
+gt(metadata_models)
+```
+
+
+---
+
+.center[<img src="https://forcats.tidyverse.org/logo.png" width="12%"/>
+
+# El paquete forcats
+
+]
+
+.left[
+
+El paquete `forcats` permite hacer varias operaciones con las variables de tipo *factor*, como ordenar, reemplazar y agrupar las variables.
+
+Las funciones principales son:
+
+* `fct_reorder()`: Reordenar los factores por otra variable.
+* `fct_infreq()`: Reordena un factor según su frecuencia.
+* `fct_relevel()`: Cambia el orden manualmente.
+* `fct_lump()`: Agrupa los valores menos/más frecuentes de un factor en *"otros"*.
+]
+
+> Como es habitual, contamos con un [cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/translations/spanish/factors-Spanish.pdf)  `r emo::ji("beers")` 
+
+---
+# Encuesta Sysarmy
+
+
+```{r message=FALSE, warning=FALSE}
+library(googlesheets4)
+library(gargle)
+library(tidyverse)
+library(scales)
+```
+
+```{r sysarmy, cache=TRUE, message=FALSE, warning=FALSE}
+
+gs4_deauth()
+options(scipen = 999) # Cambia la notación científica de los gráficos
+encuesta_sysarmy <- read_sheet("1_db6zEAMvr-1GQjJb4hV-rSQfJ9w6GmezbqKJ2JJn7I", skip = 9)
+
+sysarmy <- encuesta_sysarmy %>%
+  select('Trabajo de','Me identifico', `Salario mensual BRUTO (en tu moneda local)`, 'Años de experiencia', "Cantidad de empleados", "Nivel de estudios alcanzado", "Carrera") %>%
+  rename(Genero = 'Me identifico', 
+         Puesto = 'Trabajo de',
+         Sueldo_Bruto = `Salario mensual BRUTO (en tu moneda local)`,
+         Experiencia = 'Años de experiencia',
+         Empleados = 'Cantidad de empleados', 
+         Estudios = "Nivel de estudios alcanzado") %>%
+  filter(!is.na(Empleados),
+         between(Sueldo_Bruto, 20000, 1000000),
+         Genero != "Otros") %>%
+  mutate(Experiencia = as.numeric(unlist(Experiencia)),
+    Genero = factor(Genero),
+    Puesto = factor(Puesto))
+```
+
+---
+## Puestos
+
+.pull-left[
+Hagamos un gráfico de todos los puestos que hay en la encuesta. Recordemos que tenemos `r nrow(sysarmy)` filas para analizar `r emo::ji("scream")`.
+
+```{r bar-sys, fig.show='hide'}
+ggplot(sysarmy, aes(x=Puesto)) + 
+  geom_bar() + 
+  coord_flip()
+```
+
+]
+
+.pull-right[
+```{r ref.label="bar-sys", echo=FALSE}
+
+```
+]
+
+
+---
+class: bottom, middle
+background-image: url(https://pbs.twimg.com/media/EaouoduUwAAxaQv.jpg:large)
+background-size: cover
+
+---
+
+## fct_infreq
+
+.pull-left[
+La función `fct_infreq` permite ordenar los resultados en base a la frecuencia de cada variable.
+```{r lump-infreq, fig.show='hide'}
+ggplot(sysarmy, aes(x = fct_infreq(Estudios)))+
+  geom_bar()
+```
+
+]
+
+.pull-right[
+```{r ref.label="lump-infreq",echo=FALSE}
+
+```
+
+]
+
+---
+## fct_lump
+
+.pull-left[
+Con `fct_lump` podemos mostrar las cantidades de categorías que queremos, y agrupa al resto de las categorías en un campo *Other*.
+
+```{r lump-cat, fig.show='hide'}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, n = 10)) %>% 
+  count(Puesto, sort = TRUE) %>% 
+  ggplot(aes(x = Puesto, y = n)) + 
+  geom_col() +
+  coord_flip()
+```
+]
+
+.pull-right[
+```{r ref.label="lump-cat", echo=FALSE, message=FALSE, warning=FALSE}
+
+```
+
+]
+
+---
+## fct_lump
+
+.pull-left[
+Al igual que la función `reorder`, podemos usar `fct_reorder` para reordenar las barras según otra variable.
+
+```{r lump-ordered,fig.show='hide'}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, n = 10)) %>% 
+  count(Puesto, sort = TRUE) %>% 
+  ggplot(aes(x = fct_reorder(Puesto, n), y = n)) + #<<
+  geom_col() +
+  coord_flip()
+```
+
+]
+
+.pull-right[
+```{r ref.label="lump-ordered", echo=FALSE}
+
+```
+
+]
+
+---
+## fct_lump
+
+También se puede usar `fct_lump` para filtrar los factores que superen una cierta proporción del dataset.
+
+```{r}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, 
+                           prop = .05)) %>% # Selecciona las variables que superen el 5% de la muestra
+  count(Puesto) 
+```
+
+---
+## fct_lump
+
+También podemos cambiar el nombre por default *"Other"* con el parámetro `other_level`.
+```{r}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, 
+                           prop = .05, # Selecciona las variables que superen el 5% de la muestra
+                           other_level="otros")) %>% 
+  count(Puesto) 
+```
+
+
+---
+## fct_relevel
+
+Con `fct_relevel` podemos modificar el orden de las variables de tipo factor.
+```{r}
+estudios <- sysarmy %>% 
+  select(Estudios) %>% 
+  mutate(Estudios = fct_relevel(Estudios, c("Primario", "Secundario", "Universitario","Terciario",
+                                            "Posdoctorado","Posgrado", "Doctorado"))) %>% 
+  count(Estudios)
+
+estudios
+```
+
+---
+## fct_relevel
+
+.pull-left[
+El orden se puede establecer por posición. Por ejemplo, moviendo *Posdoctorado* al final.
+```{r warning=FALSE, message=FALSE}
+estudios <- estudios %>% 
+  mutate(Estudios = fct_relevel(Estudios, "Posdoctorado", after = Inf)) %>% 
+  count(Estudios)
+
+estudios
+```
+]
+
+--
+
+.pull-right[
+También es posible ordenar manualmente por posición.
+```{r warning=FALSE, message=FALSE}
+estudios <- estudios %>% 
+  mutate(Estudios = fct_relevel(Estudios, "Universitario", after = 3)) %>% 
+  count(Estudios)
+
+estudios
+```
+
+]
+
+---
+## fct_recode
+
+.pull-left[
+La función `fct_recode` permite cambiar la etiqueta de un valor.
+```{r}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, n = 10)) %>% 
+  count(Puesto, sort = TRUE)
+```
+
+
+]
+
+--
+
+.pull-right[
+Simplifiquemos por ejemplo, los puestos *"SysAdmin / DevOps / SRE"*, *"QA / Tester"*, y *"Manager / Director"*.
+```{r}
+sysarmy %>% 
+  select(Puesto) %>% 
+  mutate(Puesto = fct_lump(Puesto, n = 10),
+         Puesto = fct_recode(Puesto, SysAdmin = "SysAdmin / DevOps / SRE",
+                             QA = "QA / Tester",
+                             Manager = "Manager / Director")) %>% 
+  count(Puesto, sort = TRUE)
+```
+
+]
+
+---
+class: inverse, center, middle
+# Continuemos...
+
+<img src="https://media.giphy.com/media/CxUmmgdMkOkYU/giphy.gif" />
+
+
+
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
