@@ -1,0 +1,272 @@
+---
+title: "Club de R para RRHH"
+date: "26/07/2020"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+    language: "spanish"
+
+---
+class: inverse, top, center
+background-image: url(Archivos/CLUB_DE_R_Linkedin.png)
+
+# Sesión 13 - The grammar of tables
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+class: inverse, middle, right
+
+### Contacto
+
+<img src="Archivos/eu.jpg" width="150px"/>
+
+`r icon::fa("linkedin-in")` [Sergio Garcia Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r icon::fa("twitter")` [sergiogarciamor](https://twitter.com/sergiogarciamor)
+
+`r icon::fa("link")` [Información del Club de R para RRHH](https://data-4hr.com/2020/04/29/club-de-r/)
+
+`r icon::fa("slack")` [R4HR Slack](https://join.slack.com/t/r4hr/shared_invite/zt-geqfwra8-iZv3G5admNbyuej2gyFQDg)
+
+---
+class: inverse, center
+
+# Sesión 13 - El paquete gt 
+## Hay tabla!
+
+<img src="https://img.redbull.com/images/c_crop,x_230,y_0,h_1030,w_824/c_fill,w_860,h_1075/q_auto,f_auto/redbullcom/2019/07/17/44f55f2f-a5f9-44d0-9c62-31672feca5a2/hay-tabla" width="35%" />
+
+---
+# El paquete gt
+
+El paquete `gt` un paquete muy nuevo (es de este año) y su propósito es poder construir tablas con la misma calidad de publicación que las que encontramos en medios y publicaciones.
+
+La idea es usar este paquete para crear tablas de salida, tal como si fuera un gráfico, y no como un objeto reutilizable.
+
+.center[
+<img src="https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg" />
+]
+
+---
+# El paquete gt
+## Flujo de trabajo
+
+Una vez que tengamos los datos preprocesados podemos componer la tabla y usarla en un archivo de RMarkdown o guardarlo en un archivo con la función `gtsave()`.
+
+--
+
+.center[
+<img src="https://gt.rstudio.com/reference/figures/gt_workflow_diagram.svg" width="90%"/>
+
+]
+
+.left[
+1. Generamos el dataframe en un script
+2. Convertimos el dataframe o tibble a un objeto gt
+3. Creamos la salida
+]
+
+---
+# El paquete gt
+## Instalación y datos de práctica
+
+Al igual que la mayoría de los paquetes se puede instalar directamente con `install.packages("gt")`. Luego lo cargamos. Para ver la función básica usaremos el archivo `HRDataset_v13.csv` de [Kaggle](https://www.kaggle.com/rhuebner/human-resources-data-set/data).
+
+```{r paquete_datos, warning=FALSE, message=FALSE}
+library(readr) # Leer archivos csv
+library(gt)    # Crear tablas para publicar
+library(tidyverse) # Limpiar y manipular datos
+
+hr_data <- read_csv("HRDataset_v13.csv")
+```
+---
+## Nuestra primera tabla
+
+Hagamos algo sencillo, veamos cuántos empleados tenemos por área.
+
+```{r tabla_1}
+tabla_1 <- hr_data %>% 
+  select(Department) %>% 
+  filter(!is.na(Department)) %>% # Filtramos datos nulos
+  group_by(Department) %>% 
+  tally(name = "count") %>%  # Contamos los empleados por departamento
+  arrange(count)
+
+tabla_1
+```
+
+---
+## Nuestra primera tabla
+
+La función básica del paquete `gt` es `gt()`.
+
+```{r}
+gt(tabla_1)
+```
+
+---
+## Nuestra primera tabla... otra vez
+
+.pull-left[
+¿Recuerdan la primera imagen del paquete? Con las funciones `tab_*` podemos controlar los títulos y los pies de tablas.
+<img src="https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg" />
+
+]
+
+.pull-right[
+```{r}
+# Tabla con títulos y subtítulos
+gt(tabla_1) %>% 
+  tab_header(
+    title = "Empleados por Departamento",
+    subtitle = "Año Fiscal 2017")
+```
+
+]
+
+---
+## Nuestra primera tabla... otra vez
+### Formateando el título
+
+.pull-left[
+Dentro de las funciones de `tab_header` podemos usar la función `md()` para formatear los títulos y subtítulos como si lo hiciéramos en markdown.
+
+```{r tab_title, results='hide'}
+# Tabla con títulos y subtítulos con formato markdown
+tabla_gt1 <- gt(tabla_1) %>% 
+  tab_header(
+    title = md("**Empleados por Departamento**"),
+    subtitle = md("Año Fiscal *2017*"))
+tabla_gt1
+```
+]
+
+.pull-right[
+```{r ref.label='tab_title', echo=FALSE}
+
+```
+
+]
+---
+## Agregando notas al pie
+
+.pull-left[
+```{r notas_al_pie}
+tabla_gt1 <- tabla_gt1 %>%  
+  tab_source_note(source_note = md("*Club de R para RRHH*")) %>% 
+  tab_source_note(source_note = md("Origen de Datos: [Kaggle](https://www.kaggle.com/rhuebner/human-resources-data-set/data)"))
+tabla_gt1
+```
+
+]
+
+.pull-right[
+Con la función `tab_source_note` podemos agregar varias notas al pie de la tabla. Especialmente útil para agregar referencias.
+]
+
+---
+## Agregando referencias
+
+.pull-left[
+También podemos agregar referencias dentro de las tablas combinando las funciones `tab_footnote` para crear la referencia, y las funciones `locations` y `cells_body` para ubicar:
+
+* Bajo qué columna podemos alinear la referencia.
+* A qué filas está haciendo referencia.
+
+```{r tabla_ref1, results='hide'}
+tabla_gt1 <- tabla_gt1 %>% 
+  tab_footnote(footnote = "Incluyen fusión año 2019",
+               locations = cells_body(
+                 columns = vars(Department),
+                 rows = c(3,6)
+               ))
+tabla_gt1
+```
+]
+
+.pull-right[
+```{r ref.label = 'tabla_ref1', echo=FALSE, message=FALSE, warning=FALSE, out.widht="50%"}
+```
+
+
+]
+
+---
+## Agregando referencias
+
+.pull-left[
+También podemos agregar referencias en función de los resultados.
+
+```{r tabla_ref2, results='hide'}
+tabla_gt1 <- tabla_gt1 %>% 
+  tab_footnote(footnote = md("Esta es **la jefa**"),
+               locations = cells_body(
+                 columns = vars(count),
+                 rows = count == min(count))) %>% 
+  tab_footnote(footnote = md("Aca labura *muuuucha* gente"),
+               locations = cells_body(
+                 columns = vars(count),
+                 rows = count == max(count)))
+tabla_gt1
+```
+
+]
+
+.pull-right[
+
+```{r ref.label='tabla_ref2', echo=FALSE}
+
+```
+
+]
+
+---
+## Grupos
+
+.pull-left[Dentro de las tablas podemos crear grupos con la función `tab_row_group`. Podemos elegir los grupos mediante:
+
+* Referencias a filas.
+* Vectores.
+* Índices
+
+```{r tab_groups, results='hide', warning=F}
+gt(tabla_1) %>% 
+  tab_header(title = "Empleados por área") %>% 
+  tab_row_group(
+    group = "Dirección",
+    rows = 1) %>% 
+  tab_row_group(
+    group = "Áreas de Staff",
+    rows = c(2,3,5)) %>% 
+  tab_row_group(
+    group = "Operaciones",
+    rows = c(4,6))
+```
+]
+
+.pull-right[
+```{r ref.label='tab_groups', echo=F, warning=FALSE}
+
+```
+
+]
+
+---
+# Referencias
+
+[Introduction to creating gt tables](https://gt.rstudio.com/articles/intro-creating-gt-tables.html)
+
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
