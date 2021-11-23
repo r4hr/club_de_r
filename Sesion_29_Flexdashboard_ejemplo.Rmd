@@ -1,0 +1,274 @@
+---
+title: "Dashboard - Club de R para RRHH"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: united
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(extrafont)
+library(scales)
+library(funModeling)
+library(ggalt)
+
+loadfonts(quiet = TRUE) # Permite cargar en R otros tipos de fuentes.
+
+
+# Estilo limpio sin líneas de fondo
+estilo <- theme(panel.grid = element_blank(),
+                plot.background = element_rect(fill = "#FBFCFC"),
+                panel.background = element_blank(),
+                text = element_text(family = "Ubuntu Mono"))
+
+# Estilo limpio con líneas de referencia verticales en gris claro
+estilov <- theme(panel.grid = element_blank(),
+                 plot.background = element_rect(fill = "#FBFCFC"),
+                 panel.background = element_blank(),
+                 panel.grid.major.x = element_line(color = "#AEB6BF"),
+                 text = element_text(family = "Ubuntu Mono"))
+
+# Estilo limpio con líneas de referencia horizontales en gris claro
+estiloh <- theme(panel.grid = element_blank(),
+                 plot.background = element_rect(fill = "#FBFCFC"),
+                 panel.background = element_blank(),
+                 panel.grid.major.y = element_line(color = "#AEB6BF"),
+                 text = element_text(family = "Ubuntu Mono"))
+genero <- c("#8624F5", "#1FC3AA", "#FFD129", "#75838F") #Violeta - Verde - Amarillo - Gris
+genero3 <- c("#8624F5", "#1FC3AA", "#FFD129")
+colores <-  c("#8624F5", "#1FC3AA")
+azul <- "#344D7E"
+verde <-  "#009204"
+gris <- "#75838F"
+
+fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH"
+
+rhar <- read_delim("Datasets/kiwi_rh.csv", delim = ",") %>% 
+  filter(pais == "Argentina")
+
+
+
+# Obtenemos los valores de los percentiles 5 y 95 de la variable sueldo_bruto
+p05 <- profiling_num(rhar)[8,6]
+p95 <- profiling_num(rhar)[8,10]
+
+# Filtramos los sueldos que están dentro de los percentiles 5 y 95
+rhar <- rhar %>% 
+  filter(between(sueldo_bruto, p05, p95)) %>% 
+  mutate(puesto = factor(puesto, levels = c("Pasante", "Administrativo", "Analista", 
+                                            "HRBP", "Responsable", "Jefe", "Gerente", "Director")))
+
+```
+
+
+Principal
+======================================================================
+
+Column {data-width=650} {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Sueldo bruto por puesto
+
+```{r}
+rhar %>% 
+  select(puesto, sueldo_bruto) %>% 
+  group_by(puesto) %>% 
+  summarise(mediana_salarial = median(sueldo_bruto)) %>% 
+  ggplot(aes(x = mediana_salarial, y = puesto)) +
+  geom_col(fill = azul) +
+  estilov +
+  scale_x_continuous(labels = comma_format(big.mark = ".", decimal.mark = ","),
+                     limits = c(0, 200000))
+```
+
+
+### Dispersión de sueldos por puestos
+```{r}
+ggplot(rhar, aes(x = sueldo_bruto, y = puesto)) +
+  geom_point(color = azul, alpha = 0.3) +
+  estilov +
+  scale_x_continuous(labels = comma_format(big.mark = ".", decimal.mark = ","))
+
+```
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Respuestas por género
+
+```{r}
+div <- rhar %>% 
+select(genero) %>% 
+  mutate(genero = factor(genero, 
+                         levels = c("Femenino", "Masculino", "Género Diverso",
+                                    "Prefiero no responder"))) %>% 
+  group_by(genero) %>% 
+  summarise (n = n()) %>% 
+  mutate(freq = n/sum(n)) %>% 
+  arrange(-n)
+
+# Compute the cumulative percentages (top of each rectangle)
+div$ymax <- cumsum(div$freq)
+
+# Compute the bottom of each rectangle
+div$ymin <- c(0, head(div$ymax, n=-1))
+
+# Compute label position
+div$labelPosition <- (div$ymax + div$ymin) / 2
+
+# Compute a good label
+div$label <- paste0(div$genero, "\n Cant: ", div$n)
+# Make the plot
+ggplot(div, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=genero)) +
+  geom_rect() +
+  coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+  xlim(c(2, 4)) +# Try to remove that to see how to make a pie chart
+  scale_fill_manual(values = c("#8624F5",  "#1FC3AA", "#FFD129","#75838F")) +
+  theme_void() +
+  theme(legend.position = "right",
+        panel.background = element_blank(),
+        text = element_text(family = "Ubuntu Mono")) +
+  labs(title = "Cantidad de respuestas según género",
+       fill = "Género", 
+       caption = fuente)
+```
+
+### Distribución de los sueldos
+
+```{r}
+ggplot(rhar, aes(x = sueldo_bruto)) +
+  geom_density(fill = "blue", alpha = 0.4, color = "darkblue")+
+  estilo
+```
+
+Gap Salarial {data-orientation=rows}
+==========================================================
+
+Rows
+--------------------------------------------------------
+
+### Sueldo Promedio Mujeres
+
+```{r}
+brecha <- rhar %>% 
+  select(puesto, sueldo_bruto, genero) %>% 
+  filter(genero %in% c("Femenino", "Masculino"), 
+         puesto %in% c("Gerente","Jefe", "HRBP","Responsable", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto, levels = c("Administrativo","Analista", 
+                                            "HRBP", "Responsable","Jefe", "Gerente"))) %>% 
+  group_by(genero, puesto) %>% 
+  summarise(media_salarial = mean(sueldo_bruto))
+
+brecha_graf <- brecha %>% 
+  pivot_wider(., names_from = genero, values_from = media_salarial) %>% 
+  mutate(brecha = percent((Masculino-Femenino)/Masculino, 1),
+         x = (Masculino + Femenino)/2,
+         gap = Femenino/Masculino)
+
+# Calcular el indicador de brecha salarial 
+brecha_promedio <- round(mean(brecha_graf$gap*100))
+
+
+
+#gauge(value = brecha_promedio,min = 0, max = 100, symbol = "%", label = "Gap Salarial Promedio",
+#      gaugeSectors(success = c(85,100), warning = c(45,84), danger = c(0,44)))
+
+### Sueldo Promedio Mujeres
+
+valueBox(round(mean(brecha_graf$Femenino)), icon = "fa-female", color = "#8624F5")
+```
+
+### Sueldo Promedio Hombres
+
+```{r}
+### Sueldo Promedio Hombres
+valueBox(round(mean(brecha_graf$Masculino)), icon = "fa-male", color = "#1FC3AA")
+```
+
+
+### Gap Salarial Promedio
+
+```{r}
+#gap_sal <- shiny::validateCssUnit(88)
+#gauge(gap_sal, min = 0, max = 100, symbol = "%",
+#      gaugeSectors(success = c(90, 100), warning = c(45, 89), danger = c(0,44))
+#      )
+
+
+valueBox(round(mean(brecha_graf$gap),2), icon = "fa-percentage")
+```
+
+Rows
+-------------------------------------------------------
+
+### Gap salarial de puestos de RRHH
+
+```{r}
+
+ggplot(brecha_graf, 
+       aes(x = Femenino, xend = Masculino, y = puesto, 
+           group = puesto, label = brecha)) +
+  geom_dumbbell(color = "#808080",
+                size_x = 3, size_xend = 3,
+                colour_x = colores[1],
+                colour_xend = colores[2]) +
+  geom_text(data = brecha_graf, 
+            aes(x, puesto, label = brecha), nudge_y = .2) +
+  labs(title = "Brecha salarial por puestos",
+       subtitle = "Sueldos promedios en Argentina",
+       x = "",
+       y = NULL, 
+       caption = fuente) +
+  scale_x_continuous(labels = comma_format(big.mark = ".", decimal.mark = ",")) +
+  scale_color_manual(values = colores) +
+  theme_minimal()+
+  theme(plot.background = element_rect(fill = "#FBFCFC"),
+        text = element_text(family = "Ubuntu Mono"))
+```
+
+
+### Distribución de sueldos por puesto y por género
+
+```{r}
+rhar %>% 
+  select(sueldo_bruto,puesto, genero) %>% 
+  filter(genero %in% c("Femenino", "Masculino"),
+         puesto %in% c("Gerente","Jefe", "HRBP","Responsable", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto, levels = c("Administrativo","Analista", 
+                                            "HRBP", "Responsable",
+                                            "Jefe", "Gerente"))) %>% 
+  ggplot(aes(x = puesto, y = sueldo_bruto, fill = genero)) +
+  geom_boxplot() +
+  scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ",")) +
+  estiloh +
+  scale_fill_manual(values = colores)
+
+```
+
+
+Análisis de Mercado {data-navmenu="Mercado"}
+=======================================================================
+
+Column 
+-----------------------------------------------
+
+## Relación entre años de experiencia y sueldo bruto
+
+```{r}
+rhar %>% 
+  select(anios_experiencia, sueldo_bruto, genero) %>% 
+  filter(genero %in% c("Femenino", "Masculino"),
+         anios_experiencia < 30) %>% 
+  ggplot(aes(x = anios_experiencia, y = sueldo_bruto, color = genero)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm") +
+  theme_minimal() +
+  scale_color_manual(values = colores) +
+  scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ";"))
+```
+
+
