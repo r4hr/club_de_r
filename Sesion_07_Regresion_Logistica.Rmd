@@ -1,0 +1,450 @@
+---
+title: "Club de R para RRHH"
+date: "06/06/2020"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+    language: "spanish"
+    
+
+
+---
+class: inverse, top, center
+background-image: url(Archivos/CLUB_DE_R_Linkedin.png)
+
+# Sesión 7 - Análisis predictivos
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+class: inverse, middle, right
+
+### Contacto
+
+<img src="Archivos/eu.jpg" width="150px"/>
+
+`r icon::fa("linkedin-in")` [Sergio Garcia Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r icon::fa("twitter")` [sergiogarciamor](https://twitter.com/sergiogarciamor)
+
+`r icon::fa("link")`[Información del Club de R para RRHH](https://data-4hr.com/2020/04/29/club-de-r/)
+
+---
+
+# Análisis predictivo
+
+Si bien, las regresiones lineales son un tipo de análisis predictivo, porque nos permite estimar cuánto puede ganar un candidato que vemos en Linkedin, hoy veremos otro tipo de análisis predictivo, basado en la probabilidad, para usarlo en un ejemplo de análisis de rotación.
+
+--
+
+El ejemplo de hoy, lo vamos a usar reciclando un caso de estudio que desarrollamos en Data 4HR en Python, y lo vamos a replicar en R. El caso original lo pueden ver en [este link](https://drive.google.com/file/d/1XcgT0_ovihpYtnqbEDhwu4zjwI4ltx1w/view?usp=sharing) y este es el [repositorio original](https://github.com/mlambolla/Analytics_HR_Attrition) (aprovechen para ver las diferencias en las sintaxis entre R y Python si pueden).
+
+
+---
+
+# ¿De qué hablamos cuando hablamos de análisis predictivo?
+
+--
+
+El objetivo de los análisis predictivos es detectar patrones, en nuestro caso, patrones en los comportamientos, en las características, y en los datos de los empleados para poder detectar quién tiene más probabilidad de renunciar por ejemplo.
+
+--
+
+Hoy, sin ningún análisis hecho, lo que sabemos de cada empleado es que tiene tanta probabilidad de renunciar, como de no renunciar. O sea que la cosa esta *"fifty-fifty"*, o para ir nerdeando la cosa, con una probabilidad de 0.5.
+
+--
+
+Lo que buscamos con un análisis predictivo es mejorar esa probabilidad.
+
+---
+
+# ¿Qué es hacer un análisis predictivo?
+
+Hacer un análisis no implica acertar el 100% de los casos, sino que es un intento de tener una idea de quiénes tienen más **probabilidad** de irse. ¿Esto quiere decir que alguien que tiene alta probabilidad de renunciar y no lo hace (o viceversa) el modelo está mal?
+
+No. Al menos no necesariamente. ¿Qué es la probabilidad?
+
+---
+
+## Probabilidad
+
+La probabilidad es toda una rama de la estadística en sí misma. Se enfoca en intentar descubrir la certeza (o incertidumbre) de que ocurran las cosas. El resultado de una probabilidad siempre va a dar entre 0 y 1.
+
+--
+
+* Un resultado igual o cercano a **0** implica un evento improbable.
+
+--
+
+* Un resultado igual o cercano a **1** implica una alta probabilidad.
+
+--
+
+¿Qué pasa si ocurre algo improbable, o no ocurre algo con alta probabilidad? Es parte del margen de error inherente a la estadística, y por eso se asume que va a haber errores. El punto es, si repetimos el experimento 100 veces, ¿cuánto acierta el modelo, y con qué precisión?
+
+---
+
+# ¿Cómo se hace un análisis predictivo?
+
+Para hacer análisis predictivos vamos a trabajar con datos del pasado. Tradicionalmente se usa una el 70% de los datos para *entrenar el modelo*, y el 30% de los datos, se los usa para *testear el modelo*. A estos datasets los vamos a llamar **training** y **test** respectivamente.
+
+--
+
+<img src="https://www.oreilly.com/library/view/statistics-for-machine/9781788295758/assets/bbb2a548-6dba-4d9f-a4f7-8f20d13422e0.png" align='center' />
+
+--
+
+La selección de los datos se hace al azar. Así que hay que asegurarse que la proporción de renuncias sea similar en ambos datasets.
+
+---
+
+# Cómo se hace un análisis predictivo?
+## ¿Por qué trabajamos con el pasado?
+
+En los ciclos de vida de los proyectos de data mining en general, está establecida como metodología, la metodología **CRISP-DM** (*Cross Industry Standard Process for Data Mining*). En donde:
+
+.pull-left[
+Entre la etapa de *Modelado* y la *Puesta en producción* (deployment) hay una etapa de evaluación. Mientras diseñamos el modelo, trabajamos con datos históricos, en la etapa de *Evaluación* vamos probando la precisión del modelo con datos nuevos, y si todo va bien, se poné en producción.
+]
+
+.pull-right[
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/CRISP-DM_Process_Diagram.png/800px-CRISP-DM_Process_Diagram.png' width="75%" align="left" />
+]
+
+---
+
+# Nuestro primer modelo predictivo de attrition
+## Regresión Logística
+
+La regresión logística, a diferencia de la regresión lineal, en vez de arrojar un valor como resultado (un sueldo, un nivel de satisfacción), arroja una *probabilidad*, es decir que el resultado estará entre uno y cero.
+
+--
+<br><br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/320px-Logistic-curve.svg.png" />
+
+---
+
+# Nuestro primer modelo predictivo de attrition
+## Los datos
+
+Vamos a usar un dataset *"de juguete"* para facilitar las cosas. El dataset sólo tiene datos *numéricos* y *character* y no tiene datos faltantes.
+
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(tidyverse)
+
+datos_rh <- read_csv("https://raw.githubusercontent.com/mlambolla/Analytics_HR_Attrition/master/HR_comma_sep.csv")
+
+glimpse(datos_rh)
+
+any(is.na(datos_rh)) # Para verificar si hay algún dato faltante.
+
+# Cambiemos el nombre de la variable 'sales' por 'department' y cambiemos los valores de 'salary' a numéricos.
+datos_rh <- datos_rh %>% 
+  rename(department = sales) %>%
+  mutate(salary = as.numeric(case_when(
+    salary == 'low' ~ 0,
+    salary == 'medium' ~ 1,
+    salary == 'high' ~ 2
+  )))
+```
+
+---
+
+# Análisis predictivo
+## La variable target
+
+Usualmente, en los modelos predictivos, tenemos una *variable objetivo* a la que llamamos **target**.
+
+Por lo general usamos o una variable numérica o lógica (`TRUE` o `FALSE`) codificada con `1` o `0`. Es una práctica común usar el número 1 para lo que nos interesa saber, en nuestro caso, si la persona de nuestra base de datos, se fue de la compañía. En nuestro caso, la variable *target* es la columna *left*. Veamos en los datos, cuantos empleados se fueron, y cuántos aún permanecen en la compañía.
+
+```{r}
+datos_rh %>% 
+  count(left)
+```
+
+<br>
+Durante la sesión de hoy vamos a omitir todo el análisis exploratorio, así nos enfocamos en toda la parte del modelo. En la vida real esto **tiene que estar**, así que lo dejamos como desafío para esta semana.
+
+---
+
+# Análisis predictivo
+## La selección de los datos de training y test
+
+La selección de los datos se hace al azar para construir los datasets de training y de test. O sea que cada vez que corramos todo el script, R va a elegir datos distintos.
+
+Así que una forma de elegir datos al azar, pero que sean siempre los mismos es con la función `set.seed(234)`. Le pueden poner el número que se les ocurra dentro de la función.
+
+```{r eval=FALSE}
+set.seed(234)
+```
+
+---
+
+# Análisis predictivo
+## La selección de los datos de training y test
+
+Para dividir el dataset vamos a usar el paquete `caret`. 
+
+```{r message=FALSE, warning=FALSE}
+library(caret)
+
+set.seed(234)
+modelo_hr <- createDataPartition(y = datos_rh$left, p = 0.7,
+                                    list = FALSE)
+```
+
+Analicemos la función `createDataPartition` y sus parámetros:
+
+* **y** representa a la variable *target*. Fíjense que la selección es usando la estructura *nombre_dataframe$nombre_variable_target*.
+* **p** es el parámetro para seleccionar el porcentaje de datos que vamos a seleccionar para el training set.
+* **list = FALSE** evita que el nuevo objeto sea del tipo **lista**.
+
+Esta función crea un objeto con un índice de todas las filas seleccionadas para los datos de training. Con estos datos de muestra le vamos a pedir al algoritmo que analice los patrones para predecir las renuncias.
+
+> Prueben correr esta función con un set.seed() diferente para ver qué selecciones distintas hubo.
+
+---
+
+# Análisis predictivo
+## La selección de los datos de training y test
+
+
+.pull-left[Ahora creamos los dos datasets
+
+```{r warning=FALSE, message=FALSE}
+#Armo el dataframe de training [fila, columna]
+modelo_hr_train <- datos_rh[modelo_hr,]
+
+# Con el signo - (menos), creamos el dataset de testing, con todas las filas 'que no estén en modelo_hr'
+modelo_hr_test <- datos_rh[-modelo_hr,]
+
+```
+
+]
+
+
+.pull-right[Es una buena práctica chequear que las proporciones de bajas (nuestra variable target) sean similares tanto en training como en test.
+
+```{r}
+modelo_hr_train %>%
+  summarise(turnover = mean(left))
+
+modelo_hr_test %>%
+  summarise(turnover = mean(left))
+```
+
+Todo en orden, avancemos.
+]
+
+---
+
+# Análisis predictivo
+## Entrenando el modelo
+
+El primer paso es generar un modelo predictivo con los datos de *training*. *Left* es la variable objetivo, y los símbolos `~ .` significa que el resto del dataset son las variables explicatorias, con excepción de *department* que la sacamos de los cálculos.
+
+```{r}
+# Calculamos un modelo de entrenamiento, sacando department de los cálculos.
+modelo_glm2 <- glm(left ~. -department, family = "binomial",
+                   data = modelo_hr_train)
+
+summary(modelo_glm2)
+
+```
+
+---
+
+### Chequeando multicolinealidad
+
+En este tipo de modelos, vamos a buscar variables que estén relacionadas, pero de manera independientemente, sin colinealidad.
+
+Si hay colinealidad entre dos variables puede ocurrir porque una variable está construida a partir de otra variable, lo que implica que las variables colineales son de alguna manera, dos expresiones de la misma cosa, o bien, que una variable esté construida a partir de la otra (ejemplos: el índica de masa muscular, un bono de antigüedad, etc.)
+
+Una forma de detectar esto es a través de la función `vif` (Variance Inflation Factor):
+```{r message=FALSE, warning=FALSE}
+library(car)
+
+vif(modelo_glm2)
+```
+
+
+---
+
+### Chequando multicolinealidad
+
+Para tener en cuenta, tenemos que buscar variables con VIF > 5. Si esto ocurriera, tendríamos que correr los modelos, eliminando estas variables, hasta tener un modelo en el que todas las variables tengan un VIF menor a 5.
+
+```{r echo=F, message=FALSE, warning=FALSE}
+
+VIF <- c(1, "Entre 1 y 5", "5 o más")
+Interpretacion <- c("No hay colinealidad", "Moderadamente colineales", "Colinealidad alta")
+
+tabla_vif <- data.frame(VIF, Interpretacion)
+
+knitr::kable(tabla_vif, format = "html") %>% 
+  kableExtra::kable_styling(full_width = FALSE, position = "center")
+```
+
+---
+
+# Análisis predictivo
+## Estimando probabilidades
+
+Una vez que tenemos un modelo "entrenado" podemos estimar las probabilidades para los sets de training y de test.
+
+```{r}
+pred_train <- predict(modelo_glm2, newdata = modelo_hr_train, type = "response")
+```
+
+Luego, lo repetimos la predicción para los datos de test. Lo que obtenemos es un gran listado de probabilidades (asegurarse que los resultados estén entre 0 y 1).
+
+```{r}
+pred_test <- predict(modelo_glm2, newdata = modelo_hr_test, type = "response")
+
+pred_test[1:20]
+```
+
+---
+
+# Análisis predictivo
+## Estimando probabilidades
+
+Podemos ver la distribución de las predicciones con un histograma.
+
+```{r}
+hist(pred_test)
+```
+
+---
+
+# Verificando los resultados
+## Matriz de Confusión
+
+La matriz de confusión es una tabla de doble entrada en donde lo que hacemos es contrastar los aciertos del modelo, contra los fallos.
+
+<img src="https://2.bp.blogspot.com/-EvSXDotTOwc/XMfeOGZ-CVI/AAAAAAAAEiE/oePFfvhfOQM11dgRn9FkPxlegCXbgOF4QCLcBGAs/s1600/confusionMatrxiUpdated.jpg" width="67%"/>
+
+
+---
+
+# Verificando los resultados
+## Matriz de Confusión
+
+Como primer paso tenemos que añadir las probabilidades del objeto *pred_test* al dataframe de testing.
+
+```{r}
+# Asigna las probabilidades a una variable nueva llamada "score".
+modelo_hr_test$score <- pred_test
+
+# Luego en base al score, asigno una clase predicha en función a si la probabilidad es mayor a 0.5
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion = ifelse(score > 0.5, 1, 0))
+
+knitr::kable(head(modelo_hr_test, 4), format = 'html') %>% 
+  kableExtra::kable_styling(bootstrap_options = "striped",position = "center", font_size = 9)
+```
+
+---
+
+# Verificando los resultados
+## Matriz de Confusión
+
+Construyamos una matriz de confusión básica del modelo de testing.
+
+```{r}
+conf_matrix <- table(modelo_hr_test$prediccion, modelo_hr_test$left)
+conf_matrix
+```
+
+En esta matriz vemos que en 3.140 casos, el modelo acertó a empleados que no se fueron, y que acertó en 384 predicciones de empleados que renunciaron. Veamos otras métricas que podemos sacar.
+
+---
+
+# Verificando los resultados
+## Matriz de Confusión
+
+Para ver otras métricas posibles de la matriz de confusión vamos a usar la función `confusionMatrix` del paquete `caret`.
+```{r}
+confusionMatrix(conf_matrix)
+```
+
+
+---
+
+# Verificando los resultados
+## Curva ROC
+
+La **curva ROC**, es una forma visual de calcular el **AUC** (*Area Under the Curve*, el área bajo la curva). Internamente lo que hace este gráfico es ordenar las probabilidades de mayor a menor, y a medida que tenemos un *positivo verdadero* (el empleado se fue y nosotros predecimos que se iba) la curva se mueve hacia arriba. Con cada falso positivo, la curva se va moviendo a la derecha.
+
+Para esto vamos a usar la librería `ROCR`.
+
+---
+
+# Verificando los resultados
+## Curva ROC
+
+```{r}
+library(ROCR)
+
+pred <- prediction(modelo_hr_test$score, modelo_hr_test$left)
+perf <- performance(pred, "tpr", "fpr")
+plot(perf,colorize = TRUE)
+```
+
+
+---
+
+# Pendientes
+
+* Seleccionar las mejores variables
+* Information Gain
+
+
+---
+class: inverse, center, middle
+
+# DESAFIOS
+
+---
+
+## Desafíos
+
+1. Realizar el análisis exploratorio del archivo. ¿Hay algún hallazgo que te llame la atención?
+2. Correr la regresión logística con otro `set.seed()`. ¿Qué cambios hubieron?
+
+
+---
+class: inverse, center, middle
+
+# FUENTES
+
+---
+
+## Fuentes de consulta
+
+Max Kuhn, Libro: [The caret package](https://topepo.github.io/caret/index.html)
+
+Pablo Casas, Libro [Libro Vivo de Ciencia de Datos](https://librovivodecienciadedatos.ai/)
+
+
+### Matriz de confusión
+
+https://manisha-sirsat.blogspot.com/2019/04/confusion-matrix.html
+
+### Curva ROC
+
+https://rviews.rstudio.com/2019/03/01/some-r-packages-for-roc-curves/
+
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)

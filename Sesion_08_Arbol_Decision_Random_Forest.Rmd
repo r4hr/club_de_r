@@ -1,0 +1,511 @@
+---
+title: "Club de R para RRHH"
+date: "20/06/2020"
+output:
+  xaringan::moon_reader:
+    seal: false
+    css: [default, shinobi, tamu-fonts]
+    nature:
+      ratio: "16:9"
+    language: "spanish"
+    
+
+
+---
+class: inverse, top, center
+background-image: url(Archivos/CLUB_DE_R_Linkedin.png)
+
+# Sesión 8 - Árboles de Decisión y Random Forest
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+class: inverse, middle, right
+
+### Contacto
+
+<img src="Archivos/eu.jpg" width="150px"/>
+
+`r icon::fa("linkedin-in")` [Sergio Garcia Mora](https://www.linkedin.com/in/sergiogarciamora/)
+
+`r icon::fa("twitter")` [sergiogarciamor](https://twitter.com/sergiogarciamor)
+
+`r icon::fa("link")`[Información del Club de R para RRHH](https://data-4hr.com/2020/04/29/club-de-r/)
+
+---
+
+## Si te llega una oferta de trabajo...
+
+.pull-left[
+<img src="https://image.freepik.com/free-vector/young-thinking-couple-confused-teenagers-worried-thoughtful-students-teenager-think-cartoon-illustration_102902-923.jpg", width="100%" />
+]
+
+.pull-right[<br><br><br>
+.center[###¿Qué cosas evaluarías para decidir si aceptas?]]
+
+---
+
+# Los árboles de decisión
+
+Los árboles de decisión deben ser una de las herramientas estadísticas más elementales de la historia.
+
+Su ventaja radica en la facilidad visual para interpretar los resultados. Y se puede usar tanto para problemas de *clasificación*, como para problemas de *regresión*. Se los suelen llamar **CART** (por **Classification And Regression Trees**).
+
+<img src="http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1528907338/classification-tree_ygvats.png" width="65%" />
+
+---
+
+# Estructura de un árbol de decisión
+
+Los árboles tienen tres componentes:
+
+* **Nodo Raíz (Root)**: Es el primer nodo que realiza la primera división.
+* **Nodo Terminal/Hojas (Leaves)**: Son los nodos que contienen los resultados.
+* **Ramas (Branches)**: Son las líneas que conectan los nodos, mostrando el flujo de las conexiones.
+
+También se suelen usar las analogías *"padre/hijo"* para identificar los vínculos entre los nodos.
+
+<img src="https://miro.medium.com/max/1184/1*FYEZGG-gEijSb87KuxSE_Q.png" width="50%" />
+
+---
+
+class: top, center
+
+
+## ¿Cuánta información aporta la variable género en esta foto?
+
+<br>
+.center[
+<img src="https://scontent.faep5-1.fna.fbcdn.net/v/t1.0-9/46503330_1099072683607633_7371955632917708800_o.jpg?_nc_cat=108&_nc_sid=825194&_nc_eui2=AeGrA8Wkf4YBD5TpYMrIAfK31J91e-jia4DUn3V76OJrgJserBh8B_cF9qlS2lFFVd1fj4EWq3LjN9GidXgFNWaL&_nc_oc=AQkqAdrcmAwOCowsydUbKLEIIznNUkJLKRoDYzzGBNuenZTnf_Z2ag37XiiMXzpYFtYyGksHpjZWpuKJ8hGJOUl-&_nc_ht=scontent.faep5-1.fna&oh=a1a0e5a7df2d7bd179d6bc836e311ffc&oe=5F136559" width="70%" />
+]
+
+---
+
+class: inverse, center
+
+
+<img src="Archivos/egresado.jpg" width ="37%" />
+
+### no comments
+
+---
+
+# ¿Cómo va divide los nodos en CART?
+
+En esencia hay tres alternativas:
+
+* Calculando el **Índice de Gini**, que es una medida de desigualdad de la distribución.
+* Calculando la **Entropía**, que es una medida la impureza de los datos.
+* Calculando la **Ganancia de Información** (Information Gain), que mide cuánta cantidad de información aporta un atributo en particular.
+
+--
+
+Lo que hace el algoritmo del árbol de decisión es empezar por la variable que mejor divide a los datos, y luego empieza a hacer todas las subdivisiones necesarias, hasta llegar a un resultado lo más óptimo posible.
+
+---
+
+# Apliquemos un árbol de regresión
+
+Usemos los datos de la última sesión. Vamos a usar dos librerías nuevas, `rpart` y `rpartplot`:
+```{r warning=FALSE, message=FALSE}
+library(readr)
+library(tidyverse)
+library(caret)
+library(rpart)
+library(rpart.plot)
+
+datos_rh <- read_csv("https://raw.githubusercontent.com/mlambolla/Analytics_HR_Attrition/master/HR_comma_sep.csv")
+
+glimpse(datos_rh)
+```
+
+
+---
+
+## Preprocesamiento
+
+Cambiemos el nombre de la variable 'sales' por 'department' y cambiemos los valores de 'salary', representándolos numéricamente.
+
+```{r}
+# Cambiemos el nombre de la variable 'sales' por 'department' y cambiemos los valores de 'salary'
+datos_rh <- datos_rh %>% 
+  rename(department = sales) %>%
+  mutate(salary = as.numeric(case_when(
+    salary == 'low' ~ 0,
+    salary == 'medium' ~ 1,
+    salary == 'high' ~ 2
+  )))
+```
+
+
+---
+
+## Preprocesamiento
+
+Definimos un valor de `set.seed` para poder reproducir los resultados, y dividimos a los datos en un conjunto de *training* y otro de *test*.
+```{r}
+set.seed(234)
+
+# Crea un índice con las filas seleccionadas para generar un training set con el 70% de los datos.
+modelo_hr <- createDataPartition(y = datos_rh$left, p = 0.7,
+                                 list = FALSE)
+
+# Creo un dataframe con los datos de entrenamiento seleccionados en el modelo_hr
+modelo_hr_train <- datos_rh[modelo_hr,]
+
+# Creo un dataframe de testing con las filas que no están incluidas en el índice.
+modelo_hr_test <- datos_rh[-modelo_hr,]
+```
+
+---
+
+# Corriendo el algoritmo
+
+Presten atención, vamos a ver la sintaxis para calcular un árbol de regresión de los datos de entrenamiento (*training*), con todos sus parámetros y veamos los resultados:
+
+```{r}
+arbol_hr_train <- rpart(left ~., data = modelo_hr_train, method = "class")
+arbol_hr_train
+```
+
+
+---
+
+# Corriendo el algoritmo
+
+Y ahora vamos a graficarlo:
+```{r fig.align='center'}
+prp(arbol_hr_train, extra=106)
+```
+
+
+---
+
+# Probando el modelo
+
+Vamos a repetir varios pasos de la semana pasada, así vemos la precisión de este modelo.
+
+```{r}
+arbol_hr_test <- predict(arbol_hr_train, newdata = modelo_hr_test)
+
+# Veamos los 10 primeros registros
+arbol_hr_test[1:10,]
+```
+
+---
+
+# Probando el modelo
+
+.pull-left[
+Veamos un histograma de la distribución de las predicciones
+```{r hist-tree, fig.show='hide',warning=FALSE, message=FALSE}
+hist(arbol_hr_test)
+```
+
+La distribución es muy perfecta, hay que desconfiar un poco.
+]
+
+.pull-right[
+```{r ref.label='hist-tree', echo = FALSE, message=FALSE, warning=FALSE, fig.retina=3}
+
+```
+
+]
+
+---
+
+# Probando el modelo
+
+Agreguemos nuestras predicciones a los datos de *entrenamiento* para analizar la matriz de confusión.
+```{r}
+#Agrego los resultados del modelo a los datos de test
+modelo_hr_test$score_arbol <- arbol_hr_test[,2]
+
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion_arbol = ifelse(score_arbol > 0.5, 1, 0))
+
+
+# Creamos la matriz de confusión, con los valores predichos y los valores reales de la variable target.
+conf_matrix_arbol <- table(modelo_hr_test$prediccion_arbol, modelo_hr_test$left)
+conf_matrix_arbol
+```
+
+---
+
+# Probando el modelo
+
+Veamos toda la información que podemos obtener y guardemos el *accuracy* para más adelante:
+```{r}
+resultados_arbol <- confusionMatrix(conf_matrix_arbol)
+accuracy_arbol <- resultados_arbol[[3]][1]
+
+resultados_arbol
+```
+
+
+
+---
+
+class: inverse, center, middle
+
+<img src="https://pbs.twimg.com/media/DeGdkC7WkAAHmgO.jpg" />
+
+---
+
+# Overfitting
+
+Uno de los problemas que pueden presentar los árboles es que tienden a generar **overfitting** (*overfitear* en lenguaje nerd). Esto quiere decir que las estimaciones se hicieron tomando tan en detalle las caracteríticas de los casos (en nuestro caso, de los empleados), que cuando tenemos casos nuevos, el modelo pierde su capacidad predictiva.
+
+Por eso necesitamos que los modelos sean lo más *genéricos* posibles para poder utilizarlos.
+
+Una forma de resolver esto, es o *podando* el árbol, para que tenga menos nodos, o bien, pidiendo que cada nodo tenga una cantidad mínima de casos.
+
+Para evitar estos problemas podemos generar un objeto de control con la función `rpart.control`.
+
+* **minsplit**: define la cantidad mínima de observaciones que tiene que tener un nodo antes que el algoritmo lo divida.
+* **minbucket**: define la cantidad mínima de observaciones en el nodo final.
+* **maxdepth**: define la máxima profundidad de cualquier nodo en el árbol final. El nodo raíz es considerado de profundidad 0.
+
+---
+
+# Parametrizando el árbol
+
+Para este ejemplo vamos a configurar únicamente el *minbucket*, en 300. Esto implica que cada nodo final tiene que tener al menos 300 casos. Definimos un objeto de control y lo pasamos como parámetro.
+
+```{r}
+control <- rpart.control(minbucket = 300)
+arbol_hr_fit <- rpart(left ~. -department, data = modelo_hr_train,method = "class", control = control)
+
+prp(arbol_hr_fit, extra=106)
+```
+
+
+---
+
+# Parametrizando el árbol
+
+.pull-left[
+Nuevamente hacemos el histograma
+```{r hist-tree2, fig.show='hide', warning=FALSE, message=FALSE}
+arbol_hr_test2 <- predict(arbol_hr_fit, newdata = modelo_hr_test)
+hist(arbol_hr_test2)
+
+```
+
+]
+
+.pull-rigth[
+```{r ref.label='hist-tree2', echo = FALSE, message=FALSE, warning=FALSE, fig.retina=3}
+
+```
+
+]
+
+---
+
+# Parametrizando el árbol
+
+```{r warning=FALSE, message=FALSE}
+#Agrego los resultados del modelo a los datos de test
+modelo_hr_test$score_arbol2 <- arbol_hr_test2[,2]
+glimpse(modelo_hr_test)
+
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion_arbol2 = ifelse(score_arbol2 > 0.5, 1, 0))
+
+
+# Creamos la matriz de confusión, con los valores predichos y los valores reales de la variable target.
+conf_matrix_arbol2 <- table(modelo_hr_test$prediccion_arbol2, modelo_hr_test$left)
+conf_matrix_arbol2
+```
+
+---
+
+# Parametrizando el árbol
+
+.pull-left[
+
+```{r}
+resultados_arbol2 <- confusionMatrix(conf_matrix_arbol2)
+
+accuracy_arbol2 <- resultados_arbol2[[3]][1]
+
+resultados_arbol2
+```
+
+]
+
+.pull-right[Finalmente podemos observar que a pesar de "sacrificar" precisión, el modelo tiene un accuracy muy alto de todas maneras (`r round(accuracy_arbol2,3)`).]
+
+
+---
+
+class: inverse, center, middle
+
+# RANDOM FOREST
+
+<img src="https://memegenerator.net/img/instances/50264886.jpg" />
+
+--
+
+(Perdón... lo tenía que hacer)
+
+---
+
+# Random Forests
+
+Los árboles de regresión, lo que hacen es partir de la variable que tiene mejor entropía, dividiendo al dataset en partes lo más similares posibles, y luego avanza por los nodos.
+
+El algoritmo de **Random Forest** lo que hace es correr múltiples árboles de decisión, buscando las combinaciones que mejor clasifican, y luego hace una *"votación"* para definir las combinaciones que mejor performan.
+
+<img src="https://miro.medium.com/max/1848/1*3M_DcF9VK80G1mISPsZDOA.png" width="45%" />
+
+
+---
+
+# Random Forests
+
+Para practicar este algoritmo vamos a usar los paquetes `caret` y `randomForest`. 
+
+> **ADVERTENCIA**: si no limitan la cantidad de árboles con `ntree` el modelo va a tardar mucho tiempo en cargar porque por default, corre 500 árboles.
+
+```{r warning=FALSE, message=FALSE}
+library(caret)
+library(randomForest)
+library(funModeling)
+
+# Cambiamos a left como una variable de tipo factor
+modelo_hr_train <- modelo_hr_train %>% mutate(left = factor(left))
+
+# Dividimos el dataset en predictores y variable dependiente
+data_x <- modelo_hr_train %>% select(-left)
+data_y <- modelo_hr_train$left
+
+#Entrenamos el modelo
+modelo_hr_rf_train <-  train(x = data_x,
+                             y = data_y, 
+                             method = "rf",
+                             ntree =5 )# caret tiene 230 modelos disponibles
+
+## Generando el modelo predictivo
+modelo_hr_rf <- randomForest(left ~ ., modelo_hr_train, ntree=5)
+
+varImpPlot(modelo_hr_rf)
+```
+
+---
+
+# Random Forests
+
+Calculamos las predicciones con los datos de *test*.
+
+```{r}
+# Generando la probabilidad de la clase yes
+score_rf <- predict(modelo_hr_rf, 
+                    modelo_hr_test, 
+                    type = 'prob')
+
+
+modelo_hr_test$score_rf <- score_rf[,2]
+
+
+
+# Validación
+gain_lift(data = modelo_hr_test, score = "score_rf", target = "left") 
+```
+
+---
+# Random Forests
+
+Por último veamos la matriz de confusión:
+
+```{r}
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion_rf = ifelse(score_rf > 0.5, 1, 0))
+
+conf_matrix_rf <- table(modelo_hr_test$prediccion_rf, modelo_hr_test$left)
+
+resultado_rf <- confusionMatrix(conf_matrix_rf)
+accuracy_rf <- resultado_rf[[3]][1]
+resultado_rf
+```
+
+---
+
+# Accuracy de los tres modelos vistos hoy
+
+#### Árbol de decisión original
+```{r}
+accuracy_arbol
+```
+
+#### Árbol de decisión "chico"
+```{r}
+accuracy_arbol2
+```
+
+#### Random Forests
+```{r}
+accuracy_rf
+```
+
+
+---
+
+class: center
+
+# Próxima sesión
+
+## Como evaluar los modelos
+
+<img src="https://i.redd.it/05xlvswuhfg41.jpg" width="40%" />
+
+
+
+---
+class: inverse, center, middle
+
+# DESAFIOS
+
+---
+
+## Desafíos
+
+1. Subir fotos de la época del secundario o escuela media al canal #memes de Slack
+2. Correr los árboles de regresión, modificando el minsplit y maxdepth
+3. Correr un random forest con ntree=100
+
+
+---
+class: inverse, center, middle
+
+# FUENTES
+
+---
+
+## Fuentes de consulta
+
+### Árboles de Decisión
+https://medium.com/analytics-vidhya/a-guide-to-machine-learning-in-r-for-beginners-decision-trees-c24dfd490abb
+
+https://www.datacamp.com/community/tutorials/decision-trees-R
+
+https://www.guru99.com/r-decision-trees.html#4
+
+### Entropía
+
+https://medium.com/coinmonks/what-is-entropy-and-why-information-gain-is-matter-4e85d46d2f01
+
+### Random Forest
+
+https://rpubs.com/Avalos42/randomforest
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
+
