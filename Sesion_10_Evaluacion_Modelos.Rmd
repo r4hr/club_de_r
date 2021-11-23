@@ -1,0 +1,396 @@
+ 
+# Analizando los modelos predictivos
+
+En sesiones pasadas vimos algunos algoritmos para realizar análisis predictivos. Para evaluar qué tan buenos son utilizamos algunas herramientas y métricas:
+
+--
+### ¿Se acuerdan cuáles?
+
+--
+
+* Matriz de confusión
+
+--
+
+* Accuracy
+
+--
+
+* Curva ROC
+
+---
+
+# Repasemos el armado del modelo
+
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(tidyverse)
+
+datos_rh <- read_csv("https://raw.githubusercontent.com/mlambolla/Analytics_HR_Attrition/master/HR_comma_sep.csv")
+
+glimpse(datos_rh)
+```
+
+---
+
+# Repasemos el armado del modelo
+
+Limpiamos algunos datos
+```{r}
+# Sacamos el campo 'sales' y cambiemos los valores de 'salary'
+datos_rh <- datos_rh %>% 
+  select(-sales) %>%
+  mutate(salary = as.numeric(case_when(
+    salary == 'low' ~ 0,
+    salary == 'medium' ~ 1,
+    salary == 'high' ~ 2
+  )))
+```
+
+---
+
+# Repasemos el armado del modelo
+
+Dividimos el dataset en training (70% de los datos) y test (30%).
+```{r message=FALSE, warning=FALSE}
+# Crear datasets de training y de test.
+library(caret)
+
+set.seed(234)
+
+# Crea un índice con las filas seleccionadas para generar un training set con el 70% de los datos.
+modelo_hr <- createDataPartition(y = datos_rh$left, p = 0.7,
+                                 list = FALSE)
+
+# Creo un dataframe con los datos de entrenamiento seleccionados en el modelo_hr
+modelo_hr_train <- datos_rh[modelo_hr,]
+
+# Creo un dataframe de testing con las filas que no están incluidas en el índice.
+modelo_hr_test <- datos_rh[-modelo_hr,]
+
+```
+
+---
+
+# Repasemos el armado del modelo
+
+Controlamos que las proporciones de bajas en ambos datasets sean similares:
+```{r}
+# Me aseguro que las proporciones de bajas (left = 1) sean similares en los datos de training y de testing
+modelo_hr_train %>%
+  summarise(turnover = mean(left))
+
+modelo_hr_test %>%
+  summarise(turnover = mean(left))
+```
+
+---
+
+# Repasemos el armado del modelo
+
+Entrenamos el modelo
+```{r}
+# Hago las estimaciones del modelo
+modelo_glm <- glm(left~., family = "binomial", 
+                  data = modelo_hr_train)
+```
+
+Y hacemos las predicciones en el dataset de training con la función *predict*.
+```{r}
+# Con predict estimamos las probabilidades para cada uno de los empleados en training
+pred_train <- predict(modelo_glm, newdata = modelo_hr_train, type = "response")
+```
+
+---
+
+# Repasemos el armardo del modelo
+
+Finalmente probamos el modelo con los datos de *test*
+```{r}
+# Ahora hacemos lo mismo con los datos de testing
+pred_test <- predict(modelo_glm, newdata = modelo_hr_test, type = "response")
+
+# Veamos las primeras 20 probabilidades
+pred_test[1:20]
+```
+
+---
+
+# Repasemos el armado del modelo
+
+Agregamos las probabilidades al dataset de test y creamos una columna con la predicción, cuando la probabilidad es mayor a 0.5. Finalmente vemos la matriz de confusión.
+```{r}
+# Todas las probabilidades en testing las agregamos en una columna llamada "score"
+modelo_hr_test$score <- pred_test
+
+# Creamos una nueva columna con la predicción, cuando la probabilidad es mayor a 0.5 la predicción es 1
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion = ifelse(score > 0.5, 1, 0))
+
+# Creamos la matriz de confusión, con los valores predichos y los valores reales de la variable target.
+conf_matrix <- table(modelo_hr_test$prediccion, modelo_hr_test$left)
+
+# Veamos todas las métricas de la matriz con esta función del paquete caret
+confusionMatrix(conf_matrix)
+```
+
+---
+
+# AUC - Area Under the Curve
+
+Una métrica complementaria de la *curva ROC* es el **Área Bajo la Curva** (AUC, por sus siglas en inglés) que refleja la proporción del espacio que hay debajo de la curva ROC en el gráfico.
+
+<img src="https://miro.medium.com/max/1175/1*2nd7NTEBosPakccmLVWy9A.png", width="45%" />
+
+> Video: cómo se construye la curva ROC: [https://youtu.be/OjWew7W4KnY](https://youtu.be/OjWew7W4KnY)
+---
+
+# AUC - Area Under the Curve
+
+Usaremos otra librería para graficar al mismo tiempo la curva ROC, y calcular el AUC.
+
+```{r message=FALSE, warning=FALSE}
+library(pROC)
+
+pROC_obj <- roc(modelo_hr_test$left, modelo_hr_test$score,
+                smoothed = FALSE,
+                # argumentos del intervalo de confianza
+                ci=TRUE, ci.alpha=0.9, stratified=FALSE,
+                # argumentos del gráfico
+                plot=TRUE, auc.polygon=TRUE, max.auc.polygon=TRUE, grid=TRUE,
+                print.auc=TRUE, show.thres=TRUE)
+
+```
+
+---
+
+# Lift y Gain
+
+Cuando graficamos la curva ROC, R internamente ordena las predicciones de mayor probabilidad a menor. Para calcular el **lift**  y el **gain** hace lo mismo, y divide al dataset en **deciles** (o sea que lo divide en 10 partes iguales).
+
+--
+
+El **gain**, (o *ganancia* en español), lo que mide es qué proporción de aciertos acumuladas para cada decil de las predicciones.
+
+--
+
+El  **lift**, (o *lift* en español), lo que mide es cuántas veces mejora las predicciones el modelo, respecto de no tener ningún modelo.
+
+---
+
+# Lift y Gain
+
+Usaremos una función del paquete *funModeling* desarrollado por Pablo Casas. La función `gain_lift` nos hace los gráficos de *gain* y de *lift* y nos genera una tabla con los resultados.
+```{r message=FALSE, warning=FALSE}
+library(funModeling)
+
+gain_lift(data = modelo_hr_test, score = "score", target = "left")
+```
+
+---
+
+# ¿Qué hay de fondo en estas métricas?
+
+Tanto con la curva ROC, con el gain, y con el lift, lo que buscan medir, es *qué tanto mejoran las probabilidades los modelos*  respecto de no hacer ningún cálculo.
+
+--
+
+Desde el punto de vista de la teoría de la probabilidad, en su forma más simple, un empleado tiene 50% chances de irse, y 50% de chances de quedarse en la empresa. Esta falta de modelo, es de alguna manera un modelo *aleatorio* porque dejamos al azar la ocurrencia de renuncias.
+
+--
+
+Por ejemplo el *lift* nos dice en cada decil, cuántas veces mejor es la predicción respecto del modelo aleatorio.
+
+---
+
+class: inverse, center, middle
+
+<img src="https://complementarytraining.net/wp-content/uploads/2014/07/quote-essentially-all-models-are-wrong-but-some-are-useful-george-e-p-box-212711.jpg", width="90%" />
+
+---
+
+# ¿Qué tan bueno es el modelo?
+## "Todos los empleados son iguales pero hay empleados más iguales que otros"
+
+.pull-left[
+Algo interesante que surge del análisis exploratorio, son los tres grupos notorios que tenemos entre los empleados que se van.
+
+Tenemos un grupo llamativo, que representan a los empleados de *alto desempeño* y de *alto nivel de satisfacción*.
+
+```{r eval-satis, fig.show='hide', warning=FALSE, message=FALSE}
+ggplot(modelo_hr_test, aes(x = last_evaluation, y = satisfaction_level, color = factor(left)))+
+  geom_point(alpha = 0.8)+
+  scale_color_manual(values = c("#BFC9CA","#2874A6"))
+```
+
+
+]
+
+.pull-right[
+```{r ref.label='eval-satis', echo = FALSE, message=FALSE, warning=FALSE, fig.retina=3}
+
+```
+]
+
+---
+
+class: center, middle
+
+# ¿Qué tan bueno es el modelo con los top de lo top?
+
+
+<img src="https://mott.pe/noticias/wp-content/uploads/2016/02/Qu%C3%A9-le-preguntar%C3%ADas-a-Homero-Simpson-de-darse-la-oportunidad-portada.png" />
+
+---
+
+# ¿Qué tan bueno es el modelo con los top de lo top?
+
+.pull-left[
+```{r cluster, fig.show='hide', warning=FALSE, message=FALSE}
+# Seleccionamos las variables para elegir los clusters
+variables_cluster <- modelo_hr_test %>%
+  select(last_evaluation, satisfaction_level)
+
+# Preparo los datos para hacer el cálculo
+vc <- scale(variables_cluster)
+
+# Corro el algoritmo de clustering
+fit_vc <- kmeans(vc, 3)
+
+# Agrego los clusters ajustados (calculados) al dataset
+modelo_hr_test$cluster <- fit_vc$cluster
+
+library(ggthemes)
+ggplot(modelo_hr_test, aes(x = last_evaluation, y = satisfaction_level, color = factor(cluster)))+
+  geom_point(alpha = 0.8)+
+  scale_color_colorblind()
+```
+
+]
+
+.pull-right[
+```{r ref.label='cluster', echo = FALSE, message=FALSE, warning=FALSE, fig.retina=3}
+
+```
+]
+---
+
+# ¿Qué tan bueno es el modelo con los top de lo top?
+
+
+```{r}
+# Filtramos los datos del cluster 1
+modelo_hr_c1 <- modelo_hr_test %>% 
+  filter(cluster == 2)
+
+conf_matrix_c1 <- table(modelo_hr_c1$prediccion, modelo_hr_c1$left)
+
+# Veamos todas las métricas de la matriz con esta función del paquete caret
+confusionMatrix(conf_matrix_c1)
+
+```
+
+---
+
+# Comparemos con el algoritmo de Random Forest
+
+
+```{r warning=FALSE, message=FALSE}
+library(caret)
+library(randomForest)
+library(funModeling)
+
+# Cambiamos a left como una variable de tipo factor
+modelo_hr_train <- modelo_hr_train %>% mutate(left = factor(left))
+
+# Dividimos el dataset en predictores y variable dependiente
+data_x <- modelo_hr_train %>% select(-left)
+data_y <- modelo_hr_train$left
+
+#Entrenamos el modelo
+modelo_hr_rf_train <-  train(x = data_x,
+                             y = data_y, 
+                             method = "rf",
+                             ntree =5)
+
+## Generando el modelo predictivo
+modelo_hr_rf <- randomForest(left ~ ., modelo_hr_train, ntree=5)
+```
+
+---
+
+Calculamos las predicciones con los datos de *test*.
+
+```{r}
+# Generando la probabilidad de la clase yes
+score_rf <- predict(modelo_hr_rf, 
+                    modelo_hr_test, 
+                    type = 'prob')
+
+modelo_hr_test$score_rf <- score_rf[,2]
+
+
+# Validación
+gain_lift(data = modelo_hr_test, score = "score_rf", target = "left") 
+```
+
+---
+
+```{r}
+modelo_hr_test <- modelo_hr_test %>% 
+  mutate(prediccion_rf = ifelse(score_rf > 0.5, 1, 0))
+
+conf_matrix_rf <- table(modelo_hr_test$prediccion_rf, modelo_hr_test$left)
+
+confusionMatrix(conf_matrix_rf)
+```
+
+---
+
+Probemos los resultados para el cluster que nos interesa
+
+```{r}
+# Agrego los clusters ajustados (calculados) al dataset
+modelo_hr_test$cluster <- fit_vc$cluster
+
+modelo_rf_c2 <- modelo_hr_test %>% 
+  filter(cluster == 2)
+
+conf_matrix_rf_c2 <- table(modelo_rf_c2$prediccion_rf, modelo_rf_c2$left)
+
+# Veamos todas las métricas de la matriz con esta función del paquete caret
+confusionMatrix(conf_matrix_rf_c2)
+
+```
+
+---
+
+class: inverse, center, middle
+
+# FUENTES
+
+---
+
+## Fuentes de consulta
+
+### Explicaciones de lift y gain
+https://www.listendata.com/2015/06/r-function-gain-and-lift-table.html
+https://www.listendata.com/2014/08/excel-template-gain-and-lift-charts.html
+
+
+https://supervised-ml-course.netlify.app/chapter1
+
+### Regresión logística
+https://rpubs.com/Joaquin_AR/229736
+
+
+### Curvas ROC
+https://rviews.rstudio.com/2019/03/01/some-r-packages-for-roc-curves/
+
+---
+class: inverse, center, bottom
+
+Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
+Gracias a [Patricia Loto](https://twitter.com/patriloto) por compartir el [tutorial](https://twitter.com/patriloto/status/1260822644590608391?s=20)
+
+
