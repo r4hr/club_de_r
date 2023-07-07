@@ -1,0 +1,61 @@
+---
+title: "02 Salarios RH Completo"
+author: "Sergio | R4HR"
+date: "2023-07-07"
+output: 
+  powerpoint_presentation:
+    reference_doc: r4hr.potx
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.retina = 3)
+
+# Librerías ----
+
+# Si no están instalados los paquetes usar el siguiente código
+# install.packages("tidyverse")
+# install.packages("flextable")
+
+# Cargar los paquetes ----
+library(tidyverse)
+library(flextable)
+
+# Colores para gráficos ----
+verde <-  "#1FC3AA"
+lila <- "#8624F5"
+azul <- "#344D7E"
+
+
+# Carga de Datos -----
+rh <- read.csv("Sesion_38_PowerPoint/kiwi22_clean.csv",
+               sep = ";") # Indica el separador de columnas
+```
+
+# Introducción
+
+Para esta sesión vamos a realizar un análisis sencillo, utilizando los datos de la **3° Encuesta KIWI de Sueldos de RH** 🥝 desarrollada por R4HR, el cual cuenta con `r nrow(rh)` de colegas bajo relación de dependencia.
+
+![](https://img.freepik.com/fotos-premium/caracter-kiwi-kawaii_658005-700.jpg?w=2000){width="291"}
+
+# Sueldo Promedio por Puesto - Gráfico
+
+```{r grafico1}
+
+# Calcular la mediana salarial por puesto
+analisis1 <- rh %>% 
+  group_by(puesto) %>% 
+  summarise(sueldo_mediana = median(sueldo_dolar))
+
+ggplot(analisis1,                             # Fuente de datos
+       aes(x = puesto, y = sueldo_mediana)) + # Columnas a graficar
+  geom_col(fill = azul) +                     # Tipo de gráfico y color de relleno
+  # Edito títulos, ejes y pie de página del gráfico
+  labs(title = "Mediana Salarial por Puesto",
+       x = "Puesto", y = "Mediana Salarial",
+       caption = "Fuente: Encuesta KIWI de Sueldos de RH 2022") +
+  theme_minimal() +        # Modifica la estética del gráfico
+  geom_text(aes(label = round(sueldo_mediana,0)),
+            vjust = 1.2,
+            size = 3,
+            color = "white")
+```
