@@ -23,39 +23,105 @@ library(flextable)
 # Colores para gráficos ----
 verde <-  "#1FC3AA"
 lila <- "#8624F5"
-azul <- "#344D7E"
+azul <- "#306DE6"
 
 
 # Carga de Datos -----
-rh <- read.csv("Sesion_38_PowerPoint/kiwi22_clean.csv",
+rh <- read.csv("https://raw.githubusercontent.com/r4hr/club_de_r/master/Sesion_38_PowerPoint/kiwi22_clean.csv",
                sep = ";") # Indica el separador de columnas
 ```
 
 # Introducción
 
-Para esta sesión vamos a realizar un análisis sencillo, utilizando los datos de la **3° Encuesta KIWI de Sueldos de RH** 🥝 desarrollada por R4HR, el cual cuenta con `r nrow(rh)` de colegas bajo relación de dependencia.
+Para esta sesión vamos a realizar un análisis sencillo, utilizando los datos de la **3° Encuesta KIWI de Sueldos de RH** 🥝 desarrollada por R4HR, el cual cuenta con `r nrow(rh)` respuestas de colegas bajo relación de dependencia.
 
 ![](https://img.freepik.com/fotos-premium/caracter-kiwi-kawaii_658005-700.jpg?w=2000){width="291"}
 
-# Sueldo Promedio por Puesto - Gráfico
+# Análisis
+
+## Mediana Salarial por Función
 
 ```{r grafico1}
 
-# Calcular la mediana salarial por puesto
+# Calcular la mediana salarial por función
 analisis1 <- rh %>% 
-  group_by(puesto) %>% 
+  group_by(funcion) %>% 
   summarise(sueldo_mediana = median(sueldo_dolar))
 
-ggplot(analisis1,                             # Fuente de datos
-       aes(x = puesto, y = sueldo_mediana)) + # Columnas a graficar
-  geom_col(fill = azul) +                     # Tipo de gráfico y color de relleno
+# Graficamos
+ggplot(analisis1,                                   # Fuente de Datos
+       aes(x = sueldo_mediana,                      # Columna mapeada al eje x  
+           y = reorder(funcion, sueldo_mediana))) + # Columna mapeada al eje y
+  geom_col(fill = azul) +                           # Tipo de gráfico y color de relleno
+  geom_text(aes(label = round(sueldo_mediana, 0)),  # Etiqueta de Datos
+            hjust = 1.2,
+            size = 3,
+            color = "white") +
+  labs(title = "Mediana Salarial por Función",      # Edita títulos y ejes
+       subtitle = "Sueldos en U$S",
+       x = "Mediana Salarial en U$S",
+       y = "Función",
+       caption = "Fuente: Encuesta KIWI Sueldos de RH 2022") +
+  theme_minimal()                                   # Modifica la estética del gráfico
+  
+
+
+```
+
+## Sueldo Promedio por Puesto
+
+:::::: {.columns}
+::: {.column width="60%"}
+
+Desde R Markdown podemos tener una columna con un gráfico.
+
+```{r grafico2}
+
+# Calcular la mediana salarial por puesto
+analisis2 <- rh %>% 
+  group_by(puesto, genero) %>% 
+  summarise(sueldo_mediana = round(median(sueldo_dolar),0)) %>% 
+  ungroup()
+
+
+ggplot(analisis2,                             # Fuente de datos
+       aes(x = puesto,                        # Columnas a graficar
+           y = sueldo_mediana, 
+           fill = genero)) + 
+  geom_col(position = "dodge") +              # Tipo de gráfico y posición de barras
   # Edito títulos, ejes y pie de página del gráfico
   labs(title = "Mediana Salarial por Puesto",
        x = "Puesto", y = "Mediana Salarial",
+       fill = "Género", 
        caption = "Fuente: Encuesta KIWI de Sueldos de RH 2022") +
   theme_minimal() +        # Modifica la estética del gráfico
+  scale_fill_manual(values = c(verde, lila)) + # Cambia colores a barras
   geom_text(aes(label = round(sueldo_mediana,0)),
             vjust = 1.2,
+            position = position_dodge(.9),
             size = 3,
             color = "white")
 ```
+:::
+::: {.column width="40%"}
+
+Y otra columna con una tabla por ejemplo.
+```{r}
+# Hacer una tabla
+tabla1 <- analisis2 %>% 
+  pivot_wider(id_cols = puesto, 
+              names_from = genero,
+              values_from = sueldo_mediana) %>% 
+  rename(Puesto = puesto)
+
+# Hacer tabla con el paquete flextable
+flextable(tabla1) %>% 
+  theme_vanilla() %>% 
+  set_table_properties(layout = "autofit") %>% 
+  add_header_row(values = c("", "Género"),
+                 colwidth = c(1,2)) %>% 
+  align(i = 1, part = "header", align = "center")
+```
+
+:::
+::::::
